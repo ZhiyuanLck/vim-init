@@ -78,6 +78,7 @@ function! s:setup_dirvish()
 	call search(name, 'wc')
 	noremap <silent><buffer> ~ :Dirvish ~<cr>
 	noremap <buffer> % :e %
+	noremap <buffer> <tab>9 :call dirvish#open("tabedit", 0)<cr>
 endfunc
 
 augroup MyPluginSetup
