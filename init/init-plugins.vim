@@ -407,7 +407,9 @@ endif
 " echodoc：搭配 YCM/deoplete 在底部显示函数参数
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'echodoc') >= 0
+	Plug 'Valloric/YouCompleteMe'
 	Plug 'Shougo/echodoc.vim'
+
 	set noshowmode
 	let g:echodoc#enable_at_startup = 1
 endif
