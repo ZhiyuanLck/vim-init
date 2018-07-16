@@ -420,7 +420,7 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
 	" 如果 vim 支持 python 则启用  Leaderf
-	if has('python') || has('python3')
+	if 0 "has('python') || has('python3')
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
@@ -520,6 +520,8 @@ call plug#end()
 "----------------------------------------------------------------------
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
+" 设置配置文件路径
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 " 禁用预览功能：扰乱视听
 let g:ycm_add_preview_to_completeopt = 0
