@@ -8,6 +8,31 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+"----------------------------------------------------------------------
+" 启动屏幕大小
+"----------------------------------------------------------------------
+
+if has('win32') || has('win64')
+	augroup screen_set
+		autocmd!
+		autocmd GUIEnter * simalt ~x
+	augroup END
+endif
+
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window (for an alternative on Windows, see simalt below).
+  set lines=999 columns=999
+else
+  " This is console Vim.
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
+
 
 "----------------------------------------------------------------------
 " 显示设置
@@ -37,6 +62,8 @@ set showmode
 " 水平切割窗口时，默认在右边显示新窗口
 set splitright
 
+" 设置cmd高度
+set cmdheight=2
 
 "----------------------------------------------------------------------
 " 颜色主题：色彩文件位于 colors 目录中

@@ -41,6 +41,11 @@ set ttimeoutlen=50
 " 显示光标位置
 set ruler
 
+" 设置字体
+if has ('win32') || has ('win64')
+	set guifont=Bitstream_Vera_Sans_Mono:h10:cANSI
+	set gfw=幼圆:h10.5:cGB2312
+endif
 
 "----------------------------------------------------------------------
 " 搜索设置

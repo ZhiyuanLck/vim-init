@@ -186,6 +186,13 @@ cnoremap <m-l> <c-right>
 noremap <m-y> d$
 inoremap <m-y> <c-\><c-o>d$
 
+" 快速保存退出
+noremap <m-w> :w!<cr>
+noremap <m-q> :q!<cr>
+noremap <m-r> :wq!<cr>
+inoremap <m-w> <esc>:w!<cr>
+inoremap <m-q> <esc>:q!<cr>
+inoremap <m-r> <esc>:wq!<cr>
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl
@@ -237,7 +244,11 @@ let g:asyncrun_bell = 1
 nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 
 " F9 编译 C/C++ 文件
-nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+augroup Compile_c_cxx
+	autocmd!
+	autocmd FileType c nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+	autocmd FileType cpp nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+augroup END
 
 " F5 运行文件
 nnoremap <silent> <F5> :call ExecuteFile()<cr>
