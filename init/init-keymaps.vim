@@ -11,7 +11,7 @@
 "   - 符号搜索
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/12 17:18:06
+" Last Modified: 2018/08/12 21:42:54
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -22,19 +22,19 @@
 function s:comment_(mark) range
 	let lnum = a:firstline
 	let pos = getcurpos()
-	let n = len(a:mark)
+	let n = len(a:mark) + 1
 
 	while lnum <= a:lastline
 		let pat = match(getline(lnum), a:mark)
 		if pat == -1
 			exe ''.lnum .'normal I' .a:mark .' '
 			if lnum == a:firstline
-				let pos[2] += n+1
+				let pos[2] += n
 			endif
 		else
-			exe ''.lnum .'normal ^d3l'
+			exe ''.lnum .'normal ^d' .n .'l'
 			if lnum == a:firstline
-				let pos[2] -= n+1
+				let pos[2] -= n
 			endif
 		endif
 		let lnum += 1
@@ -59,10 +59,10 @@ augroup Comment
 	autocmd FileType c,cpp inoremap <m-/> <esc>:call Comment('//')<cr>a
 
 	autocmd FileType python noremap <m-/> :call Comment('#')<cr>
-	autocmd FileType python inoremap <m-/> <esc>:call Comment('#')<cr>
+	autocmd FileType python inoremap <m-/> <esc>:call Comment('#')<cr>a
 
-	autocmd FileType vim noremap <m-/> <esc>:call Comment('"')<cr>
-	autocmd FileType vim inoremap <m-/> <esc>:call Comment('"')<cr>
+	autocmd FileType vim noremap <m-/> :call Comment('"')<cr>
+	autocmd FileType vim inoremap <m-/> <esc>:call Comment('"')<cr>a
 
 augroup END
 
