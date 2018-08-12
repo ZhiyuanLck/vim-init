@@ -4,7 +4,7 @@
 "
 " 所有人都能接受的配置，不掺渣任何 keymap, 和偏好设置
 "
-" Created by skywind on 2018/05/30
+" Modified by zhiyuan
 " Last Modified: 2018/05/30 16:53:18
 "
 "======================================================================
@@ -172,6 +172,3 @@ set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
 set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
 set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
 set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
-
-
-

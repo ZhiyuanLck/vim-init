@@ -2,6 +2,7 @@
 "
 " init-keymaps.vim - 按键设置，按你喜欢更改
 "
+"   - 注释补全
 "   - 快速移动
 "   - 标签切换
 "   - 窗口切换
@@ -9,11 +10,113 @@
 "   - 编译运行
 "   - 符号搜索
 "
-" Created by skywind on 2018/05/30
-" Last Modified: 2018/05/30 17:59:31
+" Modified by zhiyuan
+" Last Modified: 2018/08/12 17:18:06
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
+
+"----------------------------------------------------------------------
+" 添加注释
+"----------------------------------------------------------------------
+function s:comment_(mark) range
+	let lnum = a:firstline
+	let pos = getcurpos()
+	let n = len(a:mark)
+
+	while lnum <= a:lastline
+		let pat = match(getline(lnum), a:mark)
+		if pat == -1
+			exe ''.lnum .'normal I' .a:mark .' '
+			if lnum == a:firstline
+				let pos[2] += n+1
+			endif
+		else
+			exe ''.lnum .'normal ^d3l'
+			if lnum == a:firstline
+				let pos[2] -= n+1
+			endif
+		endif
+		let lnum += 1
+	endwhile
+
+	call setpos('.', pos)
+endfunc
+
+function Comment(mark)
+	if index(["n", "niI", "i"], mode()) != -1
+		call s:comment_(a:mark)
+	elseif index(['v', 'V', 'CTRL-V', 's', 'S', 'CTRL-S'], mode()) != -1
+		'<,'>call s:comment_(a:mark)
+	endif
+endfunc
+
+" 自行添加文件类型
+augroup Comment
+	autocmd!
+
+	autocmd FileType c,cpp noremap <m-/> :call Comment('//')<cr>
+	autocmd FileType c,cpp inoremap <m-/> <esc>:call Comment('//')<cr>a
+
+	autocmd FileType python noremap <m-/> :call Comment('#')<cr>
+	autocmd FileType python inoremap <m-/> <esc>:call Comment('#')<cr>
+
+	autocmd FileType vim noremap <m-/> <esc>:call Comment('"')<cr>
+	autocmd FileType vim inoremap <m-/> <esc>:call Comment('"')<cr>
+
+augroup END
+
+
+
+"----------------------------------------------------------------------
+" <m-i>语法补全
+"----------------------------------------------------------------------
+function s:complete(mark, start, ...)
+	let curl = getline('.')
+	let n = len(a:mark)
+
+	if &et
+		let num = (len(curl)-n) / &ts
+	else
+		let num = len(curl) - n
+	endif
+
+	call setline('.', a:start)
+
+	for iline in a:000
+		call append(line('.')+index(a:000, iline), iline)
+	endfor
+	
+	if num
+		exe '.,.+' .a:0 .'normal V' .num .'>'
+	endif
+endfunc
+
+" vimscript补全
+function Complete_vim()
+	let vim_mark = {
+			\'au': ['augroup ', 'augroup END'],
+			\'if': ['if ', 'endif'],
+			\'fo': ['for ', 'endfor'],
+			\'wh': ['while ', 'endwhile'],
+			\'fu': ['function ', 'endfunc']
+			\}
+
+	let curl = getline('.')
+	let str = strpart(curl, col('.')-2, 2)
+
+	if has_key(vim_mark, str)
+		let pos = getcurpos()
+		call call('s:complete', extend(['vi'], vim_mark[str]))
+		call setpos('.', pos)
+	endif
+endfunc
+
+augroup Complete_
+	autocmd!
+	au BufNewFile,BufRead *.vim
+			\ inoremap <m-i> <esc>:call Complete_vim()<cr>A
+augroup END
 
 
 "----------------------------------------------------------------------
@@ -193,6 +296,10 @@ noremap <m-r> :wq!<cr>
 inoremap <m-w> <esc>:w!<cr>
 inoremap <m-q> <esc>:q!<cr>
 inoremap <m-r> <esc>:wq!<cr>
+
+" INSERT模式下快速插入新行
+inoremap <m-o> <esc>o
+inoremap <m-O> <esc>O
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl

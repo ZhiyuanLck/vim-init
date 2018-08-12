@@ -2,7 +2,7 @@
 "
 " init-style.vim - 显示样式设置
 "
-" Created by skywind on 2018/05/30
+" Modified by zhiyuan
 " Last Modified: 2018/05/30 20:29:07
 "
 "======================================================================

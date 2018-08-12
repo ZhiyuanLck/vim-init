@@ -1,8 +1,8 @@
 "======================================================================
 "
-" init-plugins.vim - 
+" init-plugins.vim
 "
-" Created by skywind on 2018/05/31
+" Modified by zhiyuan
 " Last Modified: 2018/06/10 23:11
 "
 "======================================================================
@@ -78,7 +78,7 @@ function! s:setup_dirvish()
 	call search(name, 'wc')
 	noremap <silent><buffer> ~ :Dirvish ~<cr>
 	noremap <buffer> % :e %
-	noremap <buffer> <tab>9 :call dirvish#open("tabedit", 0)<cr>
+	noremap <buffer> <tab> :call dirvish#open("tabedit", 0)<cr>
 endfunc
 
 augroup MyPluginSetup

@@ -2,7 +2,7 @@
 "
 " init-config.vim - 正常模式下的配置，在 init-basic.vim 后调用
 "
-" Created by skywind on 2018/05/30
+" Modified by zhiyuan
 " Last Modified: 2018/05/30 19:20:46
 "
 "======================================================================

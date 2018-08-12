@@ -2,7 +2,7 @@
 "
 " init.vim - initialize config
 "
-" Created by skywind on 2018/05/30
+" Modified by zhiyuan
 " Last Modified: 2018/05/30 18:26:34
 "
 "======================================================================
