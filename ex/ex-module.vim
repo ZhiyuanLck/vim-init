@@ -14,7 +14,8 @@ function! Create_message()
 	let str_3 = 'Creation Time: ' .strftime('%Y-%m-%d %T')
 	let str_4 = 'Last Modified: ' .strftime('%Y-%m-%d %T')
 	call setline(1, [str_0, '', str_1, str_2, str_3, str_4, '', str_0])
-	exe '%normal \<m-/>'
+	exe "%normal \<m-/>"
+	exe "%s/ $//g"
 endfunc
 
 function! Last_mode()

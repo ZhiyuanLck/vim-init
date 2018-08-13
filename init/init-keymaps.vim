@@ -11,7 +11,7 @@
 "   - 符号搜索
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 18:57:10
+" Last Modified: 2018/08/13 21:03:41
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -62,7 +62,9 @@ function Comment()
 		'<,'>call s:comment_(mark)
 	endif
 
-	exe 'imap <buffer> " '.map_temp
+	if mark == '"'
+		exe 'imap <buffer> " '.map_temp
+	endif
 endfunc
 
 " 自行添加文件类型
