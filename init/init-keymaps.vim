@@ -11,7 +11,7 @@
 "   - 符号搜索
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 18:54:12
+" Last Modified: 2018/08/13 18:57:10
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -316,8 +316,8 @@ inoremap <m-o> <esc>o
 inoremap <m-O> <esc>O
 
 " 清空当前行
-noremap <m-c> ^c$
-inoremap <m-c> <esc>^d$
+noremap <m-c> ^d$
+inoremap <m-c> <esc>^c$
 
 
 "----------------------------------------------------------------------
