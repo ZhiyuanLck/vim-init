@@ -11,7 +11,7 @@
 "   - 符号搜索
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/12 21:42:54
+" Last Modified: 2018/08/13 14:19:09
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -43,11 +43,16 @@ function s:comment_(mark) range
 	call setpos('.', pos)
 endfunc
 
-function Comment(mark)
+function Comment()
+	let mark = {
+		\'c': '//',
+		\'cpp': '//',
+		\'vim': '"',
+		\'python': '#'}
 	if index(["n", "niI", "i"], mode()) != -1
-		call s:comment_(a:mark)
+		call s:comment_(mark[&ft])
 	elseif index(['v', 'V', 'CTRL-V', 's', 'S', 'CTRL-S'], mode()) != -1
-		'<,'>call s:comment_(a:mark)
+		'<,'>call s:comment_(mark[&ft])
 	endif
 endfunc
 
@@ -55,14 +60,14 @@ endfunc
 augroup Comment
 	autocmd!
 
-	autocmd FileType c,cpp noremap <m-/> :call Comment('//')<cr>
-	autocmd FileType c,cpp inoremap <m-/> <esc>:call Comment('//')<cr>a
+	autocmd FileType c,cpp noremap <m-/> :call Comment()<cr>
+	autocmd FileType c,cpp inoremap <m-/> <esc>:call Comment()<cr>a
 
-	autocmd FileType python noremap <m-/> :call Comment('#')<cr>
-	autocmd FileType python inoremap <m-/> <esc>:call Comment('#')<cr>a
+	autocmd FileType python noremap <m-/> :call Comment()<cr>
+	autocmd FileType python inoremap <m-/> <esc>:call Comment()<cr>a
 
-	autocmd FileType vim noremap <m-/> :call Comment('"')<cr>
-	autocmd FileType vim inoremap <m-/> <esc>:call Comment('"')<cr>a
+	autocmd FileType vim noremap <m-/> :call Comment()<cr>
+	autocmd FileType vim inoremap <m-/> <esc>:call Comment()<cr>a
 
 augroup END
 
@@ -266,7 +271,7 @@ noremap <silent><m-right> :call Tab_MoveRight()<cr>
 
 
 "----------------------------------------------------------------------
-" ALT 键移动增强
+" ALT 键增强
 "----------------------------------------------------------------------
 
 " ALT+h/l 快速左右按单词移动（正常模式+插入模式）
@@ -300,6 +305,11 @@ inoremap <m-r> <esc>:wq!<cr>
 " INSERT模式下快速插入新行
 inoremap <m-o> <esc>o
 inoremap <m-O> <esc>O
+
+" 清空当前行
+noremap <m-c> 0c$
+inoremap <m-c> <esc>0c$
+
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl

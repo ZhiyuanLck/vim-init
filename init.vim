@@ -3,7 +3,7 @@
 " init.vim - initialize config
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/12 21:13:16
+" Last Modified: 2018/08/13 14:15:50
 "
 "======================================================================
 
@@ -51,4 +51,7 @@ LoadScript init/init-keymaps.vim
 
 " 半透明
 LoadScript ex/ex-transparent.vim
+
+" 文件头模板
+LoadScript ex/ex-module.vim
 
