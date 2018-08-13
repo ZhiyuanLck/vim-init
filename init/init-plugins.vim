@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2018/06/10 23:11
+" Last Modified: 2018/08/13 19:10:43
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -86,6 +86,25 @@ augroup MyPluginSetup
 	autocmd FileType dirvish call s:setup_dirvish()
 augroup END
 
+" 新窗口或标签页打开目录
+function! New_directory(mode)
+	if a:mode == 't'
+		exe ':split | normal -'
+	elseif a:mode == 'b'
+		exe ":split \| normal \<m-J>-"
+	elseif a:mode == 'r'
+		exe ':vsplit | normal -'
+	elseif a:mode == 'l'
+		exe ":vsplit \| normal \<m-H>-"
+	elseif a:mode == 'n'
+		exe ':tabnew | normal -'
+	endif
+endfunc
+noremap <tab>t :call New_directory('t')<cr>
+noremap <tab>b :call New_directory('b')<cr>
+noremap <tab>l :call New_directory('l')<cr>
+noremap <tab>r :call New_directory('r')<cr>
+noremap <tab>n :call New_directory('n')<cr>
 
 "----------------------------------------------------------------------
 " 基础插件
