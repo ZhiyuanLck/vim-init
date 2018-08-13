@@ -3,7 +3,7 @@
 " init.vim - initialize config
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 14:15:50
+" Last Modified: 2018/08/13 16:50:37
 "
 "======================================================================
 
@@ -55,3 +55,5 @@ LoadScript ex/ex-transparent.vim
 " 文件头模板
 LoadScript ex/ex-module.vim
 
+" 预览快速滚屏
+LoadScript ex/ex-pre_scroll.vim
