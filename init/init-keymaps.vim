@@ -11,7 +11,7 @@
 "   - 符号搜索
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 14:31:48
+" Last Modified: 2018/08/13 16:04:35
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -25,7 +25,7 @@ function s:comment_(mark) range
 	let n = len(a:mark) + 1
 
 	while lnum <= a:lastline
-		let pat = match(getline(lnum), a:mark)
+		let pat = match(trim(getline(lnum)), "^".a:mark)
 		if pat == -1
 			exe ''.lnum .'normal I' .a:mark .' '
 			if lnum == a:firstline
@@ -44,16 +44,25 @@ function s:comment_(mark) range
 endfunc
 
 function Comment()
-	let mark = {
+	let mark_dict = {
 		\'c': '//',
 		\'cpp': '//',
 		\'vim': '"',
 		\'python': '#'}
-	if index(["n", "niI", "i"], mode()) != -1
-		call s:comment_(mark[&ft])
-	elseif index(['v', 'V', 'CTRL-V', 's', 'S', 'CTRL-S'], mode()) != -1
-		'<,'>call s:comment_(mark[&ft])
+	let mark = mark_dict[&ft]
+
+	if mark == '"'
+		let map_temp = maparg('"', 'i')
+		exe 'iunmap <buffer> "'
 	endif
+
+	if index(["n", "niI", "i"], mode()) != -1
+		call s:comment_(mark)
+	elseif index(['v', 'V', 'CTRL-V', 's', 'S', 'CTRL-S'], mode()) != -1
+		'<,'>call s:comment_(mark)
+	endif
+
+	exe 'imap <buffer> " '.map_temp
 endfunc
 
 " 自行添加文件类型
