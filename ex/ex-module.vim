@@ -3,7 +3,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-13 13:23:27
-" Last Modified: 2018-08-13 13:51:21
+" Last Modified: 2018-08-13 14:31:15
 "
 "=======================================================================
 
@@ -21,6 +21,7 @@ function! Create_message()
 	let str_4 = 'Last Modified: ' .strftime('%Y-%m-%d %T')
 	call setline(1, [str_0, mark[&ft], str_1, str_2, str_3, str_4, mark[&ft], str_0])
 	exe '3,$-2normal I' .mark[&ft] .' '
+	exe 'normal G'
 endfunc
 
 function! Last_mode()
