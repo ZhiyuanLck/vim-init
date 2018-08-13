@@ -35,5 +35,5 @@ endfunc
 augroup My_messages
 	au!
 	au BufNewFile *.* call Create_message()
-	au BufWritePre *.* ks|call Last_mode()|'s
+	au BufWritePre *.* ks|call Last_mode()|'s|delmark s
 augroup END
