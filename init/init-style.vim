@@ -3,7 +3,7 @@
 " init-style.vim - 显示样式设置
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 17:08:29
+" Last Modified: 2018/08/14 23:21:39
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -22,7 +22,7 @@ endif
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).
-  set lines=999 columns=999
+  set lines=20 columns=999
 else
   " This is console Vim.
   if exists("+lines")
@@ -64,6 +64,16 @@ set splitright
 
 " 设置cmd高度
 set cmdheight=2
+
+" 不显示滚动条
+if has('gui_running')
+	set guioptions-=r
+	set guioptions-=L
+	set guioptions-=t
+	" 不显示菜单和工具栏
+	set guioptions-=m
+	set guioptions-=T
+endif
 
 "----------------------------------------------------------------------
 " 颜色主题：色彩文件位于 colors 目录中
@@ -118,7 +128,7 @@ endif
 hi! SignColumn guibg=NONE ctermbg=NONE
 
 " 修改行号为浅灰色，默认主题的黄色行号很难看，换主题可以仿照修改
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE 
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 	\ gui=NONE guifg=DarkGrey guibg=NONE
 
 " 修正补全目录的色彩：默认太难看
@@ -132,7 +142,7 @@ hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 if has('terminal') && exists(':terminal') == 2
 	if exists('##TerminalOpen')
 		augroup VimUnixTerminalGroup
-			au! 
+			au!
 			au TerminalOpen * setlocal nonumber signcolumn=no
 		augroup END
 	endif
@@ -200,7 +210,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:name == ''
 			return '[No Name]'
 		else
-			if a:fullname 
+			if a:fullname
 				return fnamemodify(l:name, ':p')
 			else
 				let aname = fnamemodify(l:name, ':p')
@@ -219,7 +229,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:buftype == 'quickfix'
 			return '[Quickfix]'
 		elseif l:name != ''
-			if a:fullname 
+			if a:fullname
 				return '-'.fnamemodify(l:name, ':p')
 			else
 				return '-'.fnamemodify(l:name, ':t')

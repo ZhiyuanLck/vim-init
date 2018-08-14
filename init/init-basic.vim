@@ -5,7 +5,7 @@
 " 所有人都能接受的配置，不掺渣任何 keymap, 和偏好设置
 "
 " Modified by zhiyuan
-" Last Modified: 2018/05/30 16:53:18
+" Last Modified: 2018/08/14 23:28:00
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -43,8 +43,8 @@ set ruler
 
 " 设置字体
 if has ('win32') || has ('win64')
-	set guifont=Bitstream_Vera_Sans_Mono:h12:cANSI
-	set gfw=幼圆:h10.5:cGB2312
+	set guifont=DejaVu_Sans_Mono_for_Powerline:h15:cANSI
+	set gfw=幼圆:h14.5:cGB2312
 endif
 
 "----------------------------------------------------------------------
@@ -90,9 +90,9 @@ endif
 "----------------------------------------------------------------------
 " 语法高亮设置
 "----------------------------------------------------------------------
-if has('syntax')  
-	syntax enable 
-	syntax on 
+if has('syntax')
+	syntax enable
+	syntax on
 endif
 
 

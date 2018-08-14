@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/13 19:10:43
+" Last Modified: 2018/08/14 22:38:36
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -11,7 +11,7 @@
 
 
 "----------------------------------------------------------------------
-" 默认情况下的分组，可以再前面覆盖之
+" 默认情况下的分组，可以在前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
@@ -38,7 +38,7 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 
 "----------------------------------------------------------------------
-" 默认插件 
+" 默认插件
 "----------------------------------------------------------------------
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
@@ -86,25 +86,6 @@ augroup MyPluginSetup
 	autocmd FileType dirvish call s:setup_dirvish()
 augroup END
 
-" 新窗口或标签页打开目录
-function! New_directory(mode)
-	if a:mode == 't'
-		exe ':split | normal -'
-	elseif a:mode == 'b'
-		exe ":split \| normal \<m-J>-"
-	elseif a:mode == 'r'
-		exe ':vsplit | normal -'
-	elseif a:mode == 'l'
-		exe ":vsplit \| normal \<m-H>-"
-	elseif a:mode == 'n'
-		exe ':tabnew | normal -'
-	endif
-endfunc
-noremap <tab>t :call New_directory('t')<cr>
-noremap <tab>b :call New_directory('b')<cr>
-noremap <tab>l :call New_directory('l')<cr>
-noremap <tab>r :call New_directory('r')<cr>
-noremap <tab>n :call New_directory('n')<cr>
 
 "----------------------------------------------------------------------
 " 基础插件
@@ -218,7 +199,7 @@ if index(g:bundle_group, 'tags') >= 0
 	let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 	" 默认禁用自动生成
-	let g:gutentags_modules = [] 
+	let g:gutentags_modules = []
 
 	" 如果有 ctags 可执行就允许动态生成 ctags 文件
 	if executable('ctags')
@@ -295,7 +276,7 @@ if index(g:bundle_group, 'filetypes') >= 0
 	" rust 语法增强
 	Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-	" vim org-mode 
+	" vim org-mode
 	Plug 'jceb/vim-orgmode', { 'for': 'org' }
 endif
 
@@ -306,19 +287,26 @@ endif
 if index(g:bundle_group, 'airline') >= 0
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
-	let g:airline_left_sep = ''
-	let g:airline_left_alt_sep = ''
+	let g:airline_left_sep = ''
+	let g:airline_left_alt_sep = ''
 	let g:airline_right_sep = ''
 	let g:airline_right_alt_sep = ''
-	let g:airline_powerline_fonts = 0
+	let g:airline_powerline_fonts = 1
 	let g:airline_exclude_preview = 1
 	let g:airline_section_b = '%n'
-	let g:airline_theme='deus'
+	let g:airline_theme='jet'
 	let g:airline#extensions#branch#enabled = 0
 	let g:airline#extensions#syntastic#enabled = 0
 	let g:airline#extensions#fugitiveline#enabled = 0
 	let g:airline#extensions#csv#enabled = 0
 	let g:airline#extensions#vimagit#enabled = 0
+	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#show_buffers = 1
+	let g:airline#extensions#tabline#show_splits = 1
+	let g:airline#extensions#tabline#tab_nr_type = 1
+	let g:airline#extensions#tabline#exclude_preview = 1
+	let g:airline#extensions#tabline#formatter = 'unique_tail'
+	let g:airline#extensions#tabline#show_close_button = 0
 endif
 
 
@@ -382,13 +370,13 @@ if index(g:bundle_group, 'ale') >= 0
 
 	" 编辑不同文件类型需要的语法检查器
 	let g:ale_linters = {
-				\ 'c': ['gcc', 'cppcheck'], 
-				\ 'cpp': ['gcc', 'cppcheck'], 
-				\ 'python': ['flake8', 'pylint'], 
-				\ 'lua': ['luac'], 
+				\ 'c': ['gcc', 'cppcheck'],
+				\ 'cpp': ['gcc', 'cppcheck'],
+				\ 'python': ['flake8', 'pylint'],
+				\ 'lua': ['luac'],
 				\ 'go': ['go build', 'gofmt'],
 				\ 'java': ['javac'],
-				\ 'javascript': ['eslint'], 
+				\ 'javascript': ['eslint'],
 				\ }
 
 
@@ -566,16 +554,16 @@ let g:ycm_semantic_triggers =  {
 "----------------------------------------------------------------------
 " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
 "----------------------------------------------------------------------
-let g:ycm_filetype_whitelist = { 
+let g:ycm_filetype_whitelist = {
 			\ "c":1,
-			\ "cpp":1, 
+			\ "cpp":1,
 			\ "objc":1,
 			\ "objcpp":1,
 			\ "python":1,
 			\ "java":1,
 			\ "javascript":1,
 			\ "coffee":1,
-			\ "vim":1, 
+			\ "vim":1,
 			\ "go":1,
 			\ "cs":1,
 			\ "lua":1,
@@ -620,5 +608,3 @@ let g:ycm_filetype_whitelist = {
 			\ "zimbu":1,
 			\ "ps1":1,
 			\ }
-
-
