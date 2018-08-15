@@ -3,10 +3,11 @@
 " auxiliary.vim - 想起来就增加的辅助功能
 "     - ALT+.窗口半透明
 "     - ALT+z禁用/开启鼠标和方向键
+"
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-08-14 23:54:04
+" Last Modified: 2018-08-15 15:57:15
 "
 " ======================================================================
 
@@ -38,23 +39,26 @@ EOF
 
 endfunc
 
-noremap <m-.> :call Transparent_toggle()<cr>
-inoremap <m-.> <esc>:call Transparent_toggle()<cr>a
+if (has('win32') || has('win64')) && has('gui_running')
+	noremap <silent> <m-.> :call Transparent_toggle()<cr>
+	inoremap <silent> <m-.> <esc>:call Transparent_toggle()<cr>a
+endif
 
 
 " **********************************************************************
 " ALT+z禁用/开启鼠标和方向键
 " **********************************************************************
 " 0关闭，1开启
-let g:surport_mouse_arrow = 1
-function s:surport_mouse_arrow()
-	if !g:surport_mouse_arrow
+let s:mode = 1
+
+function s:change_mode()
+	if !s:mode
 		set mouse=a
 		map <left> <left>
 		map <right> <right>
 		map <up> <up>
 		map <down> <down>
-		let g:surport_mouse_arrow = 1
+		let s:mode = 1
 	else
 		set mouse=
 		map <left> <nop>
@@ -65,9 +69,11 @@ function s:surport_mouse_arrow()
 		map! <right> <nop>
 		map! <up> <nop>
 		map! <down> <nop>
-		let g:surport_mouse_arrow = 0
+		let s:mode = 0
 	endif
 endfunc
 
-noremap <silent> <m-z> :call <SID>surport_mouse_arrow()<cr>
-inoremap <silent> <m-z> <esc>:call <SID>surport_mouse_arrow()<cr>
+silent call s:change_mode()
+
+noremap <silent> <m-z> :call <SID>change_mode()<cr>
+inoremap <silent> <m-z> <esc>:call <SID>change_mode()<cr>a

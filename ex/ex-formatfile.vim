@@ -8,7 +8,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-13 13:23:27
-" Last Modified: 2018-08-14 22:27:35
+" Last Modified: 2018-08-15 16:31:25
 "
 "=======================================================================
 
@@ -43,7 +43,7 @@ endfunc
 
 augroup My_messages
 	au!
-	au BufNewFile * call Create_message()
+	au BufNewFile *.c,*.cpp,*.py,*.vim call Create_message()
 	au BufWritePre * ks|call Last_mode()|'s|delmark s
 augroup END
 

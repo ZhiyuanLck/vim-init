@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/14 22:38:36
+" Last Modified: 2018/08/15 16:33:47
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -17,6 +17,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
+	let g:bundle_group += ['markdown']
 endif
 
 
@@ -301,7 +302,7 @@ if index(g:bundle_group, 'airline') >= 0
 	let g:airline#extensions#csv#enabled = 0
 	let g:airline#extensions#vimagit#enabled = 0
 	let g:airline#extensions#tabline#enabled = 1
-	let g:airline#extensions#tabline#show_buffers = 1
+	let g:airline#extensions#tabline#show_buffers = 0
 	let g:airline#extensions#tabline#show_splits = 1
 	let g:airline#extensions#tabline#tab_nr_type = 1
 	let g:airline#extensions#tabline#exclude_preview = 1
@@ -514,6 +515,23 @@ if index(g:bundle_group, 'leaderf') >= 0
 		" ALT+n 匹配 buffer
 		noremap <m-n> :CtrlPBuffer<cr>
 	endif
+endif
+
+
+"-----------------------------------------------------------------------
+" MarkDown插件安装
+"-----------------------------------------------------------------------
+if index(g:bundle_group, 'leaderf') >= 0
+	Plug 'godlygeek/tabular', { 'for': 'markdown'}
+	Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+	Plug 'joker1007/vim-markdown-quote-syntax', { 'for': 'markdown' }
+	Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+
+	" 预览快捷键
+	nmap <silent> <F11> <Plug>MarkdownPreview
+	imap <silent> <F11> <Plug>MarkdownPreview
+	nmap <silent> <F12> <Plug>StopMarkdownPreview
+	imap <silent> <F12> <Plug>StopMarkdownPreview
 endif
 
 

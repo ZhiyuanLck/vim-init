@@ -5,7 +5,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-08-14 22:35:14
+" Last Modified: 2018-08-15 12:28:45
 "
 " ======================================================================
 
@@ -36,8 +36,8 @@ inoremap <silent> <m-I> <esc>:call append(line('.')-1, '')<cr>
 noremap <silent> <leader>i :exe "call append('.', '') \| call append(line('.')-1, '')"<cr>
 
 " ALT+w/q快速保存退出
-noremap <silent> <m-w> mm:w!<cr>`m:delmark m<cr>
+noremap <silent> <m-w> mb:w!<cr>`b:delmark b<cr>
 noremap <m-q> :q!<cr>
-inoremap <silent> <m-w> <esc>mm:w!<cr>`m:delmark m<cr>
+inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
 

@@ -3,7 +3,7 @@
 " init.vim - initialize config
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/14 22:54:43
+" Last Modified: 2018/08/15 16:23:42
 "
 "======================================================================
 
@@ -49,5 +49,5 @@ LoadScript init/init-style.vim
 " 自定义按键
 LoadScript init/init-LoadKeymap.vim
 
-" 文件初始化
-LoadScript ex/ex-initfile.vim
+" 文件格式化
+LoadScript ex/ex-formatfile.vim
