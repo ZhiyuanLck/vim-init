@@ -8,7 +8,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-13 13:23:27
-" Last Modified: 2018-08-15 16:31:25
+" Last Modified: 2018-08-16 20:00:26
 "
 "=======================================================================
 
@@ -21,14 +21,14 @@ function! Create_message()
 	let str_1 = 'Author: zhiyuan'
 	let str_2 = 'GitHub: https://github.com/ZhiyuanLck'
 	let str_3 = 'Creation Time: ' .strftime('%Y-%m-%d %T')
-	let str_4 = 'Last Modified: 2018-08-14 19:23:04
+	let str_4 = 'Last Modified: ' .strftime('%Y-%m-%d %T')
 	call setline(1, [str_0, '', str_1, str_2, str_3, str_4, '', str_0])
 	exe "%normal \<m-/>"
 	exe "%s/ $//g"
 endfunc
 
 function! Last_mode()
-	if expand('%') == 'ex-module.vim'
+	if expand('%') == 'ex-formatfile.vim'
 		return
 	endif
 
