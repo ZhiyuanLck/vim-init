@@ -7,7 +7,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-08-15 15:57:15
+" Last Modified: 2018-08-21 12:00:16
 "
 " ======================================================================
 
@@ -58,6 +58,10 @@ function s:change_mode()
 		map <right> <right>
 		map <up> <up>
 		map <down> <down>
+		map! <left> <left>
+		map! <right> <right>
+		map! <up> <up>
+		map! <down> <down>
 		let s:mode = 1
 	else
 		set mouse=
