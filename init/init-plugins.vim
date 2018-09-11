@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/15 16:33:47
+" Last Modified: 2018-08-31 17:57:54
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -295,7 +295,7 @@ if index(g:bundle_group, 'airline') >= 0
 	let g:airline_powerline_fonts = 1
 	let g:airline_exclude_preview = 1
 	let g:airline_section_b = '%n'
-	let g:airline_theme='jet'
+	let g:airline_theme='deus'
 	let g:airline#extensions#branch#enabled = 0
 	let g:airline#extensions#syntastic#enabled = 0
 	let g:airline#extensions#fugitiveline#enabled = 0
@@ -428,7 +428,8 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
 	" 如果 vim 支持 python 则启用  Leaderf
-	if has('python') || has('python3')
+	" if has('python') || has('python3')
+	if 0
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
@@ -546,7 +547,7 @@ call plug#end()
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
 " 设置配置文件路径
-let g:ycm_global_ycm_extra_conf = 'C:/Users/zhiyuan/.vim/bundles/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundles/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " 禁用预览功能：扰乱视听
 let g:ycm_add_preview_to_completeopt = 0

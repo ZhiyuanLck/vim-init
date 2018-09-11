@@ -7,7 +7,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-08-14 16:57:52
+" Last Modified: 2018-08-31 21:40:13
 "
 " ======================================================================
 
@@ -27,7 +27,7 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 " F9 编译 C/C++ 文件
 augroup Compile_c_cxx
 	autocmd!
-	autocmd FileType c nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+	autocmd FileType c nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 -lm "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 	autocmd FileType cpp nnoremap <silent> <F9> :AsyncRun g++ -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 augroup END
 
@@ -35,16 +35,16 @@ augroup END
 nnoremap <silent> <F5> :call ExecuteFile()<cr>
 
 " F7 编译项目
-nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
+nnoremap <silent> <F7> :AsyncRun -cwd=<root>/build make <cr>
 
 " F8 运行项目
-nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
+nnoremap <silent> <F8> :AsyncRun -cwd=<root>/build -raw make run <cr>
 
 " F6 测试项目
-nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
+nnoremap <silent> <F6> :AsyncRun -cwd=<root>/build -raw make test <cr>
 
 " 更新 cmake
-nnoremap <silent> <F4> :AsyncRun -cwd=<root> cmake . <cr>
+nnoremap <silent> <F4> :AsyncRun -cwd=<root>/build cmake .. <cr>
 
 " Windows 下支持直接打开新 cmd 窗口运行
 if has('win32') || has('win64')
