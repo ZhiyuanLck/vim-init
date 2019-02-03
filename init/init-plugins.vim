@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/15 16:33:47
+" Last Modified: 2019-02-03 11:17:44
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -53,6 +53,9 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
+
+" 中文文档
+Plug 'yianwillis/vimcdoc'
 
 
 "----------------------------------------------------------------------
@@ -428,7 +431,7 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
 	" 如果 vim 支持 python 则启用  Leaderf
-	if has('python') || has('python3')
+	if match(system('uname -a'), 'aarch64') == -1 && (has('python') || has('python3'))
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
