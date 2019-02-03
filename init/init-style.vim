@@ -3,7 +3,7 @@
 " init-style.vim - 显示样式设置
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/14 23:21:39
+" Last Modified: 2019-02-03 21:26:36
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -86,7 +86,8 @@ set background=dark
 set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-color desert256
+" color desert256
+color desert
 
 
 "----------------------------------------------------------------------

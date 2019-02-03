@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2019-02-03 11:17:44
+" Last Modified: 2019-02-03 21:33:55
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -298,7 +298,7 @@ if index(g:bundle_group, 'airline') >= 0
 	let g:airline_powerline_fonts = 1
 	let g:airline_exclude_preview = 1
 	let g:airline_section_b = '%n'
-	let g:airline_theme='jet'
+	let g:airline_theme='onedark'
 	let g:airline#extensions#branch#enabled = 0
 	let g:airline#extensions#syntastic#enabled = 0
 	let g:airline#extensions#fugitiveline#enabled = 0
