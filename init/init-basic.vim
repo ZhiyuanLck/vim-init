@@ -5,7 +5,7 @@
 " 所有人都能接受的配置，不掺渣任何 keymap, 和偏好设置
 "
 " Modified by zhiyuan
-" Last Modified: 2019-02-03 11:15:47
+" Last Modified: 2019-04-27 11:56:26
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -93,6 +93,7 @@ endif
 if has('syntax')
 	syntax enable
 	syntax on
+    filetype on
 endif
 
 
@@ -120,7 +121,6 @@ set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
 
 " 设置分隔符可视
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
-
 
 " 设置 tags：当前文件所在目录往上向根目录搜索直到碰到 .tags 文件
 " 或者 Vim 当前目录包含 .tags 文件

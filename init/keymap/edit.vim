@@ -5,7 +5,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-08-15 12:28:45
+" Last Modified: 2018-09-13 22:28:26
 "
 " ======================================================================
 
@@ -41,3 +41,14 @@ noremap <m-q> :q!<cr>
 inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
 
+" {修正
+" function s:Brackets()
+	" if index(['c', 'cpp', 'java'], &ft) != -1
+		" inoremap { {<cr>}<esc>O
+	" endif
+" endfunc
+"
+" augroup Bra
+	" au!
+	" au BufNewFile,BufRead *.* call <SID>Brackets()
+" augroup END

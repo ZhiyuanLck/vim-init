@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2019-02-03 21:33:55
+" Last Modified: 2019-04-27 15:41:43
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -18,6 +18,7 @@ if !exists('g:bundle_group')
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['markdown']
+	let g:bundle_group += ['edit']
 endif
 
 
@@ -120,9 +121,19 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
 	Plug 'skywind3000/vim-preview'
+	autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+	autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
 	" Git 支持
 	Plug 'tpope/vim-fugitive'
+
+	" 智能注释
+    Plug 'scrooloose/nerdcommenter'
+	let g:NERDSpaceDelims=1
+	let g:NERDRemoveExtraSpaces=1
+	let g:NERDDefaultAlign='start'
+	nnoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>
+	xnoremap <silent><m-/> :call NERDComment('x', 'Invert')<cr>
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
@@ -195,8 +206,29 @@ if index(g:bundle_group, 'tags') >= 0
 	" 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
 	Plug 'skywind3000/gutentags_plus'
 
+	" 重新设置键位映射
+	let g:gutentags_plus_nomap = 1
+	" Find symbol (reference) under cursor
+	noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
+	" Find symbol definition under cursor
+	noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+	" Functions called by this function
+	noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+	" Functions calling this function
+	noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+	" Find text string under cursor
+	noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+	" Find egrep pattern under cursor
+	noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+	" Find file name under cursor
+	noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+	" Find files #including the file name under cursor
+	noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+	" Find places where current symbol is assigned
+	noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+
 	" 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-	let g:gutentags_project_root = ['.root']
+	let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
 	let g:gutentags_ctags_tagfile = '.tags'
 
 	" 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
@@ -537,6 +569,52 @@ if index(g:bundle_group, 'leaderf') >= 0
 	imap <silent> <F12> <Plug>StopMarkdownPreview
 endif
 
+if index(g:bundle_group, 'edit') >= 0
+	Plug 'andymass/vim-matchup'
+	let g:matchup_override_vimtex = 1
+	Plug 'ervandew/supertab'
+
+	Plug 'sirver/ultisnips'
+	let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/vim-init/UltiSnips']
+	let g:UltiSnipsEditSplit='tabdo'
+
+	Plug 'lervag/vimtex', {'for': ['tex', 'plaintex', 'bst']}
+	let g:tex_flavor='latex'
+	let g:vimtex_quickfix_mode=1
+    let g:vimtex_compiler_latexmk_engines = {
+        \ '_'                : '-xelatex',
+        \ 'pdflatex'         : '-pdf',
+        \ 'dvipdfex'         : '-pdfdvi',
+        \ 'lualatex'         : '-lualatex',
+        \ 'xelatex'          : '-xelatex',
+        \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+        \ 'context (luatex)' : '-pdf -pdflatex=context',
+        \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
+        \}
+    let g:vimtex_compiler_latexmk = {
+        \ 'optons': [
+        \   '-xelatex',
+        \   "-e '$tmpdir=\"./\"'",
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
+    let g:vimtex_compiler_latexrun_engines = {
+        \ '_'                : 'xelatex',
+        \ 'pdflatex'         : 'pdflatex',
+        \ 'lualatex'         : 'lualatex',
+        \ 'xelatex'          : 'xelatex',
+        \}
+    let g:vimtex_view_general_viewer='SumatraPDF'
+    let g:vimtex_view_general_options='-reuse-instance -inverse-search "\"' . $VIMRUNTIME . '\gvim.exe\" -n --remote-silent +\%l \"\%f\"" -forward-search @tex @line @pdf'
+    let g:vimtex_view_general_options_latexmk='-reuse-instance'
+
+	Plug 'KeitaNakamura/tex-conceal.vim', {'for':['tex', 'plaintex', 'bst']}
+	set conceallevel=1
+	let g:tex_conceal="abdgm"
+endif
 
 "----------------------------------------------------------------------
 " 结束插件安装
@@ -561,6 +639,14 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
+" 解决ycm与UltiSnips tab键冲突
+let g:ycm_key_list_select_completion=['<m-,>','<Down>']
+let g:ycm_key_list_previous_completion=["<m-.>",'<Up>']
+let g:SuperTabDefaultCompletionType='<m-,>'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
 set completeopt=menu,menuone
 
 " noremap <c-z> <NOP>
@@ -568,7 +654,7 @@ set completeopt=menu,menuone
 " 两个字符自动触发语义补全
 let g:ycm_semantic_triggers =  {
 			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ 'cs,lua,javascript,tex': ['re!\w{2}'],
 			\ }
 
 
@@ -577,6 +663,7 @@ let g:ycm_semantic_triggers =  {
 "----------------------------------------------------------------------
 let g:ycm_filetype_whitelist = {
 			\ "c":1,
+			\ "tex":1,
 			\ "cpp":1,
 			\ "objc":1,
 			\ "objcpp":1,

@@ -3,7 +3,7 @@
 " init-tabsize.vim - 大部分人对 tabsize 都有自己的设置，改这里即可
 "
 " Modified by zhiyuan
-" Last Modified: 2018/08/12 11:25:47
+" Last Modified: 2019-04-26 13:08:51
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -19,8 +19,8 @@ set sw=4
 " 设置 TAB 宽度
 set ts=4
 
-" 禁止展开 tab (noexpandtab)
-set noet
+" 展开 tab (noexpandtab)
+set et
 
 " 如果后面设置了 expandtab 那么展开 tab 为多少字符
 set softtabstop=4
