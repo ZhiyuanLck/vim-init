@@ -3,7 +3,7 @@
 " init-style.vim - 显示样式设置
 "
 " Modified by zhiyuan
-" Last Modified: 2019-02-03 21:26:36
+" Last Modified: 2019-05-12 23:27:51
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -22,7 +22,7 @@ endif
 if has("gui_running")
   " GUI is running or is about to start.
   " Maximize gvim window (for an alternative on Windows, see simalt below).
-  set lines=20 columns=999
+  set lines=999 columns=999
 else
   " This is console Vim.
   if exists("+lines")
@@ -87,7 +87,7 @@ set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 " color desert256
-color desert
+color monokai
 
 
 "----------------------------------------------------------------------

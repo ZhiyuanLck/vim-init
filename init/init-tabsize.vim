@@ -3,7 +3,7 @@
 " init-tabsize.vim - 大部分人对 tabsize 都有自己的设置，改这里即可
 "
 " Modified by zhiyuan
-" Last Modified: 2019-04-26 13:08:51
+" Last Modified: 2019-06-02 09:58:51
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -33,4 +33,7 @@ augroup PythonTab
 	" au FileType python setlocal shiftwidth=4 tabstop=4 noexpandtab
 augroup END
 
-
+augroup Textab
+    autocmd!
+    autocmd FileType tex,cls,sty,bst setlocal sw=2 ts=2 et softtabstop=2
+augroup END

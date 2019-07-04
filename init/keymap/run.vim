@@ -7,7 +7,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-14 13:42:06
-" Last Modified: 2018-09-09 16:36:26
+" Last Modified: 2019-06-08 11:56:42
 "
 " ======================================================================
 
@@ -27,7 +27,8 @@ nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
 " F9 编译 C/C++ 文件
 augroup Compile_c_cxx
 	autocmd!
-	autocmd FileType c nnoremap <silent> <F9> :AsyncRun -save=1 gcc -fexec-charset=GBK -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+"     autocmd FileType c nnoremap <silent> <F9> :AsyncRun -save=1 gcc -fexec-charset=GBK -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+    autocmd FileType c nnoremap <silent> <F9> :AsyncRun -save=1 gcc -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 	autocmd FileType cpp nnoremap <silent> <F9> :AsyncRun -save=1 g++ -fexec-charset=GBK -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 augroup END
 

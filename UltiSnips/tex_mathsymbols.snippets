@@ -1,0 +1,120 @@
+global !p
+texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+    synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+    try:
+        first = next(
+            i for i in reversed(synstackids)
+            if i in texIgnoreMathZoneIds or i in texMathZoneIds
+        )
+        return first != ignore
+    except StopIteration:
+        return False
+endglobal
+
+context "math()"
+snippet ,, "backslash" iA
+\\backslash
+endsnippet
+
+context "math()"
+snippet ',([{}%])' "特殊转义字符" irA
+\\`!p snip.rv = match.group(1)`
+endsnippet
+
+context "math()"
+snippet ',(([abcdDgGiklLmnoOrsSuUxXz]|ep|et|pi|Pi|ph|Ph|ps|Ps|th|Th|ta)|(v([ersStTGLDXUO]|pi|Pi|ph|Ph)))' "greek" irA
+\\`!p
+dic = {'a': 'alpha',
+	'b': 'beta',
+	'd': 'delta',
+	'c': 'chi',
+	'D': 'Delta',
+	'g': 'gamma',
+	'G': 'Gamma',
+	'i': 'iota',
+	'k': 'kappa',
+	'l': 'lambda',
+	'L': 'Lambda',
+	'm': 'mu',
+	'n': 'nu',
+	'o': 'omega',
+	'O': 'Omega',
+	'r': 'rho',
+	's': 'sigma',
+	'S': 'Sigma',
+	'u': 'upsilon',
+	'U': 'Upsilon',
+	'x': 'xi',
+	'X': 'Xi',
+	'z': 'zeta',
+	'ep': 'epsilon',
+	'et': 'eta',
+	'pi': 'pi',
+	'Pi': 'Pi',
+	'ph': 'phi',
+	'Ph': 'Phi',
+	'ps': 'psi',
+	'Ps': 'Psi',
+	'th': 'theta',
+	'Th': 'Theta',
+	'ta': 'tau',
+	've': 'varepsilon',
+	'vr': 'varho',
+	'vs': 'varsigma',
+	'vS': 'varSigma',
+	'vt': 'vartheta',
+	'vT': 'varTheta',
+	'vG': 'varGamma',
+	'vL': 'varLambda',
+	'vD': 'varDelta',
+	'vX': 'varXi',
+	'vU': 'varUpsilon',
+	'vO': 'varOmega',
+	'vpi': 'varpi',
+	'vPi': 'varPi',
+	'vph': 'varphi',
+	'vPh': 'varPhi'}
+snip.rv = dic[match.group(1)]`
+endsnippet
+
+context "math()"
+snippet '(<<|>>|==|-=>|=>|=->|<-=|<=|<=-|-<>|l<>|=<>|L<>)' "arrow" irA
+\\`!p
+dic = {'<<': 'le',
+	'>>': 'ge',
+	'==': 'equiv',
+	'-=>': 'longrightarrow',
+	'=>': 'Rightarrow',
+	'=->': 'Longrightarrow',
+	'<-=': 'longleftarrow',
+	'<=': 'Leftarrow',
+	'<=-': 'Longleftarrow',
+	'-<>': 'leftrightarrow',
+	'l<>': 'longleftrightarrow',
+	'=<>': 'Leftrightarrow',
+	'L<>': 'Longleftrightarrow'
+}
+snip.rv = dic[match.group(1)]`
+endsnippet
+
+context "math()"
+snippet -> "to" i
+\\to 
+endsnippet
+
+context "math()"
+snippet <- "gets" i
+\\gets 
+endsnippet
+

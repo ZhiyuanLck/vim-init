@@ -8,7 +8,7 @@
 " Author: zhiyuan
 " GitHub: https://github.com/ZhiyuanLck
 " Creation Time: 2018-08-13 13:23:27
-" Last Modified: 2018-08-16 20:00:26
+" Last Modified: 2019-06-04 13:19:24
 "
 "=======================================================================
 
@@ -51,7 +51,7 @@ augroup END
 " **********************************************************************
 " 去除行尾空格
 " **********************************************************************
-augroup Delblank
-	au!
-	au BufWrite * silent exe "g/ $/s/ $//"
-augroup END
+" augroup Delblank
+"     au!
+"     au BufWrite * silent exe "g/ $/s/ $//"
+" augroup END

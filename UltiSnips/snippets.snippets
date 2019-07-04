@@ -1,10 +1,40 @@
-snippet sn "start a snippet" bA
-snippet ${1} "${2}"
-${3:${VISUAL}}
+snippet sn "start a snippet" b
+snippet $1 "$2"$3
+${4:${VISUAL}}
 `!v "endsnippet"`
+$0
+endsnippet
+
+snippet csn "start a snippet with contex" bA
+context "math()"
+snippet $1 "$2"$3
+${4:${VISUAL}}
+`!v "endsnippet"`
+$0
 endsnippet
 
 snippet vi "visual"
 \${VISUAL${1}}
 endsnippet
 
+snippet /p "python code" iA
+\`!p $1\`$0
+endsnippet
+
+snippet rg "snip.rv->group" wA
+snip.rv = match.group($1)$0
+endsnippet
+
+snippet mgl "texmath" bA
+global !p
+from math import math
+endglobal
+$0
+endsnippet
+
+snippet gl "global" ba
+global !p
+$1
+endglobal
+$0
+endsnippet

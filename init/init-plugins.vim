@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2019-04-27 15:41:43
+" Last Modified: 2019-06-14 08:43:40
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -57,6 +57,8 @@ Plug 'chrisbra/vim-diff-enhanced'
 
 " 中文文档
 Plug 'yianwillis/vimcdoc'
+
+Plug 'tpope/vim-surround'
 
 
 "----------------------------------------------------------------------
@@ -417,7 +419,7 @@ if index(g:bundle_group, 'ale') >= 0
 
 
 	" 获取 pylint, flake8 的配置文件，在 vim-init/tools/conf 下面
-	function s:lintcfg(name)
+	function! s:lintcfg(name)
 		let conf = s:path('tools/conf/')
 		let path1 = conf . a:name
 		let path2 = expand('~/.vim/linter/'. a:name)
@@ -578,9 +580,9 @@ if index(g:bundle_group, 'edit') >= 0
 	let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/vim-init/UltiSnips']
 	let g:UltiSnipsEditSplit='tabdo'
 
-	Plug 'lervag/vimtex', {'for': ['tex', 'plaintex', 'bst']}
+	Plug 'lervag/vimtex', {'for': ['tex', 'plaintex', 'bst', 'cls']}
 	let g:tex_flavor='latex'
-	let g:vimtex_quickfix_mode=1
+	let g:vimtex_quickfix_mode=2
     let g:vimtex_compiler_latexmk_engines = {
         \ '_'                : '-xelatex',
         \ 'pdflatex'         : '-pdf',
@@ -592,28 +594,53 @@ if index(g:bundle_group, 'edit') >= 0
         \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
         \}
     let g:vimtex_compiler_latexmk = {
+        \ 'backend' : 'jobs',
+        \ 'background' : 1,
+        \ 'build_dir' : '../output',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
         \ 'optons': [
         \   '-xelatex',
-        \   "-e '$tmpdir=\"./\"'",
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
-        \ ],
+        \   '-gg',
+        \   '-cd', ],
         \}
-    let g:vimtex_compiler_latexrun_engines = {
-        \ '_'                : 'xelatex',
-        \ 'pdflatex'         : 'pdflatex',
-        \ 'lualatex'         : 'lualatex',
-        \ 'xelatex'          : 'xelatex',
-        \}
-    let g:vimtex_view_general_viewer='SumatraPDF'
-    let g:vimtex_view_general_options='-reuse-instance -inverse-search "\"' . $VIMRUNTIME . '\gvim.exe\" -n --remote-silent +\%l \"\%f\"" -forward-search @tex @line @pdf'
-    let g:vimtex_view_general_options_latexmk='-reuse-instance'
+"     let g:vimtex_view_general_viewer='SumatraPDF'
+"     let g:vimtex_view_general_options
+"         \ = '-reuse-instance -forward-search @tex @line @pdf'
+"         \ . ' -inverse-search "gvim --servername ' . v:servername
+"         \ . ' --remote-send \"^<C-\^>^<C-n^>'
+"         \ . ':drop \%f^<CR^>:\%l^<CR^>:normal\! zzzv^<CR^>'
+"         \ . ':execute ''drop '' . fnameescape(''\%f'')^<CR^>'
+"         \ . ':\%l^<CR^>:normal\! zzzv^<CR^>'
+"         \ . ':call remote_foreground('''.v:servername.''')^<CR^>^<CR^>\""'
+"     let g:vimtex_view_general_options_latexmk='-reuse-instance'
+    let g:vimtex_view_general_viewer = 'okular'
+    let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+    let g:vimtex_view_general_options_latexmk = '--unique'
+    let g:vimtex_quickfix_latexlog = {
+          \ 'default' : 1,
+          \ 'general' : 1,
+          \ 'references' : 1,
+          \ 'overfull' : 0,
+          \ 'underfull' : 0,
+          \ 'font' : 0,
+          \ 'packages' : {
+          \   'default' : 0,
+          \ },
+          \}
 
-	Plug 'KeitaNakamura/tex-conceal.vim', {'for':['tex', 'plaintex', 'bst']}
+    Plug 'KeitaNakamura/tex-conceal.vim', {'for':['tex', 'plaintex', 'bst']}
 	set conceallevel=1
 	let g:tex_conceal="abdgm"
+    augroup ConcealHi
+        autocmd!
+        autocmd filetype tex hi Conceal guibg=#272822
+    augroup END
 endif
 
 "----------------------------------------------------------------------

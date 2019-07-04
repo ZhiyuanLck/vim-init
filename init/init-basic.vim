@@ -5,7 +5,7 @@
 " 所有人都能接受的配置，不掺渣任何 keymap, 和偏好设置
 "
 " Modified by zhiyuan
-" Last Modified: 2019-04-27 11:56:26
+" Last Modified: 2019-06-06 10:19:41
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -77,8 +77,6 @@ if has('multi_byte')
 	" 打开文件时自动尝试下面顺序的编码
 	set fileencodings=ucs-bom,utf-8,gbk,gb18030,big5,euc-jp,latin1
 endif
-
-
 "----------------------------------------------------------------------
 " 允许 Vim 自带脚本根据文件类型自动设置缩进等
 "----------------------------------------------------------------------
@@ -86,14 +84,12 @@ if has('autocmd')
 	filetype plugin indent on
 endif
 
-
 "----------------------------------------------------------------------
 " 语法高亮设置
 "----------------------------------------------------------------------
 if has('syntax')
 	syntax enable
 	syntax on
-    filetype on
 endif
 
 
@@ -134,6 +130,22 @@ set formatoptions+=B
 
 " 文件换行符，默认使用 unix 换行符
 set ffs=unix,dos,mac
+
+" 自动载入外部的修改
+set autoread
+
+" 自动保存
+set updatetime=10000
+augroup AutoSave
+    autocmd!
+    autocmd CursorHold,CursorHoldI * update
+augroup END
+
+" Tex设置
+augroup Tex
+    autocmd!
+    autocmd filetype tex set textwidth=78
+augroup END
 
 
 "----------------------------------------------------------------------
