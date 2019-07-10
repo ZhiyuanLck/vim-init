@@ -3,7 +3,7 @@
 " init-plugins.vim
 "
 " Modified by zhiyuan
-" Last Modified: 2019-06-14 08:43:40
+" Last Modified: 2019-07-05 18:30:57
 "
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -15,7 +15,8 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
+"     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
+	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'echodoc']
 	let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['markdown']
 	let g:bundle_group += ['edit']
@@ -453,7 +454,7 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'echodoc') >= 0
 	Plug 'Valloric/YouCompleteMe'
-	Plug 'Shougo/echodoc.vim'
+"     Plug 'Shougo/echodoc.vim'
 
 	set noshowmode
 	let g:echodoc#enable_at_startup = 1
@@ -602,6 +603,7 @@ if index(g:bundle_group, 'edit') >= 0
         \ 'executable' : 'latexmk',
         \ 'optons': [
         \   '-xelatex',
+        \   '-shell-escape',
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
@@ -609,39 +611,43 @@ if index(g:bundle_group, 'edit') >= 0
         \   '-gg',
         \   '-cd', ],
         \}
-"     let g:vimtex_view_general_viewer='SumatraPDF'
-"     let g:vimtex_view_general_options
-"         \ = '-reuse-instance -forward-search @tex @line @pdf'
-"         \ . ' -inverse-search "gvim --servername ' . v:servername
-"         \ . ' --remote-send \"^<C-\^>^<C-n^>'
-"         \ . ':drop \%f^<CR^>:\%l^<CR^>:normal\! zzzv^<CR^>'
-"         \ . ':execute ''drop '' . fnameescape(''\%f'')^<CR^>'
-"         \ . ':\%l^<CR^>:normal\! zzzv^<CR^>'
-"         \ . ':call remote_foreground('''.v:servername.''')^<CR^>^<CR^>\""'
-"     let g:vimtex_view_general_options_latexmk='-reuse-instance'
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
-    let g:vimtex_quickfix_latexlog = {
-          \ 'default' : 1,
-          \ 'general' : 1,
-          \ 'references' : 1,
-          \ 'overfull' : 0,
-          \ 'underfull' : 0,
-          \ 'font' : 0,
-          \ 'packages' : {
-          \   'default' : 0,
-          \ },
-          \}
+"     let g:vimtex_quickfix_latexlog = {
+"           \ 'default' : 1,
+"           \ 'general' : 1,
+"           \ 'references' : 1,
+"           \ 'overfull' : 0,
+"           \ 'underfull' : 0,
+"           \ 'font' : 0,
+"           \ 'packages' : {
+"           \   'default' : 0,
+"           \ },
+"           \}
+    let g:vimtex_quickfix_latexlog = {'default' : 0}
 
-    Plug 'KeitaNakamura/tex-conceal.vim', {'for':['tex', 'plaintex', 'bst']}
-	set conceallevel=1
-	let g:tex_conceal="abdgm"
-    augroup ConcealHi
-        autocmd!
-        autocmd filetype tex hi Conceal guibg=#272822
-    augroup END
+"     Plug 'KeitaNakamura/tex-conceal.vim', {'for':['tex', 'plaintex', 'bst']}
+"     set conceallevel=1
+"     let g:tex_conceal="abdgm"
+"     augroup ConcealHi
+"         autocmd!
+"         autocmd filetype tex hi Conceal guibg=#272822
+"     augroup END
 endif
+
+" Plug 'tenfyzhong/CompleteParameter.vim'
+" let g:complete_parameter_use_ultisnips_mapping = 1
+" let g:complete_parameter_py_keep_value = 1
+" let g:complete_parameter_py_remove_default = 1
+" set noshowmode
+" set cmdheight=2
+" let g:complete_parameter_echo_signature = 1
+" inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+" smap <m-;> <Plug>(complete_parameter#goto_next_parameter)
+" imap <m-;> <Plug>(complete_parameter#goto_next_parameter)
+" smap <m-'> <Plug>(complete_parameter#goto_previous_parameter)
+" imap <m-'> <Plug>(complete_parameter#goto_previous_parameter)
 
 "----------------------------------------------------------------------
 " 结束插件安装
@@ -654,7 +660,7 @@ call plug#end()
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
 " 设置配置文件路径
-let g:ycm_global_ycm_extra_conf = 'C:/Users/zhiyuan/.vim/bundles/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '/home/zhiyuan/.ycm_extra_conf.py'
 
 " 禁用预览功能：扰乱视听
 let g:ycm_add_preview_to_completeopt = 0
@@ -666,6 +672,9 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
+" 补全anaconda虚拟环境
+let g:ycm_path_to_python_interpreter = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
+let g:ycm_python_binary_path = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
 " 解决ycm与UltiSnips tab键冲突
 let g:ycm_key_list_select_completion=['<m-,>','<Down>']
 let g:ycm_key_list_previous_completion=["<m-.>",'<Up>']

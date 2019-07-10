@@ -33,7 +33,7 @@ augroup Compile_c_cxx
 augroup END
 
 " F5 运行文件
-nnoremap <silent> <F5> :call ExecuteFile()<cr>
+nnoremap <silent> <F5> :call ExecuteFile()<cr><cr>
 
 " F7 编译项目
 nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>

@@ -45,7 +45,7 @@ set laststatus=2
 set number
 
 " 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
-set signcolumn=yes
+" set signcolumn=yes
 
 " 总是显示标签栏
 set showtabline=2

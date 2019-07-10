@@ -47,14 +47,6 @@ snippet table "Table environment" b
 \end{table}
 endsnippet
 
-snippet fig "Figure environment" b
-\begin{figure}[${1:htpb}]
-	\centering
-	${2:\includegraphics[width=0.8\textwidth]{$3}}
-	\caption{${4:$3}}
-	\label{fig:${5:${3/\W+/-/g}}}
-\end{figure}
-endsnippet
 
 snippet enum "Enumerate" bA
 \begin{enumerate}
@@ -113,10 +105,10 @@ snippet / "Fraction" i
 \\frac{${VISUAL}}{$1}$0
 endsnippet
 
-context "math()"
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
-\\frac{`!p snip.rv = match.group(1)`}{$1}$0
-endsnippet
+# context "math()"
+# snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "symbol frac" wrA
+# \\frac{`!p snip.rv = match.group(1)`}{$1}$0
+# endsnippet
 
 priority 1000
 context "math()"

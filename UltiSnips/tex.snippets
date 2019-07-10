@@ -23,28 +23,66 @@ def math():
 endglobal
 
 snippet no "note" b
-\documentclass[a4paper]{article}
-
-\usepackage{ctex}
-\usepackage{amsmath, amssymb}
-\setCJKmainfont[BoldFont={Source Han Serif SC SemiBold},ItalicFont={Adobe Kaiti Std}]{Source Han Serif SC}
-\setCJKsansfont[BoldFont={Source Han Sans SC},ItalicFont={Adobe Kaiti Std}]{Adobe Kaiti Std}
-\usepackage{amsmath, amssymb}
-\usepackage{geometry}
-\geometry{
-	left=2.6cm,
-	right=2.6cm,
-	top=3cm,
-	bottom=2.5cm}
-% 行距设置
-\linespread{1.2}
-\setlength{\parskip}{3mm}
-\setlength{\parindent}{2em}
-
+\documentclass[normal,blue]{elegantnote}
+\usepackage{scrextend}
+\setkomafont{labelinglabel}{\bfseries}
+\usepackage{caption}
+\usepackage{subfigure}
+${1:
+\setmonofont{DejaVu Sans Mono for Powerline}
+\usepackage[
+  newfloat,
+  cachedir=../output,
+  outputdir=../output]{minted}
+\definecolor{bg}{rgb}{0.85,0.85,0.85}
+\renewcommand{\theFancyVerbLine}{\ttfamily
+  \textcolor[rgb]{0,0,0}{\small
+  \oldstylenums{\arabic{FancyVerbLine}}}}
+\setminted{
+  autogobble,
+  breaklines,
+  bgcolor=bg,
+  linenos,
+  python3}
+\newminted{sh}{}
+\newminted{py}{}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Code}
+}
 \begin{document}
-	$0
+	$2
 \end{document}
 endsnippet
+
+snippet fig "Figure environment" b
+\begin{figure}[${1:htpb}]
+	\centering
+	\includegraphics[width=${2:0.8}\textwidth]{$3}
+\end{figure}
+endsnippet
+
+
+snippet mc "minted code" i
+\begin{code}
+\captionof{listing}{$1}
+\begin{$2}
+$3
+\end{$2}
+\end{code}
+endsnippet
+
+
+snippet pr "preamble" b
+\usepackage{scrextend}
+\setkomafont{labelinglabel}{\bfseries}
+\usepackage{caption}
+\usepackage{subfigure}
+endsnippet
+
+snippet it "item" b
+\item[$1] $2
+endsnippet
+
 
 snippet pa "usepackage" b
 \\usepackage{$0}
@@ -66,10 +104,44 @@ snippet beo "begin{} / end{}" bA
 \end{$1}
 endsnippet
 
+snippet py "pycode" b
+\begin{pycode}
+$1
+\end{pycode}
+endsnippet
+
+
 snippet frame "frame" bA
 \begin{frame}{$1}
 	${2:${VISUAL}}
 \end{frame}
+endsnippet
+
+snippet lab "labeling" b
+\begin{labeling}{$0}
+	\item[$1] $2
+\end{labeling}
+endsnippet
+
+snippet com "company" b
+\begin{labeling}{一一一一一}
+  \item[法定代表人] $15
+  \item[官网] $16
+  \item[注册资本] $1
+  \item[实缴资本] $2
+  \item[成立日期] $3
+  \item[经营状态] $4
+  \item[公司类型] $5
+  \item[行业] $6
+  \item[核准日期] $7
+  \item[登记机关] $8
+  \item[营业期限] $9
+  \item[纳税人资质] $10
+  \item[人员规模] $11
+  \item[参保人数] $12
+  \item[注册地址] $13
+  \item[经营范围] $14
+\end{labeling}
 endsnippet
 
 
@@ -101,11 +173,23 @@ child {node {$1}}$0
 endsnippet
 
 
+snippet url "url" i
+\href{$1}{$2}
+endsnippet
+
+snippet kaishu "kaishu"
+\subsubsection{$1}
+\begin{labeling}{电子书}
+\item[pdf] $2
+\item[电子书] $3
+\item[字帖] $4
+\end{labeling}
+endsnippet
 
 
 # 行内公式
 snippet mk "Math" wA
-$$1$
+$${VISUAL:$1}$
 endsnippet
 
 # 行间公式

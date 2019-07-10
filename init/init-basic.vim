@@ -33,7 +33,6 @@ set winaltkeys=no
 set wrap
 
 " 打开功能键超时检测（终端下功能键为一串 ESC 开头的字符串）
-set ttimeout
 
 " 功能键超时检测 50 毫秒
 set ttimeoutlen=50
@@ -134,12 +133,15 @@ set ffs=unix,dos,mac
 " 自动载入外部的修改
 set autoread
 
+" 自动切换工作目录
+" set autochdir
+
 " 自动保存
-set updatetime=10000
-augroup AutoSave
-    autocmd!
-    autocmd CursorHold,CursorHoldI * update
-augroup END
+" set updatetime=10000
+" augroup AutoSave
+"     autocmd!
+"     autocmd CursorHold,CursorHoldI * update
+" augroup END
 
 " Tex设置
 augroup Tex

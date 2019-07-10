@@ -3,7 +3,7 @@
 " init.vim - initialize config
 "
 " Modified by zhiyuan
-" Last Modified: 2019-05-03 10:53:15
+" Last Modified: 2019-07-05 18:09:25
 "
 "======================================================================
 
@@ -51,4 +51,4 @@ LoadScript init/init-LoadKeymap.vim
 
 
 " 文件格式化
-LoadScript ex/ex-formatfile.vim
+" LoadScript ex/ex-formatfile.vim
