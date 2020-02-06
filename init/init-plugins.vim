@@ -15,9 +15,8 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-"     let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'echodoc']
-	let g:bundle_group += ['leaderf']
+    let g:bundle_group += ['leaderf']
 	let g:bundle_group += ['markdown']
 	let g:bundle_group += ['edit']
 endif
@@ -466,60 +465,61 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
 	" 如果 vim 支持 python 则启用  Leaderf
-	if match(system('uname -a'), 'aarch64') == -1 && (has('python') || has('python3'))
+"     if match(system('uname -a'), 'aarch64') == -1 && (has('python') || has('python3'))
+    if (has('python') || has('python3'))
 		Plug 'Yggdroot/LeaderF'
 
 		" CTRL+p 打开文件模糊匹配
-		let g:Lf_ShortcutF = '<c-p>'
+        let g:Lf_ShortcutF = '<c-p>'
 
 		" ALT+n 打开 buffer 模糊匹配
-		let g:Lf_ShortcutB = '<m-n>'
+        let g:Lf_ShortcutB = '<m-n>'
 
 		" CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-		noremap <c-n> :LeaderfMru<cr>
+        noremap <c-n> :LeaderfMru<cr>
 
 		" ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
-		noremap <m-p> :LeaderfFunction!<cr>
+        noremap <m-f> :LeaderfFunction!<cr>
 
 		" ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
-		noremap <m-P> :LeaderfBufTag!<cr>
+        noremap <m-t> :LeaderfBufTag!<cr>
 
 		" ALT+n 打开 buffer 列表进行模糊匹配
-		noremap <m-n> :LeaderfBuffer<cr>
+        noremap <m-n> :LeaderfBuffer<cr>
 
 		" 全局 tags 模糊匹配
-		noremap <m-m> :LeaderfTag<cr>
+        noremap <m-m> :LeaderfTag<cr>
 
 		" 最大历史文件保存 2048 个
-		let g:Lf_MruMaxFiles = 2048
+        let g:Lf_MruMaxFiles = 2048
 
 		" ui 定制
-		let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+        let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
 		" 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
-		let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-		let g:Lf_WorkingDirectoryMode = 'Ac'
-		let g:Lf_WindowHeight = 0.30
-		let g:Lf_CacheDirectory = expand('~/.vim/cache')
+        let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
+        let g:Lf_WorkingDirectoryMode = 'Ac'
+        let g:Lf_WindowHeight = 0.30
+        let g:Lf_CacheDirectory = expand('~/.vim/cache')
 
 		" 显示绝对路径
-		let g:Lf_ShowRelativePath = 0
+        let g:Lf_ShowRelativePath = 0
 
 		" 隐藏帮助
-		let g:Lf_HideHelp = 1
+        let g:Lf_HideHelp = 1
 
 		" 模糊匹配忽略扩展名
-		let g:Lf_WildIgnore = {
-					\ 'dir': ['.svn','.git','.hg'],
-					\ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-					\ }
+        let g:Lf_WildIgnore = {
+                    \ 'dir': ['.svn','.git','.hg'],
+                    \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+                    \ }
 
 		" MRU 文件忽略扩展名
-		let g:Lf_MruFileExclude = ['*.so', '*.exe', '*.py[co]', '*.sw?', '~$*', '*.bak', '*.tmp', '*.dll']
-		let g:Lf_StlColorscheme = 'powerline'
+        let g:Lf_MruFileExclude = ['*.so', '*.exe', '*.py[co]', '*.sw?', '~$*', '*.bak', '*.tmp', '*.dll']
+        let g:Lf_StlColorscheme = 'powerline'
 
 		" 禁用 function/buftag 的预览功能，可以手动用 p 预览
-		let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+        let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 	else
 		" 不支持 python ，使用 CtrlP 代替
 		Plug 'ctrlpvim/ctrlp.vim'
@@ -548,10 +548,10 @@ if index(g:bundle_group, 'leaderf') >= 0
 		noremap <c-n> :CtrlPMRUFiles<cr>
 
 		" ALT+p 显示当前文件的函数列表
-		noremap <m-p> :CtrlPFunky<cr>
+		noremap <m-f> :CtrlPFunky<cr>
 
 		" ALT+n 匹配 buffer
-		noremap <m-n> :CtrlPBuffer<cr>
+		noremap <m-b> :CtrlPBuffer<cr>
 	endif
 endif
 
@@ -660,7 +660,7 @@ call plug#end()
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
 "----------------------------------------------------------------------
 " 设置配置文件路径
-let g:ycm_global_ycm_extra_conf = '/home/zhiyuan/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundles/YouCompleteMe/third_party/ycmd/.ycm_extra_conf.py'
 
 " 禁用预览功能：扰乱视听
 let g:ycm_add_preview_to_completeopt = 0
@@ -673,8 +673,8 @@ let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
 " 补全anaconda虚拟环境
-let g:ycm_path_to_python_interpreter = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
-let g:ycm_python_binary_path = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
+" let g:ycm_path_to_python_interpreter = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
+" let g:ycm_python_binary_path = '/home/zhiyuan/.conda/envs/py35/bin/python3.5'
 " 解决ycm与UltiSnips tab键冲突
 let g:ycm_key_list_select_completion=['<m-,>','<Down>']
 let g:ycm_key_list_previous_completion=["<m-.>",'<Up>']

@@ -20,17 +20,17 @@ if has('win32') || has('win64')
 endif
 
 if has("gui_running")
-  " GUI is running or is about to start.
-  " Maximize gvim window (for an alternative on Windows, see simalt below).
+" GUI is running or is about to start.
+" Maximize gvim window (for an alternative on Windows, see simalt below).
   set lines=999 columns=999
-else
-  " This is console Vim.
-  if exists("+lines")
-    set lines=50
-  endif
-  if exists("+columns")
-    set columns=100
-  endif
+" else
+"   This is console Vim.
+"   if exists("+lines")
+"     set lines=50
+"   endif
+"   if exists("+columns")
+"     set columns=100
+"   endif
 endif
 
 
@@ -45,7 +45,7 @@ set laststatus=2
 set number
 
 " 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
-" set signcolumn=yes
+set signcolumn=yes
 
 " 总是显示标签栏
 set showtabline=2

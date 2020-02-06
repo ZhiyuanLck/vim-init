@@ -29,7 +29,7 @@ augroup Compile_c_cxx
 	autocmd!
 "     autocmd FileType c nnoremap <silent> <F9> :AsyncRun -save=1 gcc -fexec-charset=GBK -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
     autocmd FileType c nnoremap <silent> <F9> :AsyncRun -save=1 gcc -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-	autocmd FileType cpp nnoremap <silent> <F9> :AsyncRun -save=1 g++ -fexec-charset=GBK -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+	autocmd FileType cpp nnoremap <silent> <F9> :AsyncRun -save=1 g++ -g -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
 augroup END
 
 " F5 运行文件

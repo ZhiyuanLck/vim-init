@@ -32,7 +32,9 @@ if has('nvim') == 0 && has('gui_running') == 0
 	endfor
 	for i in range(26)
 		call s:metacode(nr2char(char2nr('a') + i))
-		call s:metacode(nr2char(char2nr('A') + i))
+"         call s:metacode(nr2char(char2nr('A') + i))
+"         let upper = nr2char(char2nr('A') + i)
+"         exec "set <M-S-".upper.">=\e".upper
 	endfor
 	for c in [',', '.', '/', ';', '{', '}']
 		call s:metacode(c)
@@ -79,9 +81,9 @@ call s:key_escape('<S-F12>', '[24;2~')
 " Refer: http://sunaku.github.io/vim-256color-bce.html
 "----------------------------------------------------------------------
 if &term =~ '256color' && $TMUX != ''
-	" disable Background Color Erase (BCE) so that color schemes
-	" render properly when inside 256-color tmux and GNU screen.
-	" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+" disable Background Color Erase (BCE) so that color schemes
+" render properly when inside 256-color tmux and GNU screen.
+" see also http://snk.tuxfamily.org/log/vim-256color-bce.html
 	set t_ut=
 endif
 
