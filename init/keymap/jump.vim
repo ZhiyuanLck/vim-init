@@ -168,3 +168,14 @@ noremap <silent> <tab>l :call <SID>new_edit('l')<cr>
 noremap <silent> <tab>t :call <SID>new_edit('t')<cr>
 noremap <silent> <tab>b :call <SID>new_edit('b')<cr>
 noremap <silent> <tab>n :call <SID>new_edit('n')<cr>
+
+
+" **********************************************************************
+" cancle highlight when search
+" **********************************************************************
+noremap <silent> <m-h> :set nohlsearch<cr>
+noremap <silent> n :set hlsearch<cr>n
+noremap <silent> N :set hlsearch<cr>N
+noremap <silent> / :set hlsearch<cr>/
+noremap <silent> ? :set hlsearch<cr>?
+noremap <silent> * *:set hlsearch<cr>
