@@ -453,7 +453,7 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'echodoc') >= 0
 	Plug 'Valloric/YouCompleteMe'
-"     Plug 'Shougo/echodoc.vim'
+    Plug 'Shougo/echodoc.vim'
 
 	set noshowmode
 	let g:echodoc#enable_at_startup = 1
