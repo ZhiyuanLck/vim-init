@@ -1,0 +1,19 @@
+{
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": ["c", "cpp", "objc", "objcpp"],
+      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".root"],
+      "initializationOptions": {
+         "cache": {
+           "directory": "/tmp/ccls"
+         }
+       }
+    },
+    "digestif": {
+      "command": "digestif",
+      "filetypes": ["sty", "cls", "bib", "tex", "plaintex", "context"]
+    }
+  },
+  "snippets.userSnippetsDirectory": "~/.vim/vim-init/UltiSnips"
+}

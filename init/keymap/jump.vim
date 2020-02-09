@@ -173,7 +173,7 @@ noremap <silent> <tab>n :call <SID>new_edit('n')<cr>
 " **********************************************************************
 " cancle highlight when search
 " **********************************************************************
-noremap <silent> <m-h> :set nohlsearch<cr>
+noremap <silent> <space>h :set nohlsearch<cr>
 noremap <silent> n :set hlsearch<cr>n
 noremap <silent> N :set hlsearch<cr>N
 noremap <silent> / :set hlsearch<cr>/
