@@ -48,6 +48,28 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
 Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
+
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+
+" incsearch.vim x fuzzy x vim-easymotion
+
+function! s:config_easyfuzzymotion(...) abort
+  return extend(copy({
+  \   'converters': [incsearch#config#fuzzy#converter()],
+  \   'modules': [incsearch#config#easymotion#module()],
+  \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+  \   'is_expr': 0,
+  \   'is_stay': 1
+  \ }), get(a:, 1, {}))
+endfunction
+
+noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+
 
 " 文件浏览器，代替 netrw
 Plug 'justinmk/vim-dirvish'
@@ -138,6 +160,7 @@ if index(g:bundle_group, 'basic') >= 0
     let g:NERDRemoveExtraSpaces=1
     let g:NERDDefaultAlign='start'
     nnoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>
+    inoremap <silent><m-/> <esc>:call NERDComment('n', 'Invert')<cr>
     xnoremap <silent><m-/> :call NERDComment('x', 'Invert')<cr>
 
     " 使用 ALT+E 来选择窗口

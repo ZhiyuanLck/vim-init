@@ -10,10 +10,21 @@
          }
        }
     },
+
     "digestif": {
       "command": "digestif",
       "filetypes": ["sty", "cls", "bib", "tex", "plaintex", "context"]
     }
   },
-  "snippets.userSnippetsDirectory": "~/.vim/vim-init/UltiSnips"
+
+  "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": ["cmake"],
+      "rootPatterns": [
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    }
 }
