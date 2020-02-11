@@ -22,6 +22,7 @@ if !exists('g:bundle_group')
     let g:bundle_group += ['leaderf']
     let g:bundle_group += ['markdown']
     let g:bundle_group += ['edit']
+    let g:bundle_group += ['task']
 endif
 
 
@@ -507,7 +508,7 @@ if index(g:bundle_group, 'coc') >= 0
     set signcolumn=yes
 
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint', 'coc-explorer', 'coc-tabnine']
+    let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint', 'coc-explorer']
 
     " coc-explorer"
     :nmap <space>e :CocCommand explorer<CR>
@@ -848,7 +849,7 @@ if index(g:bundle_group, 'edit') >= 0
     Plug 'andymass/vim-matchup'
     let g:matchup_override_vimtex = 1
 
-    Plug 'lervag/vimtex', {'for': ['tex', 'plaintex', 'bst', 'cls']}
+    Plug 'lervag/vimtex', {'for': ['tex', 'plaintex']}
     let g:tex_flavor='latex'
     let g:vimtex_quickfix_mode=2
     let g:vimtex_compiler_latexmk_engines = {
@@ -881,7 +882,45 @@ if index(g:bundle_group, 'edit') >= 0
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
-    let g:vimtex_quickfix_latexlog = {'default' : 0}
+"     let g:vimtex_quickfix_latexlog = {'default' : 0}
+endif
+
+" task
+if index(g:bundle_group, 'task') >= 0
+    Plug 'skywind3000/asyncrun.vim'
+    Plug 'skywind3000/asynctasks.vim'
+    nnoremap <silent><space>ae :AsyncTaskEdit!<cr>
+    nnoremap <silent><space>al :AsyncTaskList!<cr>
+    nnoremap <silent><space>am :AsyncTaskMacro!<cr>
+    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', 'compile_commands.json']
+    let g:asynctasks_term_pos = 'tab'
+    let g:asynctasks_term_reuse = 1
+    let g:asynctasks_rtp_config = 'vim-init/settings/tasks.ini'
+    " 自动打开 quickfix window ，高度为 6
+    let g:asyncrun_open = 6
+
+    " 任务结束时候响铃提醒
+    let g:asyncrun_bell = 1
+
+    " 设置 F10 打开/关闭 Quickfix 窗口
+    nnoremap <silent><F10> :call asyncrun#quickfix_toggle(6)<cr>
+    inoremap <silent><F10> <esc>:call asyncrun#quickfix_toggle(6)<cr>
+
+    " run
+    nnoremap <silent><F5> :AsyncTask file-run<cr>
+    inoremap <silent><F5> <esc>:AsyncTask file-run<cr>
+    " compile
+    nnoremap <silent><F9> :AsyncTask file-compile<cr>
+    inoremap <silent><F9> <esc>:AsyncTask file-compile<cr>
+    " make
+    nnoremap <silent><F7> :AsyncTask make<cr>
+    inoremap <silent><F7> <esc>:AsyncTask make<cr>
+    " make run
+    nnoremap <silent><F8> :AsyncTask make-run<cr>
+    inoremap <silent><F8> <esc>:AsyncTask make-run<cr>
+    " cmake
+    nnoremap <silent><F4> :AsyncTask cmake<cr>
+    inoremap <silent><F4> <esc>:AsyncTask cmake<cr>
 endif
 
 "----------------------------------------------------------------------

@@ -159,7 +159,7 @@ function s:new_edit(mode)
 	elseif a:mode == 'b'
 		exe "sp \| normal \<m-J>-"
 	elseif a:mode == 'n'
-		exe "tabnew \| normal -"
+		exe "tabnew"
 	endif
 endfunc
 

@@ -23,11 +23,8 @@ LoadKeymap edit.vim
 " 缓存、tab与窗口编辑与跳转
 LoadKeymap jump.vim
 
-" 注释与补全
-LoadKeymap CommentAndComplete.vim
-
 " 编译运行
-LoadKeymap run.vim
+" LoadKeymap run.vim
 
 " 文档、定义搜索与跳转
 LoadKeymap search.vim
