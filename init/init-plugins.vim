@@ -902,6 +902,10 @@ if index(g:bundle_group, 'task') >= 0
     " 任务结束时候响铃提醒
     let g:asyncrun_bell = 1
 
+    let g:asynctasks_term_rows = 8
+    let g:asynctasks_term_cols = 80
+    let g:asynctasks_term_focus = 0
+
     " 设置 F10 打开/关闭 Quickfix 窗口
     nnoremap <silent><F10> :call asyncrun#quickfix_toggle(6)<cr>
     inoremap <silent><F10> <esc>:call asyncrun#quickfix_toggle(6)<cr>
