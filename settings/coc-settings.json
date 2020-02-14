@@ -26,5 +26,6 @@
       "initializationOptions": {
         "buildDirectory": "build"
       }
-    }
+    },
+  "coc.source.file.enable": "false"
 }

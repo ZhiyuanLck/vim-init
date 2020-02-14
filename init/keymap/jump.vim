@@ -158,7 +158,7 @@ function s:new_edit(mode)
 		exe "sp \| normal -"
 	elseif a:mode == 'b'
 		exe "sp \| normal \<m-J>-"
-	elseif a:mode == 'n'
+	elseif a:mode == 'c'
 		exe "tabnew"
 	endif
 endfunc
@@ -167,13 +167,17 @@ noremap <silent> <tab>r :call <SID>new_edit('r')<cr>
 noremap <silent> <tab>l :call <SID>new_edit('l')<cr>
 noremap <silent> <tab>t :call <SID>new_edit('t')<cr>
 noremap <silent> <tab>b :call <SID>new_edit('b')<cr>
-noremap <silent> <tab>n :call <SID>new_edit('n')<cr>
+noremap <silent> <tab>c :call <SID>new_edit('c')<cr>
+
+" tab pre next
+noremap <silent> <tab>n :tabn<cr>
+noremap <silent> <tab>p :tabp<cr>
 
 
 " **********************************************************************
 " cancle highlight when search
 " **********************************************************************
-noremap <silent> <space>h :set nohlsearch<cr>
+noremap <silent> <space>hl :set nohlsearch<cr>
 noremap <silent> n :set hlsearch<cr>n
 noremap <silent> N :set hlsearch<cr>N
 noremap <silent> / :set hlsearch<cr>/

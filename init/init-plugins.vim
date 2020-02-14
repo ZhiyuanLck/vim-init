@@ -507,8 +507,12 @@ if index(g:bundle_group, 'coc') >= 0
     " always show signcolumns
     set signcolumn=yes
 
+    " setting dir
     let g:coc_config_home=$HOME.'/.vim/vim-init/settings'
     let g:coc_data_home=$HOME.'/.vim/coc'
+
+    " disable completion of some words
+    autocmd FileType vim let b:coc_suggest_blacklist = ["'/", '"/', '/'']
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
