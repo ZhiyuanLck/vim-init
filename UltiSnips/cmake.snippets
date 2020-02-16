@@ -2,11 +2,14 @@ snippet cxx "cmake default" bA
 cmake_minimum_required(VERSION 3.1)
 project($1)
 set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(PROJECT_BINARY_DIR ${PROJECT_SOURCE_DIR}/build)
+add_compile_options(-g -Wall -O2)
 add_executable(${PROJECT_NAME} ${2:$1}.cpp)
 add_custom_target(run
     COMMAND ${PROJECT_NAME}
     DEPENDS ${PROJECT_NAME}
-    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
 )
 endsnippet
 

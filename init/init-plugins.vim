@@ -255,7 +255,6 @@ if index(g:bundle_group, 'tags') >= 0
     noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
     " Find places where current symbol is assigned
     noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
-
     " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
     let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
     let g:gutentags_ctags_tagfile = '.tags'
@@ -512,7 +511,7 @@ if index(g:bundle_group, 'coc') >= 0
     let g:coc_data_home=$HOME.'/.vim/coc'
 
     " disable completion of some words
-    autocmd FileType vim let b:coc_suggest_blacklist = ["'/", '"/', '/'']
+    let b:coc_suggest_blacklist = ["'/", '"/', ' /']
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
@@ -899,8 +898,8 @@ if index(g:bundle_group, 'task') >= 0
     Plug 'skywind3000/asynctasks.vim'
     nnoremap <silent><space>ae :AsyncTaskEdit!<cr>
     nnoremap <silent><space>al :AsyncTaskList!<cr>
-    nnoremap <silent><space>am :AsyncTaskMacro!<cr>
-    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg', 'compile_commands.json']
+    nnoremap <silent><space>am :AsyncTaskMacro<cr>
+    let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
     let g:asynctasks_term_pos = 'tab'
     let g:asynctasks_term_reuse = 1
     let g:asynctasks_rtp_config = 'vim-init/settings/tasks.ini'
