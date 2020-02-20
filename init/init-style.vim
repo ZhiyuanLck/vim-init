@@ -86,8 +86,13 @@ set background=dark
 set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-" color desert256
-color monokai
+color solarized
+
+" highlight
+hi! MatchParen ctermfg=fg ctermbg=White
+hi! MatchWord ctermfg=Black ctermbg=Red
+hi! CocErrorFloat ctermfg=Black ctermbg=Red
+hi! PmenuSel ctermbg=DarkBlue ctermfg=Black
 
 
 "----------------------------------------------------------------------

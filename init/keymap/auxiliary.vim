@@ -19,11 +19,11 @@ let g:transparency = 255
 let g:half_tr = 140
 
 function! Transparent_toggle()
-	if g:transparency == 255
-		let g:transparency = g:half_tr
-	else
-		let g:transparency = 255
-	endif
+    if g:transparency == 255
+        let g:transparency = g:half_tr
+    else
+        let g:transparency = 255
+    endif
 
 py3 << EOF
 import win32con
@@ -40,8 +40,8 @@ EOF
 endfunc
 
 if (has('win32') || has('win64')) && has('gui_running')
-	noremap <silent> <m-.> :call Transparent_toggle()<cr>
-	inoremap <silent> <m-.> <esc>:call Transparent_toggle()<cr>a
+    noremap <silent> <m-.> :call Transparent_toggle()<cr>
+    inoremap <silent> <m-.> <esc>:call Transparent_toggle()<cr>a
 endif
 
 
@@ -52,29 +52,29 @@ endif
 let s:mode = 1
 
 function s:change_mode()
-	if !s:mode
-		set mouse=a
-		map <left> <left>
-		map <right> <right>
-		map <up> <up>
-		map <down> <down>
-		map! <left> <left>
-		map! <right> <right>
-		map! <up> <up>
-		map! <down> <down>
-		let s:mode = 1
-	else
-		set mouse=
-		map <left> <nop>
-		map <right> <nop>
-		map <up> <nop>
-		map <down> <nop>
-		map! <left> <nop>
-		map! <right> <nop>
-		map! <up> <nop>
-		map! <down> <nop>
-		let s:mode = 0
-	endif
+    if !s:mode
+        set mouse=a
+        map <left> <left>
+        map <right> <right>
+        map <up> <up>
+        map <down> <down>
+        map! <left> <left>
+        map! <right> <right>
+        map! <up> <up>
+        map! <down> <down>
+        let s:mode = 1
+    else
+        set mouse=
+        map <left> <nop>
+        map <right> <nop>
+        map <up> <nop>
+        map <down> <nop>
+        map! <left> <nop>
+        map! <right> <nop>
+        map! <up> <nop>
+        map! <down> <nop>
+        let s:mode = 0
+    endif
 endfunc
 
 silent call s:change_mode()
