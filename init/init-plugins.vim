@@ -16,7 +16,6 @@
 if !exists('g:bundle_group')
     let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'nerdtree']
-"     let g:bundle_group += ['echodoc']
     let g:bundle_group += ['snip']
     let g:bundle_group += ['coc']
     let g:bundle_group += ['leaderf']
@@ -85,6 +84,9 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'yianwillis/vimcdoc'
 
 Plug 'tpope/vim-surround'
+
+" better terminal
+Plug 'skywind3000/vim-terminal-help'
 
 
 "----------------------------------------------------------------------
@@ -358,7 +360,7 @@ if index(g:bundle_group, 'airline') >= 0
     let g:airline_powerline_fonts = 1
     let g:airline_exclude_preview = 1
     let g:airline_section_b = '%n'
-    let g:airline_theme='lucius'
+    let g:airline_theme='mystl'
     let g:airline#extensions#branch#enabled = 0
     let g:airline#extensions#syntastic#enabled = 0
     let g:airline#extensions#fugitiveline#enabled = 0

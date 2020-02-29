@@ -89,10 +89,25 @@ set t_Co=256
 color solarized
 
 " highlight
-hi! MatchParen ctermfg=fg ctermbg=White
-hi! MatchWord ctermfg=Black ctermbg=Red
-hi! CocErrorFloat ctermfg=Black ctermbg=Red
-hi! PmenuSel ctermbg=DarkBlue ctermfg=Black
+hi MatchParen ctermfg=White ctermbg=Red
+hi MatchWord ctermfg=Black ctermbg=6
+hi Terminal ctermfg=6
+hi Conditional ctermfg=176
+hi Repeat ctermfg=168
+hi PmenuSel ctermfg=6 ctermbg=0
+" coc
+hi CocErrorFloat ctermfg=240 ctermbg=Red
+hi CocHighlightText ctermfg=226 ctermbg=240
+" IncSearch
+" hi clear IncSearch
+" Leaderf
+hi Lf_hl_stlFullPathMode ctermbg=250 ctermfg=0
+hi Lf_hl_stlCategory ctermbg=6 ctermfg=0
+hi Lf_hl_stlName ctermbg=235
+nnoremap <f1> :echo "hi<"
+    \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
+    \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
+    \ . synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<cr>
 
 
 "----------------------------------------------------------------------
@@ -136,10 +151,6 @@ hi! SignColumn guibg=NONE ctermbg=NONE
 " 修改行号为浅灰色，默认主题的黄色行号很难看，换主题可以仿照修改
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 	\ gui=NONE guifg=DarkGrey guibg=NONE
-
-" 修正补全目录的色彩：默认太难看
-hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
-hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 
 
 "----------------------------------------------------------------------

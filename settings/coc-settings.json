@@ -28,6 +28,15 @@
       "args": ["start"],
       "filetypes": ["sh"],
       "ignoredRootPaths": []
+    },
+
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/", ".git"],
+      "filetypes": ["go"],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
     }
   },
   "coc.source.file.enable": false

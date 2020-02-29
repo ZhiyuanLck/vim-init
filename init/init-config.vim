@@ -183,5 +183,3 @@ augroup InitFileTypesGroup
     au BufNewFile,BufRead *.vl setlocal filetype=verilog
 
 augroup END
-
-
