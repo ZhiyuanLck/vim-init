@@ -517,7 +517,7 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint']
 
     " coc-explorer"
     :nmap <space>e :CocCommand explorer<CR>
