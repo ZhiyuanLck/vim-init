@@ -1,21 +1,5 @@
 {
   "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
-    },
-
-    "digestif": {
-      "command": "digestif",
-      "filetypes": ["sty", "cls", "bib", "tex", "plaintex", "context"]
-    },
-
     "bash": {
       "command": "bash-language-server",
       "args": ["start"],
@@ -32,5 +16,6 @@
       }
     }
   },
-  "coc.source.file.enable": false
+  "coc.source.file.enable": false,
+  "snippets.loadFromExtensions": false
 }

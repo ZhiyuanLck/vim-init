@@ -1,5 +1,8 @@
 global !p
-texMathZones = ['texMathZone'+x for x in ['A', 'AS', 'B', 'BS', 'C', 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS', 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA',
+'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG']]
 
 texIgnoreMathZones = ['texMathText']
 
@@ -274,7 +277,7 @@ snippet part "d/dx" w
 endsnippet
 
 context "math()"
-snippet sq "\sqrt{}" iA
+snippet sq "\sqrt{}" i
 \sqrt{${1:${VISUAL}}} $0
 endsnippet
 
@@ -409,10 +412,10 @@ snippet nabl "nabla" iA
 \nabla
 endsnippet
 
-context "math()"
-snippet xx "cross" iA
-\times
-endsnippet
+# context "math()"
+# snippet xx "cross" iA
+# \times
+# endsnippet
 
 priority 100
 # snippet * "cdot" iA
@@ -435,11 +438,11 @@ snippet '(?<!\\)(sin|cos|arccot|cot|csc|ln|log|exp|star|perp)' "ln" rwA
 \\`!p snip.rv = match.group(1)`
 endsnippet
 
-priority 200
-context "math()"
-snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta|int)' "ln" rwA
-\\`!p snip.rv = match.group(1)`
-endsnippet
+# priority 200
+# context "math()"
+# snippet '(?<!\\)(arcsin|arccos|arctan|arccot|arccsc|arcsec|pi|zeta)' "ln" rwA
+# \\`!p snip.rv = match.group(1)`
+# endsnippet
 
 # priority 100
 # context "math()"

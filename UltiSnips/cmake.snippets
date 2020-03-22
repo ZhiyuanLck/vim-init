@@ -3,15 +3,25 @@ cmake_minimum_required(VERSION 3.1)
 
 project($1)
 
+add_compile_options(-g -Wall -O2 -std=c++14)
+
 set(CMAKE_CXX_STANDARD 11)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(PROJECT_BINARY_DIR ${PROJECT_SOURCE_DIR}/build)
 
-add_compile_options(-g -Wall -O2)
+find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
+
+include_directories(${GTEST_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME} ${2:$1}.cpp)
+target_link_libraries(${PROJECT_NAME} ${GTEST_BOTH_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${CMAKE_THREAD_LIBS_INIT})
+
+add_test(Test ${PROJECT_NAME})
+enable_testing()
 
 add_custom_target(run
     COMMAND ${PROJECT_NAME}

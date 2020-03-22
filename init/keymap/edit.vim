@@ -41,6 +41,14 @@ noremap <m-q> :q!<cr>
 inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
 
+" surround
+nmap <space>mw ysw$
+nmap <space>mW ysW$
+nmap <space>m( ysa($
+nmap <space>m{ ysa{$
+nmap <space>m[ ysa[$
+vmap <space>m S$
+
 " {修正
 " function s:Brackets()
 	" if index(['c', 'cpp', 'java'], &ft) != -1

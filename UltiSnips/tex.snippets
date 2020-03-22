@@ -1,7 +1,8 @@
 global !p
 texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C',
 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
-'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z']]
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA',
+'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG']]
 
 texIgnoreMathZones = ['texMathText']
 
@@ -88,7 +89,7 @@ snippet pa "usepackage" b
 \\usepackage{$0}
 endsnippet
 
-snippet po "usepackage with option" bA
+snippet po "usepackage with option" b
 \\usepackage[$0]{$1}
 endsnippet
 
@@ -103,6 +104,13 @@ snippet beo "begin{} / end{}" bA
 	${3:${VISUAL}}
 \end{$1}
 endsnippet
+
+snippet eq "equation" b
+\begin{equation}
+  $1
+\end{equation}
+endsnippet
+
 
 snippet py "pycode" b
 \begin{pycode}
@@ -247,5 +255,15 @@ while True:
     i -= 1
 snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 `{$1}$0
+endsnippet
+
+priority 1000
+context "math()"
+snippet int "" i
+\intb
+endsnippet
+
+snippet aa "" i
+ab
 endsnippet
 

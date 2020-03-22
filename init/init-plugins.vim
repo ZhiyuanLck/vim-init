@@ -517,7 +517,7 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-pyright', 'coc-markdownlint', 'coc-vimtex']
 
     " coc-explorer"
     :nmap <space>e :CocCommand explorer<CR>
@@ -754,20 +754,21 @@ if index(g:bundle_group, 'leaderf') >= 0
         " CTRL+p 打开文件模糊匹配
         let g:Lf_ShortcutF = '<c-p>'
 
-        " ALT+n 打开 buffer 模糊匹配
-        let g:Lf_ShortcutB = '<m-n>'
+        " ALT+b 打开 buffer 模糊匹配
+        let g:Lf_ShortcutB = '<m-b>'
 
         " CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
         noremap <c-n> :LeaderfMru<cr>
 
-        " ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
+        " ALT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
         noremap <m-f> :LeaderfFunction!<cr>
 
-        " ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
+        " ALT+t 打开 tag 列表，i 进入模糊匹配，ESC退出
         noremap <m-t> :LeaderfBufTag!<cr>
 
-        " ALT+n 打开 buffer 列表进行模糊匹配
-        noremap <m-n> :LeaderfBuffer<cr>
+        " ALT+b 打开 buffer 列表进行模糊匹配
+        noremap <m-b> :LeaderfBuffer<cr>
+        let g:Lf_JumpToExistingWindow = 1
 
         " 全局 tags 模糊匹配
         noremap <m-m> :LeaderfTag<cr>
@@ -891,7 +892,8 @@ if index(g:bundle_group, 'edit') >= 0
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
-"     let g:vimtex_quickfix_latexlog = {'default' : 0}
+    let g:vimtex_quickfix_ignore_filters = ['Warning.*Fandol']
+"     let g:vimtex_quickfix_latexlog = {'font' : 0}
 endif
 
 " task
@@ -904,16 +906,17 @@ if index(g:bundle_group, 'task') >= 0
     let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
     let g:asynctasks_term_pos = 'tab'
     let g:asynctasks_term_reuse = 1
+    let g:asynctasks_term_focus = 1
     let g:asynctasks_rtp_config = 'vim-init/settings/tasks.ini'
     " 自动打开 quickfix window ，高度为 6
-    let g:asyncrun_open = 6
+    let g:asyncrun_open = 8
 
     " 任务结束时候响铃提醒
     let g:asyncrun_bell = 1
 
     let g:asynctasks_term_rows = 8
     let g:asynctasks_term_cols = 80
-    let g:asynctasks_term_focus = 0
+    let g:asynctasks_term_focus = 1
 
     " 设置 F10 打开/关闭 Quickfix 窗口
     nnoremap <silent><F10> :call asyncrun#quickfix_toggle(6)<cr>
@@ -931,9 +934,15 @@ if index(g:bundle_group, 'task') >= 0
     " make run
     nnoremap <silent><F8> :AsyncTask make-run<cr>
     inoremap <silent><F8> <esc>:AsyncTask make-run<cr>
+    " make test
+    nnoremap <silent><F6> :AsyncTask make-test<cr>
+    inoremap <silent><F6> <esc>:AsyncTask make-test<cr>
     " cmake
     nnoremap <silent><F4> :AsyncTask cmake<cr>
     inoremap <silent><F4> <esc>:AsyncTask cmake<cr>
+    " grep
+    nnoremap <silent><F2> :AsyncTask grep-word<cr>
+    inoremap <silent><F2> :AsyncTask grep-word<cr>
 endif
 
 "----------------------------------------------------------------------
