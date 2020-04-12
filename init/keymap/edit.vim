@@ -49,6 +49,14 @@ nmap <space>m{ ysa{$
 nmap <space>m[ ysa[$
 vmap <space>m S$
 
+" copy and paste
+nnoremap <space>y "+y
+vnoremap <space>y "+y
+nnoremap <space>p "+p
+vnoremap <space>p "+p
+nnoremap <space>P "+P
+vnoremap <space>P "+P
+
 " {修正
 " function s:Brackets()
 	" if index(['c', 'cpp', 'java'], &ft) != -1

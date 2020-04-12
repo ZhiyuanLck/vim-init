@@ -2,7 +2,8 @@ global !p
 texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C',
 'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
 'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA',
-'AmsB', 'AmsC', 'AmsD', 'AmsE', 'AmsF', 'AmsG']]
+'AmsAS', 'AmsB', 'AmsBS', 'AmsC', 'AmsCS', 'AmsD', 'AmsDS', 'AmsE',
+'AmsES' 'AmsF', 'AmsG', 'AmsGS']]
 
 texIgnoreMathZones = ['texMathText']
 
@@ -22,6 +23,16 @@ def math():
     except StopIteration:
         return False
 endglobal
+
+snippet doc "" b
+\documentclass[a4paper, 12pt]{article}
+\usepackage{xeCJK}
+
+\begin{document}
+  $1
+\end{document}
+endsnippet
+
 
 snippet no "note" b
 \documentclass[normal,blue]{elegantnote}
@@ -131,28 +142,6 @@ snippet lab "labeling" b
 \end{labeling}
 endsnippet
 
-snippet com "company" b
-\begin{labeling}{一一一一一}
-  \item[法定代表人] $15
-  \item[官网] $16
-  \item[注册资本] $1
-  \item[实缴资本] $2
-  \item[成立日期] $3
-  \item[经营状态] $4
-  \item[公司类型] $5
-  \item[行业] $6
-  \item[核准日期] $7
-  \item[登记机关] $8
-  \item[营业期限] $9
-  \item[纳税人资质] $10
-  \item[人员规模] $11
-  \item[参保人数] $12
-  \item[注册地址] $13
-  \item[经营范围] $14
-\end{labeling}
-endsnippet
-
-
 snippet /tt "ttfamily" iA
 \{\\ttfamily $1\}
 endsnippet
@@ -185,16 +174,6 @@ snippet url "url" i
 \href{$1}{$2}
 endsnippet
 
-snippet kaishu "kaishu"
-\subsubsection{$1}
-\begin{labeling}{电子书}
-\item[pdf] $2
-\item[电子书] $3
-\item[字帖] $4
-\end{labeling}
-endsnippet
-
-
 # 行内公式
 snippet mk "Math" wA
 $${1:${VISUAL}}$
@@ -209,18 +188,18 @@ endsnippet
 
 # 下标
 context "math()"
-snippet '([A-Za-z])(\d)' "auto subscript" wrA
+snippet '([A-Za-z])(\d)' "auto subscript" wr
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
 context "math()"
-snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wr
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 
 context "math()"
 snippet ds "subscript" iA
-_{$1}$0
+_{$1\}$0
 endsnippet
 
 # 上标

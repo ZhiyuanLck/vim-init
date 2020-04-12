@@ -880,19 +880,18 @@ if index(g:bundle_group, 'edit') >= 0
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
         \ 'optons': [
-        \   '-xelatex',
-        \   '-shell-escape',
+        \   '-pdfxe',
+        \   "-xelatex=\"xelatex --shell-escape %O %S\"",
         \   '-verbose',
         \   '-file-line-error',
         \   '-synctex=1',
         \   '-interaction=nonstopmode',
-        \   '-gg',
         \   '-cd', ],
         \}
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
-    let g:vimtex_quickfix_ignore_filters = ['Warning.*Fandol']
+    let g:vimtex_quickfix_ignore_filters = ['Warning.*Fandol', 'Overfull']
 "     let g:vimtex_quickfix_latexlog = {'font' : 0}
 endif
 
@@ -919,8 +918,8 @@ if index(g:bundle_group, 'task') >= 0
     let g:asynctasks_term_focus = 1
 
     " 设置 F10 打开/关闭 Quickfix 窗口
-    nnoremap <silent><F10> :call asyncrun#quickfix_toggle(6)<cr>
-    inoremap <silent><F10> <esc>:call asyncrun#quickfix_toggle(6)<cr>
+    nnoremap <silent><F12> :call asyncrun#quickfix_toggle(6)<cr>
+    inoremap <silent><F12> <esc>:call asyncrun#quickfix_toggle(6)<cr>
 
     " run
     nnoremap <silent><F5> :AsyncTask file-run<cr>
@@ -943,6 +942,7 @@ if index(g:bundle_group, 'task') >= 0
     " grep
     nnoremap <silent><F2> :AsyncTask grep-word<cr>
     inoremap <silent><F2> :AsyncTask grep-word<cr>
+    command -nargs=0 Evim AsyncTask grep-vim
 endif
 
 "----------------------------------------------------------------------
