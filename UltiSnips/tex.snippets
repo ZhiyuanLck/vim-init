@@ -24,10 +24,60 @@ def math():
         return False
 endglobal
 
-snippet doc "" b
-\documentclass[a4paper, 12pt]{article}
+snippet ctex "" b
+\documentclass{ctexart}
+
+\begin{document}
+  $1
+\end{document}
+endsnippet
+
+snippet thm "theorem" b
+\begin{thm}{${1:name}}
+$2
+\end{thm}
+endsnippet
+
+snippet show "" b
+\documentclass{article}
+\usepackage[outputdir=output]{minted}
+\usepackage{amsmath}
+\usepackage{tcolorbox}
+\tcbuselibrary{minted, skins}
+\tcbset{listing engine=minted}
+\definecolor{bg}{rgb}{0.9,0.9,0.9}
+\definecolor{show}{rgb}{0.8, 0.9, 0.9}
+
+
+\begin{document}
+\begin{tcblisting}{minted language=tex,
+  skin=bicolor,
+%   listing side text,
+  colbacklower=show}
+$1
+\end{tcblisting}
+\end{document}
+endsnippet
+
+
+snippet tikz "" b
+\documentclass[tikz, border=1cm]{standalone}
+
+\begin{document}
+  $1
+\end{document}
+endsnippet
+
+snippet ctikz "" b
+\documentclass[tikz, border=1cm]{standalone}
 \usepackage{xeCJK}
 
+\begin{document}
+  $1
+\end{document}
+endsnippet
+
+snippet doc "" b
 \begin{document}
   $1
 \end{document}
@@ -104,6 +154,15 @@ snippet po "usepackage with option" b
 \\usepackage[$0]{$1}
 endsnippet
 
+snippet art "article" b
+\documentclass{article}
+
+\begin{document}
+$1
+\end{document}
+endsnippet
+
+
 snippet beg "begin{} / end{}" bA
 \begin{$1}
 	${2:${VISUAL}}
@@ -111,7 +170,7 @@ snippet beg "begin{} / end{}" bA
 endsnippet
 
 snippet beo "begin{} / end{}" bA
-\begin{$1}{$2}
+\begin{$1}$2
 	${3:${VISUAL}}
 \end{$1}
 endsnippet
@@ -122,6 +181,19 @@ snippet eq "equation" b
 \end{equation}
 endsnippet
 
+snippet ti "tikzpicture"
+\begin{tikzpicture}
+$1
+\end{tikzpicture}
+endsnippet
+
+snippet expl "" b
+\ExplSyntaxOn
+$1
+\ExplSyntaxOff
+endsnippet
+
+
 
 snippet py "pycode" b
 \begin{pycode}
@@ -129,8 +201,15 @@ $1
 \end{pycode}
 endsnippet
 
+snippet make "" b
+\makeatletter
+$1
+\makeatother
+endsnippet
 
-snippet frame "frame" bA
+
+
+snippet frame "frame" b
 \begin{frame}{$1}
 	${2:${VISUAL}}
 \end{frame}
@@ -244,5 +323,10 @@ endsnippet
 
 snippet aa "" i
 ab
+endsnippet
+
+context "math()"
+snippet part "d/dx" i
+\frac{\partial ${1:V}}{\partial ${2:x}} $0
 endsnippet
 

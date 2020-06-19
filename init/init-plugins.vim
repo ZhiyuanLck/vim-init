@@ -863,11 +863,11 @@ if index(g:bundle_group, 'edit') >= 0
     let g:tex_flavor='latex'
     let g:vimtex_quickfix_mode=2
     let g:vimtex_compiler_latexmk_engines = {
-        \ '_'                : '-xelatex',
+        \ '_'                : '-xelatex --shell-escape',
         \ 'pdflatex'         : '-pdf',
         \ 'dvipdfex'         : '-pdfdvi',
         \ 'lualatex'         : '-lualatex',
-        \ 'xelatex'          : '-xelatex',
+        \ 'xelatex'          : '-xelatex --shell-escape',
         \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
         \ 'context (luatex)' : '-pdf -pdflatex=context',
         \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
@@ -875,7 +875,7 @@ if index(g:bundle_group, 'edit') >= 0
     let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'jobs',
         \ 'background' : 1,
-        \ 'build_dir' : '../output',
+        \ 'build_dir' : './output',
         \ 'callback' : 1,
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
@@ -891,8 +891,31 @@ if index(g:bundle_group, 'edit') >= 0
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
-    let g:vimtex_quickfix_ignore_filters = ['Warning.*Fandol', 'Overfull']
+    let g:vimtex_quickfix_ignore_filters = [
+      \ 'Warning.*Fandol', 'Overfull',
+      \ 'Warning.*Font',
+      \]
 "     let g:vimtex_quickfix_latexlog = {'font' : 0}
+    let g:vimtex_quickfix_latexlog = {
+          \ 'default' : 1,
+          \ 'ignore_filters' : ['Fandol'],
+          \ 'general' : 1,
+          \ 'references' : 1,
+          \ 'overfull' : 1,
+          \ 'underfull' : 1,
+          \ 'font' : 1,
+          \ 'packages' : {
+          \   'default' : 1,
+          \   'general' : 1,
+          \   'babel' : 1,
+          \   'biblatex' : 1,
+          \   'fixltx2e' : 1,
+          \   'hyperref' : 1,
+          \   'natbib' : 1,
+          \   'scrreprt' : 1,
+          \   'titlesec' : 1,
+          \ },
+          \}
 endif
 
 " task

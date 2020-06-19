@@ -113,3 +113,10 @@ noremap <silent> <m-u> :call Tools_PreviousCursor(6)<cr>
 inoremap <silent> <m-u> <esc>:call Tools_PreviousCursor(6)<cr>a
 noremap <silent> <m-d> :call Tools_PreviousCursor(7)<cr>
 inoremap <silent> <m-d> <esc>:call Tools_PreviousCursor(7)<cr>a
+
+nnoremap j jzz
+nnoremap k kzz
+nnoremap n nzz
+vnoremap j jzz
+vnoremap k kzz
+vnoremap n nzz

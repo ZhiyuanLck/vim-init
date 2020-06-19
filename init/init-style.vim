@@ -340,5 +340,6 @@ set tabline=%!Vim_NeatTabLine()
 set guitablabel=%{Vim_NeatGuiTabLabel()}
 set guitabtooltip=%{Vim_NeatGuiTabTip()}
 
-
-
+" 修正高亮组
+" hi link texMathOnly texMatcherNM
+hi clear texMathOnly
