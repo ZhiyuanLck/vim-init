@@ -40,14 +40,13 @@ endsnippet
 
 snippet show "" b
 \documentclass{article}
-\usepackage[outputdir=output]{minted}
 \usepackage{amsmath}
+\usepackage[outputdir=output]{minted}
 \usepackage{tcolorbox}
 \tcbuselibrary{minted, skins}
 \tcbset{listing engine=minted}
 \definecolor{bg}{rgb}{0.9,0.9,0.9}
 \definecolor{show}{rgb}{0.8, 0.9, 0.9}
-
 
 \begin{document}
 \begin{tcblisting}{minted language=tex,
@@ -59,12 +58,38 @@ $1
 \end{document}
 endsnippet
 
+snippet shp "" b
+\usepackage[outputdir=output]{minted}
+\usepackage{tcolorbox}
+\tcbuselibrary{minted, skins}
+\tcbset{listing engine=minted}
+\definecolor{bg}{rgb}{0.9,0.9,0.9}
+\definecolor{show}{rgb}{0.8, 0.9, 0.9}
+endsnippet
+
+snippet shc "" b
+\begin{tcblisting}{minted language=tex,
+  skin=bicolor,
+%   listing side text,
+  colbacklower=show}
+$1
+\end{tcblisting}
+endsnippet
+
+
+snippet so "temp" b
+\sortitem{$1}{$2}
+$0
+endsnippet
+
 
 snippet tikz "" b
 \documentclass[tikz, border=1cm]{standalone}
 
 \begin{document}
-  $1
+\begin{tikzpicture}
+$1
+\end{tikzpicture}
 \end{document}
 endsnippet
 
@@ -73,13 +98,15 @@ snippet ctikz "" b
 \usepackage{xeCJK}
 
 \begin{document}
-  $1
+\begin{tikzpicture}
+$1
+\end{tikzpicture}
 \end{document}
 endsnippet
 
 snippet doc "" b
 \begin{document}
-  $1
+$1
 \end{document}
 endsnippet
 
@@ -277,13 +304,13 @@ snippet '([A-Za-z])_(\d\d)' "auto subscript2" wr
 endsnippet
 
 context "math()"
-snippet ds "subscript" iA
+snippet ds "subscript" i
 _{$1\}$0
 endsnippet
 
 # 上标
 context "math()"
-snippet us "superscript" iA
+snippet us "superscript" i
 ^{$1}$0
 endsnippet
 
@@ -328,5 +355,50 @@ endsnippet
 context "math()"
 snippet part "d/dx" i
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
+endsnippet
+
+context "math()"
+snippet nlim "" iA
+\lim_{n \to ${1:\infty}} $0
+endsnippet
+
+context "math()"
+snippet lr "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+context "math()"
+snippet lr( "left( right)" i
+\left( ${1:${VISUAL}} \right) $0
+endsnippet
+
+context "math()"
+snippet lr| "left| right|" i
+\left| ${1:${VISUAL}} \right| $0
+endsnippet
+
+context "math()"
+snippet lr{ "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+context "math()"
+snippet lrb "left\{ right\}" i
+\left\\{ ${1:${VISUAL}} \right\\} $0
+endsnippet
+
+context "math()"
+snippet lr[ "left[ right]" i
+\left[ ${1:${VISUAL}} \right] $0
+endsnippet
+
+context "math()"
+snippet sq "" i
+\sqrt{$1}$0
+endsnippet
+
+snippet wd "" bA
+\word{$1}$2{$3}
+$0
 endsnippet
 

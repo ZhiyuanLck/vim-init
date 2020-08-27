@@ -23,6 +23,12 @@ set bs=eol,start,indent
 " 自动缩进
 set autoindent
 
+" 添加I标志位
+set cpoptions+=I
+
+" set indentkeys=o,O
+" set cinkeys=o,O
+
 " 打开 C/C++ 语言缩进优化
 set cindent
 
@@ -146,7 +152,7 @@ set autoread
 " Tex设置
 augroup Tex
     autocmd!
-"     autocmd filetype tex set textwidth=78
+    autocmd filetype tex set textwidth=78
 augroup END
 
 

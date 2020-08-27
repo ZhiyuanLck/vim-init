@@ -14,18 +14,8 @@
       "initializationOptions": {
         "usePlaceholders": true
       }
-    },
-
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
-      "initializationOptions": {
-         "cache": {
-           "directory": "/tmp/ccls"
-         }
-       }
     }
+
   },
   "coc.source.file.enable": false,
   "snippets.loadFromExtensions": false

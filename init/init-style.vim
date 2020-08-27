@@ -86,24 +86,12 @@ set background=dark
 set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-color candy
+color Monokai
+hi Pmenu ctermbg=216 ctermfg=236
+hi PmenuSel ctermbg=172 ctermfg=232
+hi default link CocInfoFloat PmenuSel
+hi! clear texError
 
-" highlight
-hi MatchParen ctermfg=White ctermbg=Red
-hi MatchWord ctermfg=Black ctermbg=6
-hi Terminal ctermfg=6
-hi Conditional ctermfg=176
-hi Repeat ctermfg=168
-hi PmenuSel ctermfg=6 ctermbg=0
-" coc
-hi CocErrorFloat ctermfg=240 ctermbg=Red
-hi CocHighlightText ctermfg=226 ctermbg=240
-" IncSearch
-" hi clear IncSearch
-" Leaderf
-hi Lf_hl_stlFullPathMode ctermbg=250 ctermfg=0
-hi Lf_hl_stlCategory ctermbg=6 ctermfg=0
-hi Lf_hl_stlName ctermbg=235
 nnoremap <f1> :echo "hi<"
     \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
     \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"

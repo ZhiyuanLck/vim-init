@@ -161,7 +161,10 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'scrooloose/nerdcommenter'
     let g:NERDSpaceDelims=1
     let g:NERDRemoveExtraSpaces=1
-    let g:NERDDefaultAlign='start'
+"     let g:NERDDefaultAlign='start'
+    let g:NERDCustomDelimiters = {
+      \ 'sty': { 'left': '%'}
+      \ }
     nnoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>
     inoremap <silent><m-/> <esc>:call NERDComment('n', 'Invert')<cr>
     xnoremap <silent><m-/> :call NERDComment('x', 'Invert')<cr>
@@ -360,7 +363,8 @@ if index(g:bundle_group, 'airline') >= 0
     let g:airline_powerline_fonts = 1
     let g:airline_exclude_preview = 1
     let g:airline_section_b = '%n'
-    let g:airline_theme='mystl'
+    " let g:airline_theme='molokai'
+    let g:airline_theme='angr'
     let g:airline#extensions#branch#enabled = 0
     let g:airline#extensions#syntastic#enabled = 0
     let g:airline#extensions#fugitiveline#enabled = 0
@@ -602,8 +606,8 @@ if index(g:bundle_group, 'coc') >= 0
     omap af <Plug>(coc-funcobj-a)
 
     " Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-    nmap <silent> <TAB> <Plug>(coc-range-select)
-    xmap <silent> <TAB> <Plug>(coc-range-select)
+    " nmap <silent> <TAB> <Plug>(coc-range-select)
+    " xmap <silent> <TAB> <Plug>(coc-range-select)
 
     " Use `:Format` to format current buffer
     command! -nargs=0 Format :call CocAction('format')
@@ -803,6 +807,8 @@ if index(g:bundle_group, 'leaderf') >= 0
 
         " 禁用 function/buftag 的预览功能，可以手动用 p 预览
         let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+
+        let g:Lf_ShowDevIcons = 'Source Code Pro for Powerline Medium'
     else
         " 不支持 python ，使用 CtrlP 代替
         Plug 'ctrlpvim/ctrlp.vim'
@@ -872,10 +878,10 @@ if index(g:bundle_group, 'edit') >= 0
         \ 'context (luatex)' : '-pdf -pdflatex=context',
         \ 'context (xetex)'  : '-pdf -pdflatex=''texexec --xtx''',
         \}
+"         \ 'build_dir' : './output',
     let g:vimtex_compiler_latexmk = {
         \ 'backend' : 'jobs',
         \ 'background' : 1,
-        \ 'build_dir' : './output',
         \ 'callback' : 1,
         \ 'continuous' : 1,
         \ 'executable' : 'latexmk',
@@ -891,11 +897,15 @@ if index(g:bundle_group, 'edit') >= 0
     let g:vimtex_view_general_viewer = 'okular'
     let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
     let g:vimtex_view_general_options_latexmk = '--unique'
+    let g:vimtex_indent_ignored_envs = ['document', 'tikzpicture']
+    let g:vimtex_indent_lists = []
+    let g:vimtex_indent_on_ampersands = 0
+    let g:tex_no_error=1
     let g:vimtex_quickfix_ignore_filters = [
-      \ 'Warning.*Fandol', 'Overfull',
+      \ 'Warning.*Fandol', 'Overfull', 'Underfull',
       \ 'Warning.*Font',
+      \ 'Warning.*font',
       \]
-"     let g:vimtex_quickfix_latexlog = {'font' : 0}
     let g:vimtex_quickfix_latexlog = {
           \ 'default' : 1,
           \ 'ignore_filters' : ['Fandol'],
