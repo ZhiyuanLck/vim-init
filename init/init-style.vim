@@ -92,10 +92,10 @@ hi PmenuSel ctermbg=172 ctermfg=232
 hi default link CocInfoFloat PmenuSel
 hi! clear texError
 
-nnoremap <f1> :echo "hi<"
-    \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
-    \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
-    \ . synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<cr>
+" nnoremap <f1> :echo "hi<"
+    " \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
+    " \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
+    " \ . synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<cr>
 
 
 "----------------------------------------------------------------------
