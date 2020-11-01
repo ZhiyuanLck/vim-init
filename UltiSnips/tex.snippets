@@ -26,9 +26,10 @@ endglobal
 
 snippet ctex "" b
 \documentclass{ctexart}
+$1
 
 \begin{document}
-  $1
+$2
 \end{document}
 endsnippet
 
@@ -76,19 +77,13 @@ $1
 \end{tcblisting}
 endsnippet
 
-
-snippet so "temp" b
-\sortitem{$1}{$2}
-$0
-endsnippet
-
-
 snippet tikz "" b
 \documentclass[tikz, border=1cm]{standalone}
+$1
 
 \begin{document}
 \begin{tikzpicture}
-$1
+$2
 \end{tikzpicture}
 \end{document}
 endsnippet
@@ -96,10 +91,11 @@ endsnippet
 snippet ctikz "" b
 \documentclass[tikz, border=1cm]{standalone}
 \usepackage{xeCJK}
+$1
 
 \begin{document}
 \begin{tikzpicture}
-$1
+$2
 \end{tikzpicture}
 \end{document}
 endsnippet
@@ -183,22 +179,23 @@ endsnippet
 
 snippet art "article" b
 \documentclass{article}
+$1
 
 \begin{document}
-$1
+
 \end{document}
 endsnippet
 
 
 snippet beg "begin{} / end{}" bA
 \begin{$1}
-	${2:${VISUAL}}
+${2:${VISUAL}}
 \end{$1}
 endsnippet
 
 snippet beo "begin{} / end{}" bA
 \begin{$1}$2
-	${3:${VISUAL}}
+${3:${VISUAL}}
 \end{$1}
 endsnippet
 
@@ -282,7 +279,7 @@ endsnippet
 
 # 行内公式
 snippet mk "Math" wA
-$${1:${VISUAL}}$
+$${1:${VISUAL}}$$0
 endsnippet
 
 # 行间公式
@@ -345,7 +342,7 @@ endsnippet
 priority 1000
 context "math()"
 snippet int "" i
-\intb
+\int_{$1}^{$2}$0
 endsnippet
 
 snippet aa "" i
@@ -355,11 +352,6 @@ endsnippet
 context "math()"
 snippet part "d/dx" i
 \frac{\partial ${1:V}}{\partial ${2:x}} $0
-endsnippet
-
-context "math()"
-snippet nlim "" iA
-\lim_{n \to ${1:\infty}} $0
 endsnippet
 
 context "math()"
@@ -395,10 +387,5 @@ endsnippet
 context "math()"
 snippet sq "" i
 \sqrt{$1}$0
-endsnippet
-
-snippet wd "" bA
-\word{$1}$2{$3}
-$0
 endsnippet
 

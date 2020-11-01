@@ -91,7 +91,7 @@ snip.rv = dic[match.group(1)]`
 endsnippet
 
 context "math()"
-snippet '(<<|>>|==|-=>|=>|=->|<-=|<=|<=-|-<>|l<>|=<>|L<>)' "arrow" irA
+snippet '(<<|>>|==|-=>|=>|=->|-=<|=<|=-<|-<>|l<>|=<>|L<>)' "arrow" irA
 \\`!p
 dic = {'<<': 'le',
 	'>>': 'ge',
@@ -99,9 +99,9 @@ dic = {'<<': 'le',
 	'-=>': 'longrightarrow',
 	'=>': 'Rightarrow',
 	'=->': 'Longrightarrow',
-	'<-=': 'longleftarrow',
-	'<=': 'Leftarrow',
-	'<=-': 'Longleftarrow',
+	'-=<': 'longleftarrow',
+	'=<': 'Leftarrow',
+	'=-<': 'Longleftarrow',
 	'-<>': 'leftrightarrow',
 	'l<>': 'longleftrightarrow',
 	'=<>': 'Leftrightarrow',

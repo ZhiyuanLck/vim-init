@@ -160,6 +160,8 @@ function s:new_edit(mode)
 		exe "sp \| normal \<m-J>-"
 	elseif a:mode == 'c'
 		exe "tabnew \| normal -"
+	elseif a:mode == 'o'
+		exe "tabnew \| LeaderfMru"
 	endif
 endfunc
 
@@ -168,6 +170,7 @@ noremap <silent> <tab>l :call <SID>new_edit('l')<cr>
 noremap <silent> <tab>t :call <SID>new_edit('t')<cr>
 noremap <silent> <tab>b :call <SID>new_edit('b')<cr>
 noremap <silent> <tab>c :call <SID>new_edit('c')<cr>
+noremap <silent> <tab>o :call <SID>new_edit('o')<cr>
 
 " tab pre next
 noremap <silent> <tab>n :tabn<cr>

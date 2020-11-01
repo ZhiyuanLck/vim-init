@@ -33,7 +33,7 @@ noremap <silent> <m-I> :call append(line('.')-1, '')<cr>
 inoremap <silent> <m-I> <esc>:call append(line('.')-1, '')<cr>
 
 " LEADER+i在当前行的上下方分别插入空白行
-noremap <silent> <leader>i :exe "call append('.', '') \| call append(line('.')-1, '')"<cr>
+noremap <silent> <leader>i vi{s  <esc>hp
 
 " ALT+w/q快速保存退出
 noremap <silent> <m-w> mb:w!<cr>`b:delmark b<cr>
@@ -56,6 +56,7 @@ nnoremap <space>p "+p
 vnoremap <space>p "+p
 nnoremap <space>P "+P
 vnoremap <space>P "+P
+
 
 " {修正
 " function s:Brackets()

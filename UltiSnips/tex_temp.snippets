@@ -1,0 +1,98 @@
+global !p
+texMathZones = ['texMathZone' + x for x in ['A', 'AS', 'B', 'BS', 'C',
+'CS', 'D', 'DS', 'E', 'ES', 'F', 'FS', 'G', 'GS', 'H', 'HS', 'I', 'IS',
+'J', 'JS', 'K', 'KS', 'L', 'LS', 'DS', 'V', 'W', 'X', 'Y', 'Z', 'AmsA',
+'AmsAS', 'AmsB', 'AmsBS', 'AmsC', 'AmsCS', 'AmsD', 'AmsDS', 'AmsE',
+'AmsES' 'AmsF', 'AmsG', 'AmsGS']]
+
+texIgnoreMathZones = ['texMathText']
+
+texMathZoneIds = vim.eval('map('+str(texMathZones)+", 'hlID(v:val)')")
+texIgnoreMathZoneIds = vim.eval('map('+str(texIgnoreMathZones)+", 'hlID(v:val)')")
+
+ignore = texIgnoreMathZoneIds[0]
+
+def math():
+    synstackids = vim.eval("synstack(line('.'), col('.') - (col('.')>=2 ? 1 : 0))")
+    try:
+        first = next(
+            i for i in reversed(synstackids)
+            if i in texIgnoreMathZoneIds or i in texMathZoneIds
+        )
+        return first != ignore
+    except StopIteration:
+        return False
+endglobal
+
+snippet ques ""
+\begin{mathques}{${1:2020-09-02}}{${2:极限}}
+\begin{ques}
+	$3
+\end{ques}
+\begin{solu}
+
+\end{solu}
+\end{mathques}
+endsnippet
+
+snippet wd "" bA
+\word$1{$2}$3{$4}
+$0
+endsnippet
+
+snippet ma "" b
+\begin{mathques}{2020-$1}{$2}$3
+\begin{ques}
+$4
+\end{ques}
+\begin{solu}
+\end{solu}
+\end{mathques}
+endsnippet
+
+context "math()"
+snippet nlim "" iA
+\lim_{n \to ${1:\infty}} $0
+endsnippet
+
+context "math()"
+snippet xlim "" iA
+\lim_{x \to ${1:0}} $0
+endsnippet
+
+snippet mac ""
+%
+% \begin{macro}{$1}
+% $2
+%    \begin{macrocode}
+%    \end{macrocode}
+% \end{macro}
+endsnippet
+
+snippet mcc ""
+%
+%
+%    \begin{macrocode}
+%    \end{macrocode}
+endsnippet
+
+snippet arg ""
+% \begin{arguments}$0
+% \end{arguments}
+endsnippet
+
+snippet ait ""
+%   \item \meta{$1}
+endsnippet
+
+snippet pl ""
+\begin{sdpolitics}{2020-11-$1}{$2}
+	$3
+\end{sdpolitics}
+endsnippet
+
+snippet ad ""
+\addto{$1}
+$0
+endsnippet
+

@@ -19,7 +19,7 @@
 " **********************************************************************
 " INSERT 模式下使用 EMACS 键位
 " **********************************************************************
-inoremap <c-a> <home>
+inoremap <c-a> <esc>I
 inoremap <c-e> <end>
 inoremap <c-d> <del>
 inoremap <c-_> <c-k>
@@ -81,38 +81,43 @@ inoremap <m-k> <c-\><c-o>gk
 " **********************************************************************
 " 0:up, 1:down, 2:pgup, 3:pgdown, 4:top, 5:bottom
 function! Tools_PreviousCursor(mode)
-	if winnr('$') <= 1
-		return
-	endif
-	noautocmd silent! wincmd p
-	if a:mode == 0
-		exec "normal! \<c-y>"
-	elseif a:mode == 1
-		exec "normal! \<c-e>"
-	elseif a:mode == 2
-		exec "normal! ".winheight('.')."\<c-y>"
-	elseif a:mode == 3
-		exec "normal! ".winheight('.')."\<c-e>"
-	elseif a:mode == 4
-		normal! gg
-	elseif a:mode == 5
-		normal! G
-	elseif a:mode == 6
-		exec "normal! \<c-u>"
-	elseif a:mode == 7
-		exec "normal! \<c-d>"
-	elseif a:mode == 8
-		exec "normal! k"
-	elseif a:mode == 9
-		exec "normal! j"
-	endif
-	noautocmd silent! wincmd p
+  if winnr('$') <= 1
+    return
+  endif
+  let l = line('.')
+  noautocmd silent! wincmd p
+  if a:mode == 0
+    exec "normal! \<c-y>"
+  elseif a:mode == 1
+    exec "normal! \<c-e>"
+  elseif a:mode == 2
+    exec "normal! ".winheight('.')."\<c-y>"
+  elseif a:mode == 3
+    exec "normal! ".winheight('.')."\<c-e>"
+  elseif a:mode == 4
+    normal! gg
+  elseif a:mode == 5
+    normal! G
+  elseif a:mode == 6
+    exec "normal! \<c-u>"
+  elseif a:mode == 7
+    exec "normal! \<c-d>"
+  elseif a:mode == 8
+    exec "normal! k"
+  elseif a:mode == 9
+    exec "normal! j"
+  elseif a:mode == 10
+    exec "normal! " .l ."Gzz"
+  endif
+  noautocmd silent! wincmd p
 endfunc
 
 noremap <silent> <m-u> :call Tools_PreviousCursor(6)<cr>
 inoremap <silent> <m-u> <esc>:call Tools_PreviousCursor(6)<cr>a
 noremap <silent> <m-d> :call Tools_PreviousCursor(7)<cr>
 inoremap <silent> <m-d> <esc>:call Tools_PreviousCursor(7)<cr>a
+noremap <silent> <m-s> :call Tools_PreviousCursor(10)<cr>
+inoremap <silent> <m-s> :call Tools_PreviousCursor(10)<cr>a
 
 nnoremap j jzz
 nnoremap k kzz

@@ -90,7 +90,8 @@ color Monokai
 hi Pmenu ctermbg=216 ctermfg=236
 hi PmenuSel ctermbg=172 ctermfg=232
 hi default link CocInfoFloat PmenuSel
-hi! clear texError
+hi VertSplit ctermbg=bg ctermfg=fg
+hi! default link Search IncSearch
 
 nnoremap <f1> :echo "hi<"
     \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
