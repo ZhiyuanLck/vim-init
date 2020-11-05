@@ -22,4 +22,5 @@
   "python.linting.flake8Args": ["--ignore=E121,E123,E126,E226,E24,E704,W503,W504,F403,E501"],
   "python.linting.enabled": false,
   "snippets.loadFromExtensions": false,
+  "coc.preferences.colorSupport": true
 }

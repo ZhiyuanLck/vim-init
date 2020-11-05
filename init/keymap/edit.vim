@@ -38,8 +38,10 @@ noremap <silent> <leader>i vi{s  <esc>hp
 " ALT+w/q快速保存退出
 noremap <silent> <m-w> mb:w!<cr>`b:delmark b<cr>
 noremap <m-q> :q!<cr>
+" noremap <m-q> :bd<cr>
 inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
+" inoremap <m-q> <esc>:bd<cr>
 
 " surround
 nmap <space>mw ysw$
@@ -57,15 +59,16 @@ vnoremap <space>p "+p
 nnoremap <space>P "+P
 vnoremap <space>P "+P
 
-
-" {修正
-" function s:Brackets()
-	" if index(['c', 'cpp', 'java'], &ft) != -1
-		" inoremap { {<cr>}<esc>O
-	" endif
-" endfunc
-"
-" augroup Bra
-	" au!
-	" au BufNewFile,BufRead *.* call <SID>Brackets()
-" augroup END
+function! MyPaste(ex)
+  let save_reg = @"
+  let reg = v:register
+  let l:count = v:count1
+  let save_map = maparg('_', 'v', 0, 1)
+  exec 'vnoremap _ '.a:ex
+  exec 'normal gv"'.reg.l:count.'_'
+  call mapset('v', 0, save_map)
+  let @" = save_reg
+endfunction
+" p不替换无名寄存器内容
+vmap p :<c-u>call MyPaste('p')<cr>
+vmap P :<c-u>call MyPaste('P')<cr>

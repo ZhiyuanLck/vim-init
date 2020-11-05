@@ -8,7 +8,11 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+" 取得本文件所在的目录
+let s:plughome = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+" 定义一个命令用来加载插件配置
+command! -nargs=1 LoadPlug exec 'so '.s:plughome.'/plugin-setting/'.'<args>.vim'
 
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以在前面覆盖之
@@ -23,6 +27,8 @@ if !exists('g:bundle_group')
   let g:bundle_group += ['edit']
   let g:bundle_group += ['task']
   let g:bundle_group += ['float']
+  let g:bundle_group += ['multi-cursor']
+  let g:bundle_group += ['icon']
 endif
 
 
@@ -146,7 +152,30 @@ if index(g:bundle_group, 'basic') >= 0
   Plug 'kshenoy/vim-signature'
 
   " 用于在侧边符号栏显示 git/svn 的 diff
-  Plug 'mhinz/vim-signify'
+  " Plug 'mhinz/vim-signify'
+  Plug 'airblade/vim-gitgutter'
+  nmap ]h <Plug>(GitGutterNextHunk)
+  nmap [h <Plug>(GitGutterPrevHunk)
+  omap ih <Plug>(GitGutterTextObjectInnerPending)
+  omap ah <Plug>(GitGutterTextObjectOuterPending)
+  xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+  xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+  let g:gitgutter_sign_added = '▐'
+  let g:gitgutter_sign_modified = '▐'
+  let g:gitgutter_sign_removed = '▐'
+  let g:gitgutter_preview_win_floating = 1
+  " signify 调优
+  " let g:signify_vcs_list = ['git', 'svn']
+  " let g:signify_sign_add         = '+'
+  " let g:signify_sign_delete      = '_'
+  " let g:signify_sign_delete_first_line = '‾'
+  " let g:signify_sign_change      = '~'
+  " let g:signify_sign_changedelete    = g:signify_sign_change
+
+  " git 仓库使用 histogram 算法进行 diff
+  let g:signify_vcs_cmds = {
+      \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
+      \}
 
   " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
   " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
@@ -167,7 +196,19 @@ if index(g:bundle_group, 'basic') >= 0
   Plug 'scrooloose/nerdcommenter'
   let g:NERDSpaceDelims=1
   let g:NERDRemoveExtraSpaces=1
-  let g:NERDDefaultAlign='start'
+  function! SetCommentAlign()
+    if index(['tex', 'sty', 'cls', 'dtx'], expand('%:e')) >= 0
+      let g:NERDRemoveExtraSpaces=0
+      let g:NERDDefaultAlign='start'
+    else
+      let g:NERDRemoveExtraSpaces=1
+      let g:NERDDefaultAlign='none'
+    endif
+  endfunction
+  augroup CommentAlignStart
+    autocmd!
+    autocmd BufNewFile,BufRead * silent call SetCommentAlign()
+  augroup END
   let g:NERDCustomDelimiters = {
     \ 'sty': { 'left': '%'},
     \ 'cls': { 'left': '%'}
@@ -186,18 +227,6 @@ if index(g:bundle_group, 'basic') >= 0
   " 使用 <space>ha 清除 errormarker 标注的错误
   noremap <silent><space>ha :RemoveErrorMarkers<cr>
 
-  " signify 调优
-  let g:signify_vcs_list = ['git', 'svn']
-  let g:signify_sign_add         = '+'
-  let g:signify_sign_delete      = '_'
-  let g:signify_sign_delete_first_line = '‾'
-  let g:signify_sign_change      = '~'
-  let g:signify_sign_changedelete    = g:signify_sign_change
-
-  " git 仓库使用 histogram 算法进行 diff
-  let g:signify_vcs_cmds = {
-      \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
-      \}
 endif
 
 
@@ -251,26 +280,6 @@ if index(g:bundle_group, 'tags') >= 0
   " 支持光标移动到符号名上：<leader>cg 查看定义，<leader>cs 查看引用
   Plug 'skywind3000/gutentags_plus'
 
-  " 重新设置键位映射
-  let g:gutentags_plus_nomap = 1
-  " Find symbol (reference) under cursor
-  noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr>
-  " Find symbol definition under cursor
-  noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
-  " Functions called by this function
-  noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
-  " Functions calling this function
-  noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
-  " Find text string under cursor
-  noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
-  " Find egrep pattern under cursor
-  noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
-  " Find file name under cursor
-  noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-  " Find files #including the file name under cursor
-  noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-  " Find places where current symbol is assigned
-  noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
   " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
   let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
   let g:gutentags_ctags_tagfile = '.tags'
@@ -367,24 +376,45 @@ endif
 if index(g:bundle_group, 'airline') >= 0
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
+
+  " powerline symbols
+  if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+  endif
+  let g:airline_powerline_fonts = 1
+"   let g:airline_left_sep = ''
+"   let g:airline_left_alt_sep = ''
+"   let g:airline_right_sep = ''
+"   let g:airline_right_alt_sep = ''
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
   let g:airline_right_sep = ''
   let g:airline_right_alt_sep = ''
-  let g:airline_powerline_fonts = 1
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = '☰ '
+  let g:airline_symbols.maxlinenr = ''
+  let g:airline_symbols.dirty='⚡'
+
   let g:airline_exclude_preview = 1
-  let g:airline_section_b = '%n'
-  " let g:airline_theme='molokai'
-  let g:airline_theme='angr'
-  let g:airline#extensions#branch#enabled = 0
+"   let g:airline_section_b = '%n'
+  let g:airline_theme='minimalist'
+"   let g:airline_theme='angr'
+  let g:airline#extensions#branch#enabled = 1
   let g:airline#extensions#syntastic#enabled = 0
-  let g:airline#extensions#fugitiveline#enabled = 0
-  let g:airline#extensions#csv#enabled = 0
+  let g:airline#extensions#fugitiveline#enabled = 1
+  let g:airline#extensions#csv#enabled = 1
   let g:airline#extensions#vimagit#enabled = 0
+
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#show_tabs = 1
   let g:airline#extensions#tabline#show_buffers = 0
-  let g:airline#extensions#tabline#show_splits = 1
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
   let g:airline#extensions#tabline#tab_nr_type = 1
+  let g:airline#extensions#tabline#show_splits = 1
+
+  let g:airline_buffer_map = 0
+
   let g:airline#extensions#tabline#exclude_preview = 1
   let g:airline#extensions#tabline#formatter = 'unique_tail'
   let g:airline#extensions#tabline#show_close_button = 0
@@ -532,7 +562,7 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-highlight']
 
     " coc-explorer"
     :nmap <space>e :CocCommand explorer<CR>
@@ -761,98 +791,7 @@ endif
 " LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
-  " 如果 vim 支持 python 则启用  Leaderf
-"   if match(system('uname -a'), 'aarch64') == -1 && (has('python') || has('python3'))
-  if (has('python') || has('python3'))
-    Plug 'Yggdroot/LeaderF'
-
-    " CTRL+p 打开文件模糊匹配
-    let g:Lf_ShortcutF = '<c-p>'
-
-    " ALT+b 打开 buffer 模糊匹配
-    let g:Lf_ShortcutB = '<m-b>'
-
-    " CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-    noremap <c-n> :LeaderfMru<cr>
-
-    " ALT+f 打开函数列表，按 i 进入模糊匹配，ESC 退出
-    noremap <m-f> :LeaderfFunction!<cr>
-
-    " ALT+t 打开 tag 列表，i 进入模糊匹配，ESC退出
-    noremap <m-t> :LeaderfBufTag!<cr>
-
-    " ALT+b 打开 buffer 列表进行模糊匹配
-    noremap <m-b> :LeaderfBuffer<cr>
-    let g:Lf_JumpToExistingWindow = 1
-
-    " 全局 tags 模糊匹配
-    noremap <m-m> :LeaderfTag<cr>
-
-    " 最大历史文件保存 2048 个
-    let g:Lf_MruMaxFiles = 2048
-
-    " ui 定制
-    let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-
-    " 如何识别项目目录，从当前文件目录向父目录递归知道碰到下面的文件/目录
-    let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
-    let g:Lf_WorkingDirectoryMode = 'Ac'
-    let g:Lf_WindowHeight = 0.30
-    let g:Lf_CacheDirectory = expand('~/.vim/cache')
-
-    " 显示绝对路径
-    let g:Lf_ShowRelativePath = 0
-
-    " 隐藏帮助
-    let g:Lf_HideHelp = 1
-
-    " 模糊匹配忽略扩展名
-    let g:Lf_WildIgnore = {
-          \ 'dir': ['.svn','.git','.hg'],
-          \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-          \ }
-
-    " MRU 文件忽略扩展名
-    let g:Lf_MruFileExclude = ['*.so', '*.exe', '*.py[co]', '*.sw?', '~$*', '*.bak', '*.tmp', '*.dll']
-    let g:Lf_StlColorscheme = 'powerline'
-
-    " 禁用 function/buftag 的预览功能，可以手动用 p 预览
-    let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-
-    let g:Lf_ShowDevIcons = 'Source Code Pro for Powerline Medium'
-  else
-    " 不支持 python ，使用 CtrlP 代替
-    Plug 'ctrlpvim/ctrlp.vim'
-
-    " 显示函数列表的扩展插件
-    Plug 'tacahiroy/ctrlp-funky'
-
-    " 忽略默认键位
-    let g:ctrlp_map = ''
-
-    " 模糊匹配忽略
-    let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll|mp3|wav|sdf|suo|mht)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-
-    " 项目标志
-    let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
-    let g:ctrlp_working_path = 0
-
-    " CTRL+p 打开文件模糊匹配
-    noremap <c-p> :CtrlP<cr>
-
-    " CTRL+n 打开最近访问过的文件的匹配
-    noremap <c-n> :CtrlPMRUFiles<cr>
-
-    " ALT+p 显示当前文件的函数列表
-    noremap <m-f> :CtrlPFunky<cr>
-
-    " ALT+n 匹配 buffer
-    noremap <m-b> :CtrlPBuffer<cr>
-  endif
+  LoadPlug LeaderF
 endif
 
 
@@ -920,6 +859,17 @@ if index(g:bundle_group, 'edit') >= 0
     \ 'Warning.*Font',
     \ 'Warning.*font',
     \]
+  " let g:vimtex_syntax_enabled = 0
+  let g:vimtex_syntax_autoload_packages = [
+        \ 'amsmath',
+        \ 'array',
+        \ 'beamer',
+        \ 'hyperref',
+        \ 'mathtools',
+        \ 'minted',
+        \ 'pgfplots',
+        \ 'tikz',
+        \]
 endif
 
 " task
@@ -929,8 +879,25 @@ if index(g:bundle_group, 'task') >= 0
   nnoremap <silent><space>ae :AsyncTaskEdit!<cr>
   nnoremap <silent><space>al :AsyncTaskList!<cr>
   nnoremap <silent><space>am :AsyncTaskMacro<cr>
+  function! s:runner_proc(opts)
+    let curr_bufnr = floaterm#curr()
+    if has_key(a:opts, 'silent') && a:opts.silent == 1
+      FloatermHide!
+    endif
+    let cmd = 'cd ' . shellescape(getcwd())
+    call floaterm#terminal#send(curr_bufnr, [cmd])
+    call floaterm#terminal#send(curr_bufnr, [a:opts.cmd])
+    stopinsert
+    if &filetype == 'floaterm' && g:floaterm_autoinsert
+      call floaterm#util#startinsert()
+    endif
+  endfunction
+
+  let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+  let g:asyncrun_runner.floaterm = function('s:runner_proc')
+
   let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-  let g:asynctasks_term_pos = 'tab'
+  let g:asynctasks_term_pos = 'floaterm'
   let g:asynctasks_term_reuse = 1
   let g:asynctasks_term_focus = 1
   let g:asynctasks_confirm = 0
@@ -943,7 +910,6 @@ if index(g:bundle_group, 'task') >= 0
 
   let g:asynctasks_term_rows = 8
   let g:asynctasks_term_cols = 80
-  let g:asynctasks_term_focus = 1
 
   " 设置 F10 打开/关闭 Quickfix 窗口
   nnoremap <silent><F12> :call asyncrun#quickfix_toggle(6)<cr>
@@ -986,6 +952,51 @@ if index(g:bundle_group, 'task') >= 0
         \ 'display': {'ctermbg': '239', 'ctermfg': '196'},
         \ 'current_selection': {'ctermbg': '31', 'ctermfg': 'fg'}
         \ }
+endif
+
+if index(g:bundle_group, 'float') >= 0
+  Plug 'voldikss/vim-floaterm'
+  let g:floaterm_rootmarkers = ['.root', '.svn', '.git', '.hg', '.project']
+  function! FloatermRun(mode, name_input, title_input, name_as_title=1)
+    let name_cmd = ''
+    let title_cmd = ''
+    if a:name_input
+      let name_str = input('name: ')
+      let name_cmd = printf("--name=%s", name_str)
+    endif
+    if a:title_input
+      if a:name_as_title
+        let title_str = name_str
+      else
+        let title_str = input('title: ')
+      endif
+      let title_cmd = printf("--title=%s\\ $1/$2", title_str)
+    endif
+    " echo printf("Floaterm%s %s %s", a:mode, name_cmd, title_cmd)
+    exec printf("Floaterm%s %s %s", a:mode, name_cmd, title_cmd)
+  endfunction
+  nnoremap <silent> <space>fc  :call FloatermRun('New', 1, 1)<CR>
+  tnoremap <silent> <space>fc  <C-\><C-n>:exe 'FloatermNew --title='.input('title: ').'\ $1/$2'<CR>
+  nnoremap <silent> <space>fp  :FloatermPrev<CR>
+  tnoremap <silent> <space>fp  <C-\><C-n>:FloatermPrev<CR>
+  nnoremap <silent> <space>fn  :FloatermNext<CR>
+  tnoremap <silent> <space>fn  <C-\><C-n>:FloatermNext<CR>
+  nnoremap <silent> <space>ft :FloatermToggle<CR>
+  tnoremap <silent> <space>ft <C-\><C-n>:FloatermToggle<CR>
+  nnoremap <silent> <space>fk :FloatermKill<CR>
+  tnoremap <silent> <space>fk <C-\><C-n>:FloatermKill<CR>
+  nnoremap <silent> <space>fa :FloatermKill!<CR>
+  tnoremap <silent> <space>fa <C-\><C-n>:FloatermKill!<CR>
+  tnoremap <silent> <space>fu <C-\><C-n>:exe 'FloatermUpdate --title='.input('title: ').'\ $1/$2'<CR>
+endif
+
+if index(g:bundle_group, 'multi-cursor') >= 0
+  Plug 'terryma/vim-multiple-cursors'
+endif
+
+if index(g:bundle_group, 'icon') >= 0
+  " icons
+  Plug 'ryanoasis/vim-devicons'
 endif
 
 "----------------------------------------------------------------------
