@@ -1,28 +1,38 @@
-syn cluster texCmdGroup add=texExplSignature
-syn cluster texEnvGroup add=texExplSignature
-syn cluster texFoldGroup add=texExplSignature
-syn cluster texBoldGroup add=texExplSignature
-syn cluster texItalGroup add=texExplSignature
-syn cluster texMatchGroup add=texExplSignature
-syn cluster texMatchNMGroup add=texExplSignature
-syn cluster texStyleGroup add=texExplSignature
-syn cluster texPreambleMatchGroup add=texExplSignature
-syn cluster texMathMatchGroup add=texExplSignature
-syn cluster texMathZoneGroup add=texExplSignature
-syn clear texStatement
-syn match texStatement /\\[a-zA-Z@_]/ contains=texExplStatement
+function! s:tex_cluster_add(groups)
+  let clusters = [
+    \ 'texCmdGroup', 'texEnvGroup', 'texFoldGroup',
+    \ 'texBoldGroup', 'texItalGroup',
+    \ 'texMatchGroup', 'texMatchNMGroup',
+    \ 'texStyleGroup', 'texPreambleMatchGroup',
+    \ 'texMathMatchGroup', 'texMathZoneGroup'
+    \]
+  for cluster in clusters
+    exec 'syn cluster '.cluster.' add='.a:groups
+  endfor
+endfunction
 
-syn match texExplStatement /\\[a-zA-Z_]\+/ contained
-    \ contains=texExplFunction,texExplSignature
+" call <SID>tex_cluster_add('texExplSignature')
+
+" syn clear texStatement
+syn match texStatement /\\[a-zA-Z@_:]\+/ contained contains=texExplStatement,texExplSignature
+
+call TexNewMathZone("A","displaymath",1)
+call TexNewMathZone("B","eqnarray",1)
+call TexNewMathZone("C","equation",1)
+call TexNewMathZone('AmsA', 'align', 1)
+call TexNewMathZone('AmsB', 'alignat', 1)
+call TexNewMathZone('AmsD', 'flalign', 1)
+call TexNewMathZone('AmsC', 'gather', 1)
+call TexNewMathZone('AmsD', 'multline', 1)
+call TexNewMathZone('AmsE', 'xalignat', 1)
+call TexNewMathZone('AmsF', 'xxalignat', 0)
+call TexNewMathZone('AmsG', 'mathpar', 1)
+
+syn match texExplStatement /\\[a-zA-Z_]\+/ contained nextgroup=texExplSignature
 highlight link texExplStatement texStatement
 
-" syn match texExplFunction /.*:/ contained
-" highlight link texExplFunction texExplStatement
-
-syn match texExplSignature /:[NncVvoxefTFpwD]*/
+syn match texExplSignature /:[NncVvoxefTFpwD]*/ contained
 highlight texExplSignature ctermfg=38
 
-
-syn clear texOption
-syn match texOption "\v(\\)@<!#+[1-9]"
+syn match texOption /\v(\\)@<!#+[1-9]/ contained
 highlight texOption ctermfg=176

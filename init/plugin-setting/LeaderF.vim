@@ -1,4 +1,5 @@
 Plug 'Yggdroot/LeaderF'
+Plug 'ZhiyuanLck/LeaderF-ColorPanel'
 
 " 最大历史文件保存 2048 个
 let g:Lf_MruMaxFiles = 2048
@@ -90,30 +91,6 @@ function! HighlightHighlight(args)
   return ids
 endfunction
 
-function! ColorCterm(args)
-  let lines = []
-  for i in range(32)
-    let l = []
-    for j in range(8)
-      call add(l, printf(" %3s xxx", i * 8 + j))
-    endfor
-    call add(lines, join(l, ' '))
-  endfor
-  return lines
-endfunction
-
-function! ColorCtermAccept(args)
-endfunction
-
-function! ColorCtermHighlight(args)
-  let ids = []
-  for i in range(256)
-    exec printf('highlight CtermColor%d ctermfg=%d ctermbg=%d', i, i, i)
-    let pattern = '\v(\s+'.i.'\s+)@<=xxx'
-    call add(ids, matchadd('CtermColor'.i, pattern , 20))
-  endfor
-  return ids
-endfunction
 
 " 自定义扩展
 let g:Lf_Extensions = {
@@ -130,12 +107,7 @@ let g:Lf_Extensions = {
         \       "accept": "HighlightAccept",
         \       "highlight": "HighlightHighlight",
         \ },
-        \ "ColorCterm": {
-        \       "source": "ColorCterm",
-        \       "accept": "ColorCtermAccept",
-        \       "highlight": "ColorCtermHighlight",
-        \ },
-        \}
+        \ }
 
 function! CallLeaderF(mode)
   if a:mode == 'p'
@@ -175,7 +147,7 @@ function! CallLeaderF(mode)
   elseif a:mode == 'cs'
     exec "LeaderfColorscheme"
   elseif a:mode == 'cc'
-    exec "Leaderf ColorCterm"
+    exec "LeaderfColorPanel"
   elseif a:mode == 'cmd'
     exec "LeaderfCommand"
   elseif a:mode == 'q'

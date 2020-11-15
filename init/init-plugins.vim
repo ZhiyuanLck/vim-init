@@ -28,6 +28,7 @@ if !exists('g:bundle_group')
   let g:bundle_group += ['task']
   let g:bundle_group += ['float']
   let g:bundle_group += ['multi-cursor']
+  let g:bundle_group += ['fcitx']
   let g:bundle_group += ['icon']
 endif
 
@@ -562,7 +563,15 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-highlight']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-translator']
+
+    " scroll
+    nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+    nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+
+    " coc-translator
+    nnoremap <leader>e :<c-u>CocCommand translator.popup<cr>
+    vnoremap <leader>e :<c-u>CocCommand translator.popup<cr>
 
     " coc-explorer"
     :nmap <space>e :CocCommand explorer<CR>
@@ -893,11 +902,12 @@ if index(g:bundle_group, 'task') >= 0
     endif
   endfunction
 
-  let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
-  let g:asyncrun_runner.floaterm = function('s:runner_proc')
+  " let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+  " let g:asyncrun_runner.floaterm = function('s:runner_proc')
 
   let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg']
-  let g:asynctasks_term_pos = 'floaterm'
+  let g:asynctasks_term_pos = 'tab'
+  let g:asynctasks_term_pos = 'fterm'
   let g:asynctasks_term_reuse = 1
   let g:asynctasks_term_focus = 1
   let g:asynctasks_confirm = 0
@@ -941,57 +951,34 @@ endif
 
 if index(g:bundle_group, 'task') >= 0
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+  let g:clap_layout = {'relative': 'editor'}
   " nnoremap - :exe "lcd %:p:h \| Clap filer"<cr>
   " hi ClapSpinner cterm=bold ctermbg=232 ctermfg=197
   " hi ClapSearchText cterm=bold ctermbg=232 ctermfg=253
   " hi ClapDisplay ctermbg=234 ctermfg=57
-  let g:clap_theme = {
-        \ 'spinner': {'cterm': 'bold', 'ctermbg': '29', 'ctermfg': '234'},
-        \ 'search_text': {'ctermbg': '29', 'ctermfg': '235'},
-        \ 'input': {'ctermbg': '29'},
-        \ 'display': {'ctermbg': '239', 'ctermfg': '196'},
-        \ 'current_selection': {'ctermbg': '31', 'ctermfg': 'fg'}
-        \ }
+  " let g:clap_theme = {
+        " \ 'spinner': {'cterm': 'bold', 'ctermbg': '29', 'ctermfg': '234'},
+        " \ 'search_text': {'ctermbg': '29', 'ctermfg': '235'},
+        " \ 'input': {'ctermbg': '29'},
+        " \ 'display': {'ctermbg': '239', 'ctermfg': '196'},
+        " \ 'current_selection': {'ctermbg': '31', 'ctermfg': 'fg'}
+        " \ }
 endif
 
 if index(g:bundle_group, 'float') >= 0
-  Plug 'voldikss/vim-floaterm'
+  Plug 'ZhiyuanLck/vim-float-terminal'
+  let g:fterm_autoquit = 0
   let g:floaterm_rootmarkers = ['.root', '.svn', '.git', '.hg', '.project']
-  function! FloatermRun(mode, name_input, title_input, name_as_title=1)
-    let name_cmd = ''
-    let title_cmd = ''
-    if a:name_input
-      let name_str = input('name: ')
-      let name_cmd = printf("--name=%s", name_str)
-    endif
-    if a:title_input
-      if a:name_as_title
-        let title_str = name_str
-      else
-        let title_str = input('title: ')
-      endif
-      let title_cmd = printf("--title=%s\\ $1/$2", title_str)
-    endif
-    " echo printf("Floaterm%s %s %s", a:mode, name_cmd, title_cmd)
-    exec printf("Floaterm%s %s %s", a:mode, name_cmd, title_cmd)
-  endfunction
-  nnoremap <silent> <space>fc  :call FloatermRun('New', 1, 1)<CR>
-  tnoremap <silent> <space>fc  <C-\><C-n>:exe 'FloatermNew --title='.input('title: ').'\ $1/$2'<CR>
-  nnoremap <silent> <space>fp  :FloatermPrev<CR>
-  tnoremap <silent> <space>fp  <C-\><C-n>:FloatermPrev<CR>
-  nnoremap <silent> <space>fn  :FloatermNext<CR>
-  tnoremap <silent> <space>fn  <C-\><C-n>:FloatermNext<CR>
-  nnoremap <silent> <space>ft :FloatermToggle<CR>
-  tnoremap <silent> <space>ft <C-\><C-n>:FloatermToggle<CR>
-  nnoremap <silent> <space>fk :FloatermKill<CR>
-  tnoremap <silent> <space>fk <C-\><C-n>:FloatermKill<CR>
-  nnoremap <silent> <space>fa :FloatermKill!<CR>
-  tnoremap <silent> <space>fa <C-\><C-n>:FloatermKill!<CR>
-  tnoremap <silent> <space>fu <C-\><C-n>:exe 'FloatermUpdate --title='.input('title: ').'\ $1/$2'<CR>
+  let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
+  let g:asyncrun_runner.fterm = function('fterm#async_runner')
 endif
 
 if index(g:bundle_group, 'multi-cursor') >= 0
   Plug 'terryma/vim-multiple-cursors'
+endif
+
+if index(g:bundle_group, 'fcitx') >= 0
+  Plug 'lilydjwg/fcitx.vim'
 endif
 
 if index(g:bundle_group, 'icon') >= 0

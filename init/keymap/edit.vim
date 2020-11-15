@@ -72,3 +72,9 @@ endfunction
 " p不替换无名寄存器内容
 vmap p :<c-u>call MyPaste('p')<cr>
 vmap P :<c-u>call MyPaste('P')<cr>
+
+" 宏操作
+for i in range(97, 122)
+  let s:char = nr2char(i)
+  exec 'nmap <space><space>'.s:char.' @'.s:char
+endfor

@@ -132,22 +132,22 @@ inoremap <m-J> <esc><c-w>j
 inoremap <m-K> <esc><c-w>k
 
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
-	" vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
-	" 设置 termwinkey 为 CTRL 加减号（GVIM），有些终端下是 CTRL+?
-	" 后面四个键位是搭配 termwinkey 的，如果 termwinkey 更改，也要改
-	set termwinkey=<c-_>
-	tnoremap <m-H> <c-_>h
-	tnoremap <m-L> <c-_>l
-	tnoremap <m-J> <c-_>j
-	tnoremap <m-K> <c-_>k
-	tnoremap <m-q> <c-\><c-n>
+  " vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
+  " 设置 termwinkey 为 CTRL 加减号（GVIM），有些终端下是 CTRL+?
+  " 后面四个键位是搭配 termwinkey 的，如果 termwinkey 更改，也要改
+  set termwinkey=<c-_>
+  tnoremap <m-H> <c-_>h
+  tnoremap <m-L> <c-_>l
+  tnoremap <m-J> <c-_>j
+  tnoremap <m-K> <c-_>k
+  tnoremap <m-q> <c-\><c-n>
 elseif has('nvim')
-	" neovim 没有 termwinkey 支持，必须把 terminal 切换回 normal 模式
-	tnoremap <m-H> <c-\><c-n><c-w>h
-	tnoremap <m-L> <c-\><c-n><c-w>l
-	tnoremap <m-J> <c-\><c-n><c-w>j
-	tnoremap <m-K> <c-\><c-n><c-w>k
-	tnoremap <m-q> <c-\><c-n>
+  " neovim 没有 termwinkey 支持，必须把 terminal 切换回 normal 模式
+  tnoremap <m-H> <c-\><c-n><c-w>h
+  tnoremap <m-L> <c-\><c-n><c-w>l
+  tnoremap <m-J> <c-\><c-n><c-w>j
+  tnoremap <m-K> <c-\><c-n><c-w>k
+  tnoremap <m-q> <c-\><c-n>
 endif
 
 
@@ -155,19 +155,21 @@ endif
 " 新建标签页窗口打开目录
 " **********************************************************************
 function s:new_edit(mode)
-	if a:mode == 'r'
-		exe "vsp \| normal -"
-	elseif a:mode == 'l'
-		exe "vsp \| normal \<m-H>-"
-	elseif a:mode == 't'
-		exe "sp \| normal -"
-	elseif a:mode == 'b'
-		exe "sp \| normal \<m-J>-"
-	elseif a:mode == 'c'
-		exe "tabnew \| normal -"
-	elseif a:mode == 'o'
-		exe "tabnew \| LeaderfMru"
-	endif
+  if a:mode == 'r'
+    exe "vsp \| normal -"
+  elseif a:mode == 'l'
+    exe "vsp \| normal \<m-H>-"
+  elseif a:mode == 't'
+    exe "sp \| normal -"
+  elseif a:mode == 'b'
+    exe "sp \| normal \<m-J>-"
+  elseif a:mode == 'c'
+    let s:path = fnamemodify(bufname('%'), ':p')
+    tabnew
+    exec 'Clap filer '.s:path
+  elseif a:mode == 'o'
+    exe "tabnew \| LeaderfMru"
+  endif
 endfunc
 
 noremap <silent> <tab>r :call <SID>new_edit('r')<cr>

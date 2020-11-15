@@ -59,3 +59,15 @@ command! CheckLoad call CheckLoad()
 " 查看高亮组
 nnoremap <F3> :echo synIDattr(synID(line('.'), col('.'), 1), "name")<CR>
 inoremap <F3> <ESC>:echo synIDattr(synID(line('.'), col('.'), 1), "name")<CR>
+function! s:show_syn_stack()
+  let syn_stack = []
+  for id in synstack(line("."), col("."))
+    call add(syn_stack, synIDattr(id, "name"))
+  endfor
+  echom syn_stack
+endfunction
+nnoremap <S-F3> :call <SID>show_syn_stack()<CR>
+inoremap <S-F3> <ESC>:call <SID>show_syn_stack()<CR>
+
+" help命令
+command! -nargs=? H vert bo help <args>@en

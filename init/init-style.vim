@@ -336,3 +336,7 @@ augroup texHighlight
   autocmd!
   autocmd FileType tex runtime! syntax/tex.vim
 augroup END
+
+" split bar
+set fillchars+=vert:▏
+hi VertSplit ctermbg=12 ctermfg=bg

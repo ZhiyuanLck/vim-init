@@ -125,3 +125,10 @@ nnoremap n nzz
 vnoremap j jzz
 vnoremap k kzz
 vnoremap n nzz
+
+" 增大减小窗口尺寸
+nnoremap <m--> <c-w>-
+nnoremap <m-=> <c-w>+
+nnoremap <m-,> <c-w><
+nnoremap <m-.> <c-w>>
+nnoremap <m-+> <c-w>=

@@ -152,7 +152,7 @@ set autoread
 " Tex设置
 augroup Tex
     autocmd!
-    autocmd filetype tex set textwidth=78
+    autocmd BufRead,BufNewFile *.tex,*.sty,*.cls,*.dtx setlocal textwidth=78
 augroup END
 
 

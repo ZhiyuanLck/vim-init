@@ -339,14 +339,16 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 `{$1}$0
 endsnippet
 
-priority 1000
+priority 100
 context "math()"
-snippet int "" i
+snippet i "" i
 \int_{$1}^{$2}$0
 endsnippet
 
-snippet aa "" i
-ab
+priority 1000
+context "math()"
+snippet ii "" i
+\iint\limits_{$1}$0
 endsnippet
 
 context "math()"

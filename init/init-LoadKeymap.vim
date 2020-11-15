@@ -24,7 +24,7 @@ LoadKeymap edit.vim
 LoadKeymap jump.vim
 
 " 编译运行
-" LoadKeymap run.vim
+LoadKeymap run.vim
 
 " 文档、定义搜索与跳转
 LoadKeymap search.vim
