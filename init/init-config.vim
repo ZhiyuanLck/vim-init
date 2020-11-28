@@ -34,9 +34,9 @@ if has('nvim') == 0 && has('gui_running') == 0
         call s:metacode(nr2char(char2nr('a') + i))
         let t = nr2char(char2nr('A') + i)
         " 'P' cause print bug
-        if t != 'P'
+        " if t != 'P'
             call s:metacode(t)
-        endif
+        " endif
     endfor
     for c in [',', '.', '/', ';', '{', '}']
         call s:metacode(c)

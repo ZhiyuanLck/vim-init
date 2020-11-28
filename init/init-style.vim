@@ -145,22 +145,22 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 "----------------------------------------------------------------------
 " 终端设置，隐藏行号和侧边栏
 "----------------------------------------------------------------------
-if has('terminal') && exists(':terminal') == 2
-	if exists('##TerminalOpen')
-		augroup VimUnixTerminalGroup
-			au!
-			au TerminalOpen * setlocal nonumber signcolumn=no
-		augroup END
-	endif
-endif
+" if has('terminal') && exists(':terminal') == 2
+  " if exists('##TerminalOpen')
+    " augroup VimUnixTerminalGroup
+      " au!
+      " au TerminalOpen * setlocal nonumber signcolumn=no
+    " augroup END
+  " endif
+" endif
 
 
 "----------------------------------------------------------------------
 " quickfix 设置，隐藏行号
 "----------------------------------------------------------------------
 augroup VimInitStyle
-	au!
-	au FileType qf setlocal nonumber
+  au!
+  au FileType qf setlocal nonumber
 augroup END
 
 

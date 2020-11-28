@@ -78,3 +78,22 @@ for i in range(97, 122)
   let s:char = nr2char(i)
   exec 'nmap <space><space>'.s:char.' @'.s:char
 endfor
+
+function! s:align_left_and_right() abort
+  let list = split(getline('.'), '\v([*|]\zs\s+|\s+\ze[*|])')
+  let space_lenth = 78 - len(list[0]) - len(list[1])
+  call setline(line('.'), list[0].repeat(' ', space_lenth).list[1])
+endfunction
+
+function! s:set_vim_doc() abort
+  noremap <m-;> :call <sid>align_left_and_right()<cr>
+  inoremap <m-;> <esc>:call <sid>align_left_and_right()<cr>
+  noremap <m-'> :call append(line('.'), repeat('=', 78))<cr>
+  inoremap <m-'> <esc>:call append(line('.'), repeat('=', 78))<cr>
+  set tw=78 scl=no
+endfunction
+
+augroup VimDocEdit
+  autocmd!
+  autocmd BufNew,BufRead *.txt call s:set_vim_doc()
+augroup END

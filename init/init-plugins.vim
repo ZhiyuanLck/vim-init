@@ -23,12 +23,12 @@ if !exists('g:bundle_group')
   let g:bundle_group += ['snip']
   let g:bundle_group += ['coc']
   let g:bundle_group += ['leaderf']
-  let g:bundle_group += ['markdown']
+  " let g:bundle_group += ['markdown']
   let g:bundle_group += ['edit']
   let g:bundle_group += ['task']
   let g:bundle_group += ['float']
   let g:bundle_group += ['multi-cursor']
-  let g:bundle_group += ['fcitx']
+  " let g:bundle_group += ['fcitx']
   let g:bundle_group += ['icon']
 endif
 
@@ -563,7 +563,7 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-translator']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-python', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-sh']
 
     " scroll
     nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
@@ -807,7 +807,7 @@ endif
 "-----------------------------------------------------------------------
 " MarkDown插件安装
 "-----------------------------------------------------------------------
-if index(g:bundle_group, 'leaderf') >= 0
+if index(g:bundle_group, 'markdown') >= 0
   Plug 'godlygeek/tabular', { 'for': 'markdown'}
   Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
   Plug 'joker1007/vim-markdown-quote-syntax', { 'for': 'markdown' }
@@ -952,25 +952,14 @@ endif
 if index(g:bundle_group, 'task') >= 0
   Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
   let g:clap_layout = {'relative': 'editor'}
-  " nnoremap - :exe "lcd %:p:h \| Clap filer"<cr>
-  " hi ClapSpinner cterm=bold ctermbg=232 ctermfg=197
-  " hi ClapSearchText cterm=bold ctermbg=232 ctermfg=253
-  " hi ClapDisplay ctermbg=234 ctermfg=57
-  " let g:clap_theme = {
-        " \ 'spinner': {'cterm': 'bold', 'ctermbg': '29', 'ctermfg': '234'},
-        " \ 'search_text': {'ctermbg': '29', 'ctermfg': '235'},
-        " \ 'input': {'ctermbg': '29'},
-        " \ 'display': {'ctermbg': '239', 'ctermfg': '196'},
-        " \ 'current_selection': {'ctermbg': '31', 'ctermfg': 'fg'}
-        " \ }
 endif
 
 if index(g:bundle_group, 'float') >= 0
   Plug 'ZhiyuanLck/vim-float-terminal'
   let g:fterm_autoquit = 0
-  let g:floaterm_rootmarkers = ['.root', '.svn', '.git', '.hg', '.project']
   let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
   let g:asyncrun_runner.fterm = function('fterm#async_runner')
+  " Plug 'ZhiyuanLck/vim-lf'
 endif
 
 if index(g:bundle_group, 'multi-cursor') >= 0
