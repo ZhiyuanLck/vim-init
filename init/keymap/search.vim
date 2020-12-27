@@ -57,8 +57,19 @@ endfunction
 command! CheckLoad call CheckLoad()
 
 " 查看高亮组
-nnoremap <F3> :echo synIDattr(synID(line('.'), col('.'), 1), "name")<CR>
-inoremap <F3> <ESC>:echo synIDattr(synID(line('.'), col('.'), 1), "name")<CR>
+function! s:show_highlight()
+  let id = synID(line('.'), col('.'), 1)
+  let hg = id->synIDattr('name')
+  let link = id->synIDtrans()->synIDattr('name')
+  if hg != ''
+    exec "highlight ".hg
+    if link !=# hg
+      exec "highlight ".link
+    endif
+  endif
+endfunction
+nnoremap <silent><F3> :call <sid>show_highlight()<CR>
+inoremap <silent><F3> <cmd>call <sid>show_highlight()<CR>
 function! s:show_syn_stack()
   let syn_stack = []
   for id in synstack(line("."), col("."))

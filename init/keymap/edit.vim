@@ -9,19 +9,6 @@
 "
 " ======================================================================
 
-
-" ALT+a删除到行首非空白字符
-noremap <m-a> d^x
-inoremap <m-a> d^s
-
-" ALT+y 删除到行末
-noremap <m-y> d$
-inoremap <m-y> <c-\><c-o>d$
-
-" ALT+c清空当前行
-noremap <m-c> ^d$
-inoremap <m-c> <esc>^c$
-
 " INSERT模式下ALT+o/O快速插入新行编辑
 inoremap <m-o> <esc>o
 inoremap <m-O> <esc>O
@@ -43,35 +30,17 @@ inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
 " inoremap <m-q> <esc>:bd<cr>
 
-" surround
-nmap <space>mw ysw$
-nmap <space>mW ysW$
-nmap <space>m( ysa($
-nmap <space>m{ ysa{$
-nmap <space>m[ ysa[$
-vmap <space>m S$
-
 " copy and paste
-nnoremap <space>y "+y
-vnoremap <space>y "+y
-nnoremap <space>p "+p
-vnoremap <space>p "+p
-nnoremap <space>P "+P
-vnoremap <space>P "+P
+set clipboard=unnamed
+nnoremap <space>y "+y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+vnoremap <space>y "+y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+nnoremap <space>p "+p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+vnoremap <space>p "+p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+nnoremap <space>P "+P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+vnoremap <space>P "+P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
 
-function! MyPaste(ex)
-  let save_reg = @"
-  let reg = v:register
-  let l:count = v:count1
-  let save_map = maparg('_', 'v', 0, 1)
-  exec 'vnoremap _ '.a:ex
-  exec 'normal gv"'.reg.l:count.'_'
-  call mapset('v', 0, save_map)
-  let @" = save_reg
-endfunction
-" p不替换无名寄存器内容
-vmap p :<c-u>call MyPaste('p')<cr>
-vmap P :<c-u>call MyPaste('P')<cr>
+vnoremap p p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+vnoremap P P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
 
 " 宏操作
 for i in range(97, 122)

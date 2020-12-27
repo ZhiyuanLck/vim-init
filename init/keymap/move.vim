@@ -63,10 +63,10 @@ inoremap <C-l> <right>
 " ALT键快速移动
 " **********************************************************************
 " ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-noremap <m-h> b
-noremap <m-l> w
-inoremap <m-h> <c-left>
-inoremap <m-l> <c-right>
+" noremap <m-h> b
+" noremap <m-l> w
+" inoremap <m-h> <c-left>
+" inoremap <m-l> <c-right>
 
 " ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
 noremap <m-j> gj

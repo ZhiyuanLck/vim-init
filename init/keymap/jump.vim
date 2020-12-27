@@ -193,3 +193,121 @@ noremap <silent> N :set hlsearch<cr>N
 noremap <silent> / :set hlsearch<cr>/
 noremap <silent> ? :set hlsearch<cr>?
 noremap <silent> * *:set hlsearch<cr>
+
+" **********************************************************************
+" any jump
+
+" lr=1 left: right | lr=0 right: left
+function! s:get_dic(lr) abort
+  let pair_dic = {}
+  for [ft, pairs] in items(s:pair)
+    let tmp_dic = {}
+    for pair in pairs
+      if a:lr
+        let tmp_dic[pair[0]] = pair[1]
+      else
+        let tmp_dic[pair[1]] = pair[0]
+      endif
+    endfor
+    let pair_dic[ft] = tmp_dic
+  endfor
+  for [ft, pairs] in items(pair_dic)
+    if ft != '*'
+      let pair_dic[ft] = pair_dic['*']->extend(pair_dic[ft])
+    endif
+  endfor
+  return pair_dic
+endfunction
+
+function! s:get_del_list(left) abort
+  let dels = {}
+  let ft_pair_dic = a:left == 1 ? s:lrpair : s:rlpair
+  for [ft, pair_dic] in ft_pair_dic->items()
+    let dels[ft] = pair_dic->keys()
+  endfor
+  return dels
+endfunction
+
+function! s:is_left(ldel) abort
+  let ldels = get(s:ldels, &ft, s:ldels['*'])
+  return match(ldels, a:ldel) != -1
+endfunction
+
+function! s:jump_any(str, left) abort
+  let insert = mode() == 'i'
+  let pattern = printf('\V%s', a:str->substitute("\\", "\\\\", 'g'))
+  let flags = a:left ? 'b' : 'e'
+  let flags .= insert && !a:left ? 'c' : ''
+  let flags .= 'nW'
+" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  " avoid match the same place in insert mode
+  if a:left && insert && col('.') > 1
+    let cur_col = col('.')
+    let [lnum, col] = searchpos(pattern, 'becnW')
+    let pre_ch = strcharpart(getline('.')[cur_col - 2:], 0, 1)
+    if s:is_left(pre_ch)
+      let pre_lnum = line('.') > 1 ? line('.') - 1 : line('.')
+      let pre_col = line('.') > 1 ? getline('.')->len() : col('.')
+      let lnum = cur_col == 2 ? pre_lnum : line('.')
+      let col = cur_col == 2 ? pre_col : col('.') - 2
+      call setpos('.', [0, lnum, col, 0])
+    endif
+  endif
+  let [lnum, col] = searchpos(pattern, flags)
+  if lnum == 0 && col == 0
+    return
+  endif
+  if insert
+    let col += 1
+  endif
+  call setpos('.', [0, lnum, col, 0])
+endfunction
+
+function! s:jump(left) abort
+  let insert = mode() == 'i'
+  let ft_dels = a:left == 1 ? s:ldels : s:rdels
+  let dels = get(ft_dels, &ft, ft_dels['*'])
+  let escape = ']'
+  let pattern = '['
+  for deli in dels
+    if stridx(escape, deli) != -1
+      let deli = '\'.deli
+    endif
+    let pattern .= deli
+  endfor
+  let pattern .= ']'
+  let flags = a:left ? 'b' : ''
+  let flags .= insert ? 'c' : ''
+  let flags .= 'nW'
+  " avoid match the same place in insert mode
+  if a:left && insert && col('.') > 1
+    let cur_col = col('.')
+    let pre_ch = strcharpart(getline('.')[cur_col - 2:], 0, 1)
+    if s:is_left(pre_ch)
+      let pre_lnum = line('.') > 1 ? line('.') - 1 : line('.')
+      let pre_col = line('.') > 1 ? getline('.')->len() : col('.')
+      let lnum = cur_col == 2 ? pre_lnum : line('.')
+      let col = cur_col == 2 ? pre_col : col('.') - 2
+      call setpos('.', [0, lnum, col, 0])
+    endif
+  endif
+  let [lnum, col] = searchpos(pattern, flags)
+  if lnum == 0 && col == 0
+    return
+  endif
+  if insert
+    let col += 1
+  endif
+  call setpos('.', [0, lnum, col, 0])
+endfunction
+
+let s:pair = {'*': ['""', "''", '()', '[]', '{}'], 'tex': ['$$']}
+let s:lrpair = s:get_dic(1)
+let s:rlpair = s:get_dic(0)
+let s:ldels = s:get_del_list(1)
+let s:rdels = s:get_del_list(0)
+
+inoremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
+inoremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
+noremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
+noremap <silent><m-h> <cmd>call <sid>jump(1)<cr>

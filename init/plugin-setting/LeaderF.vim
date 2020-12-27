@@ -11,7 +11,11 @@ let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
 let g:Lf_WorkingDirectoryMode = 'Ac'
 let g:Lf_WindowHeight = 0.30
-let g:Lf_CacheDirectory = expand('~/.vim/cache')
+
+let g:Lf_GtagsAutoGenerate = 0
+let g:Lf_GtagsGutentags = 1
+let g:Lf_CacheDirectory = expand('~')
+let g:gutentags_cache_dir = expand(g:Lf_CacheDirectory.'/.LfCache/gtags')
 
 " 显示绝对路径
 let g:Lf_ShowRelativePath = 0
@@ -51,6 +55,11 @@ let g:Lf_PreviewResult = {
 " 使用popup
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
+
+" nmap gd <Plug>LeaderfGtagsDefinition
+" nmap gr <Plug>LeaderfGtagsReference
+" nmap gs <Plug>LeaderfGtagsSymbol
+" nmap gf <Plug>LeaderfGtagsGrep
 
 function! GetScript(args)
   let out = execute('scriptnames')
