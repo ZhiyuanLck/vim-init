@@ -452,16 +452,6 @@ if index(g:bundle_group, 'nerdtree') >= 0
   noremap <space>nt :NERDTreeToggle<cr>
 endif
 
-" ultisnip
-if index(g:bundle_group, 'snip') >= 0
-  Plug 'sirver/ultisnips'
-  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/vim-init/UltiSnips']
-  let g:UltiSnipsEditSplit='tabdo'
-  let g:UltiSnipsExpandTrigger = '<c-j>'
-  let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-  let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-endif
-
 " coc
 if index(g:bundle_group, 'coc') >= 0
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -859,6 +849,17 @@ if index(g:bundle_group, 'edit') >= 0
         " \ 'tikz',
         " \]
 endif
+
+" ultisnip
+if index(g:bundle_group, 'snip') >= 0
+  Plug 'sirver/ultisnips'
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/vim-init/UltiSnips']
+  let g:UltiSnipsEditSplit='tabdo'
+  let g:UltiSnipsExpandTrigger = '<c-j>'
+  let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+  let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+endif
+
 
 " task
 if index(g:bundle_group, 'task') >= 0
