@@ -939,6 +939,31 @@ if index(g:bundle_group, 'float') >= 0
   let g:fterm_autoquit = 0
   let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
   let g:asyncrun_runner.fterm = function('fterm#async_runner')
+  let g:fterm_highlights = {
+        \ "fterm_hl_border": {
+        \   "ctermfg": 10,
+        \   },
+        \ "fterm_hl_termline_info": {
+        \   "ctermfg": 255,
+        \   "ctermbg": 245,
+        \   },
+        \ "fterm_hl_termline_normal": {
+        \   "ctermfg": 252,
+        \   "ctermbg": 240,
+        \   },
+        \ "fterm_hl_termline_current": {
+        \   "ctermfg": 0,
+        \   "ctermbg": 84,
+        \   },
+        \ "fterm_hl_terminal_body": {
+        \   "ctermfg": "fg",
+        \   "ctermbg": "NONE",
+        \   },
+        \ "fterm_hl_termline_body": {
+        \   "ctermfg": "fg",
+        \   "ctermbg": "NONE",
+        \   },
+        \ }
   Plug 'ZhiyuanLck/vim-lf'
   nnoremap <silent>- <cmd>Lf .<cr>
   " let g:vlf_file_numbered = 1

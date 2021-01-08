@@ -91,7 +91,6 @@ hi! Normal guibg=NONE ctermbg=NONE
 " hi Pmenu ctermbg=216 ctermfg=236
 " hi PmenuSel ctermbg=172 ctermfg=232
 " hi default link CocInfoFloat PmenuSel
-hi VertSplit ctermbg=bg ctermfg=fg
 " hi! default link Search IncSearch
 
 " nnoremap <f1> :echo "hi<"
@@ -340,4 +339,4 @@ augroup END
 
 " split bar
 set fillchars+=vert:▏
-hi VertSplit ctermbg=12 ctermfg=bg
+hi VertSplit ctermfg=12
