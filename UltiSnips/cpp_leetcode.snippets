@@ -1,0 +1,45 @@
+snippet lee ""
+#include <iostream>
+#include <vector>
+#include <string>
+$1
+
+using namespace std;
+
+template<template<class, class...> class T, class H, class... Args>
+ostream& operator<<(ostream &os, const T<H, Args...> &obj) {
+	bool start = true;
+	for (auto v: obj) {
+		if (start) {
+			os << v;
+			start = false;
+		}
+		else {
+			os << ' ' << v;
+		}
+	}
+	os << '\n';
+	return os;
+}
+
+$2
+
+int main() {
+	$3
+}
+endsnippet
+
+snippet Lee ""
+#include <iostream>
+#include <vector>
+#include <string>
+$1
+
+using namespace std;
+
+$2
+
+int main() {
+	$3
+}
+endsnippet

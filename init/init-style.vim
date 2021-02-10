@@ -87,7 +87,7 @@ set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 color OceanicNext
-hi! Normal guibg=NONE ctermbg=NONE
+" hi! Normal guibg=NONE ctermbg=NONE
 " hi Pmenu ctermbg=216 ctermfg=236
 " hi PmenuSel ctermbg=172 ctermfg=232
 " hi default link CocInfoFloat PmenuSel

@@ -31,7 +31,8 @@ function! LookTeXDoc(name)
   if executable('texdoc') != 1
     return
   endif
-  exec "AsyncRun -silent texdoc ".a:name
+  call system(printf("nohup texdoc %s >/dev/null 2>&1 &", a:name))
+  " exec "AsyncRun -silent texdoc ".a:name
 endfunction
 
 function s:look_tex_map()

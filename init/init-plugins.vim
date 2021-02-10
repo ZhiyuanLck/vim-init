@@ -64,6 +64,10 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
 Plug 'easymotion/vim-easymotion'
+map <silent>f <Plug>(easymotion-f)
+map <silent>t <Plug>(easymotion-t)
+map <silent>b <Plug>(easymotion-s)
+
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
@@ -967,6 +971,12 @@ if index(g:bundle_group, 'float') >= 0
   Plug 'ZhiyuanLck/vim-lf'
   nnoremap <silent>- <cmd>Lf .<cr>
   " let g:vlf_file_numbered = 1
+  Plug 'ZhiyuanLck/vim-support'
+  Plug 'ZhiyuanLck/vim-session'
+  Plug 'skywind3000/vim-cppman'
+  let g:cppman_open_mode = "vert botright"
+  Plug 'puremourning/vimspector'
+  " let g:vimspector_enable_mappings = 'HUMAN'
 endif
 
 if index(g:bundle_group, 'multi-cursor') >= 0
@@ -986,3 +996,16 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
+
+noremap <silent><leader>vn <Plug>VimspectorContinue
+noremap <silent><leader>vs <Plug>VimspectorStop
+noremap <silent><leader>vr <Plug>VimspectorRestart
+noremap <silent><leader>vp <Plug>VimspectorPause
+noremap <silent><leader>vt <Plug>VimspectorToggleBreakpoint
+noremap <silent><leader>vy <Plug>VimspectorToggleConditionalBreakpoint
+noremap <silent><leader>vf <Plug>VimspectorAddFunctionBreakpoint
+noremap <silent><leader>vg <Plug>VimspectorStepOver
+noremap <silent><leader>vi <Plug>VimspectorStepInto
+noremap <silent><leader>vo <Plug>VimspectorStepOut
+noremap <silent><leader>vc <Plug>VimspectorRunToCursor
+noremap <silent><leader>vv :call vimspector#Lauch()<cr>

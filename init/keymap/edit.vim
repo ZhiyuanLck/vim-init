@@ -30,6 +30,8 @@ inoremap <silent> <m-w> <esc>mb:w!<cr>`b:delmark b<cr>
 inoremap <m-q> <esc>:q!<cr>
 " inoremap <m-q> <esc>:bd<cr>
 
+inoremap <s-tab> <c-v><tab>
+
 " copy and paste
 set clipboard=unnamed
 nnoremap <space>y "+y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
