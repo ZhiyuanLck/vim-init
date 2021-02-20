@@ -1,13 +1,3 @@
-"======================================================================
-"
-" init-plugins.vim
-"
-" Modified by zhiyuan
-" Last Modified: 2019-07-05 18:30:57
-"
-"======================================================================
-" vim: set ts=4 sw=4 tw=78 noet :
-
 " 取得本文件所在的目录
 let s:plughome = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
@@ -61,12 +51,17 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 "----------------------------------------------------------------------
 " 默认插件
 "----------------------------------------------------------------------
+" Plug 'google/vim-searchindex'
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
-Plug 'easymotion/vim-easymotion'
-map <silent>f <Plug>(easymotion-f)
-map <silent>t <Plug>(easymotion-t)
-map <silent>b <Plug>(easymotion-s)
+" Plug 'easymotion/vim-easymotion'
+" map <silent>f <Plug>(easymotion-f)
+" map <silent>t <Plug>(easymotion-t)
+" map <silent>b <Plug>(easymotion-s)
+Plug 'justinmk/vim-sneak'
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+let g:sneak#label = 1
 
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
@@ -227,9 +222,9 @@ if index(g:bundle_group, 'basic') >= 0
     \ 'sty': { 'left': '%'},
     \ 'cls': { 'left': '%'}
     \ }
-  nnoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>
-  inoremap <silent><m-/> <esc>:call NERDComment('n', 'Invert')<cr>
-  xnoremap <silent><m-/> :call NERDComment('x', 'Invert')<cr>
+  nnoremap <silent><m-/> <cmd>call NERDComment('n', 'Invert')<cr>
+  inoremap <silent><m-/> <cmd>call NERDComment('n', 'Invert')<cr>
+  xnoremap <silent><m-/> <cmd>call NERDComment('x', 'Invert')<cr>
 
   " 使用 ALT+E 来选择窗口
   " nmap <m-e> <Plug>(choosewin)
@@ -490,8 +485,8 @@ if index(g:bundle_group, 'coc') >= 0
     let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-pyright', 'coc-jedi', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-sh']
 
     " scroll
-    nnoremap <expr><C-f> coc#util#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-    nnoremap <expr><C-b> coc#util#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+    nnoremap <expr><C-f> coc#float#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
+    nnoremap <expr><C-b> coc#float#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
 
     " coc-translator
     nnoremap <leader>e :<c-u>CocCommand translator.popup<cr>
@@ -977,6 +972,7 @@ if index(g:bundle_group, 'float') >= 0
   let g:cppman_open_mode = "vert botright"
   Plug 'puremourning/vimspector'
   " let g:vimspector_enable_mappings = 'HUMAN'
+  Plug 'ZhiyuanLck/vim-diary'
 endif
 
 if index(g:bundle_group, 'multi-cursor') >= 0

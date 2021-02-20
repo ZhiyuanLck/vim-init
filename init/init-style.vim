@@ -44,8 +44,8 @@ set laststatus=2
 " 总是显示行号
 set number
 
-" 总是显示侧边栏（用于显示 mark/gitdiff/诊断信息）
-set signcolumn=yes
+" 行号栏显示标记
+set signcolumn=number
 
 " 总是显示标签栏
 set showtabline=2
@@ -53,8 +53,8 @@ set showtabline=2
 " 设置显示制表符等隐藏字符
 set list
 
-" 右下角显示命令
-set showcmd
+" 右下角不显示命令
+set noshowcmd
 
 " 插入模式在状态栏下面显示 -- INSERT --
 set showmode
@@ -87,17 +87,18 @@ set t_Co=256
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 color OceanicNext
-" hi! Normal guibg=NONE ctermbg=NONE
-" hi Pmenu ctermbg=216 ctermfg=236
-" hi PmenuSel ctermbg=172 ctermfg=232
-" hi default link CocInfoFloat PmenuSel
-" hi! default link Search IncSearch
 
-" nnoremap <f1> :echo "hi<"
-    " \ . synIDattr(synID(line("."), col("."), 1), "name") . '> trans <'
-    " \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
-    " \ . synIDattr(synIDtrans(synID(line("."), col("."), 1)), "name") . ">"<cr>
+" 设置cursorline
+set cursorline
+set cursorlineopt=screenline
+hi clear CursorLine
+hi! CursorLine ctermbg=236
 
+" 搜索计数
+" set shortmess-=S
+
+" 搜索无高亮
+set nohlsearch
 
 "----------------------------------------------------------------------
 " 状态栏设置

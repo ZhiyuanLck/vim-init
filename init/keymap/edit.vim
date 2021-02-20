@@ -16,11 +16,7 @@ inoremap <m-O> <esc>O
 " ALT+i/I在下方/上方插入空白行
 noremap <silent> <m-i> :call append('.', '')<cr>
 inoremap <silent> <m-i> <esc>:call append('.', '')<cr>
-noremap <silent> <m-I> :call append(line('.')-1, '')<cr>
-inoremap <silent> <m-I> <esc>:call append(line('.')-1, '')<cr>
 
-" LEADER+i在当前行的上下方分别插入空白行
-noremap <silent> <leader>i vi{s  <esc>hp
 
 " ALT+w/q快速保存退出
 noremap <silent> <m-w> mb:w!<cr>`b:delmark b<cr>
@@ -33,16 +29,14 @@ inoremap <m-q> <esc>:q!<cr>
 inoremap <s-tab> <c-v><tab>
 
 " copy and paste
-set clipboard=unnamed
-nnoremap <space>y "+y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-vnoremap <space>y "+y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-nnoremap <space>p "+p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-vnoremap <space>p "+p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-nnoremap <space>P "+P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-vnoremap <space>P "+P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-
-vnoremap p p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
-vnoremap P P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+set clipboard=unnamedplus
+" noremap <silent>y y<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+" noremap <silent>p p<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+" noremap <silent>P P<cmd>call setreg('*', getreg('0'), getregtype('0'))<cr>
+noremap P o<esc>p
+vnoremap p p<cmd>call setreg('+', getreg('0'), getregtype('0'))<cr>
+map Y y$
+map L $
 
 " 宏操作
 for i in range(97, 122)

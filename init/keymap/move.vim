@@ -15,19 +15,13 @@
 "
 " ======================================================================
 
-
-" **********************************************************************
 " INSERT 模式下使用 EMACS 键位
-" **********************************************************************
 inoremap <c-a> <esc>I
 inoremap <c-e> <end>
 inoremap <c-d> <del>
 inoremap <c-_> <c-k>
 
-
-" **********************************************************************
 " COMMAND模式下快速移动
-" **********************************************************************
 cnoremap <c-h> <left>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
@@ -43,42 +37,23 @@ cnoremap <c-_> <c-k>
 cnoremap <m-h> <c-left>
 cnoremap <m-l> <c-right>
 
+" 插入模式下快速移动
+inoremap <c-h> <left>
+inoremap <c-j> <down>
+inoremap <c-k> <up>
+inoremap <c-l> <right>
 
-" **********************************************************************
-" 设置 CTRL+HJKL 移动光标（INSERT 模式偶尔需要移动的方便些）
-" 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
-" 详见：http://www.skywind.me/blog/archives/2021
-" **********************************************************************
-noremap <C-h> <left>
-noremap <C-j> <down>
-noremap <C-k> <up>
-noremap <C-l> <right>
-inoremap <C-h> <left>
-inoremap <C-j> <down>
-inoremap <C-k> <up>
-inoremap <C-l> <right>
+" 互换j和gj，居中
+noremap <silent>j  gjzz
+noremap <silent>k  gkzz
+noremap <silent>gj jzz
+noremap <silent>gk kzz
+noremap <silent>n  nzz
+noremap <silent>N  Nzz
+noremap <silent>*  *zz
+noremap <silent><space>hl :set nohlsearch<cr>
 
-
-" **********************************************************************
-" ALT键快速移动
-" **********************************************************************
-" ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-" noremap <m-h> b
-" noremap <m-l> w
-" inoremap <m-h> <c-left>
-" inoremap <m-l> <c-right>
-
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
-noremap <m-j> gj
-noremap <m-k> gk
-inoremap <m-j> <c-\><c-o>gj
-inoremap <m-k> <c-\><c-o>gk
-
-
-
-" **********************************************************************
 " 异步滚动窗口
-" **********************************************************************
 " 0:up, 1:down, 2:pgup, 3:pgdown, 4:top, 5:bottom
 function! Tools_PreviousCursor(mode)
   if winnr('$') <= 1
@@ -118,13 +93,6 @@ noremap <silent> <m-d> :call Tools_PreviousCursor(7)<cr>
 inoremap <silent> <m-d> <esc>:call Tools_PreviousCursor(7)<cr>a
 noremap <silent> <m-s> :call Tools_PreviousCursor(10)<cr>
 inoremap <silent> <m-s> :call Tools_PreviousCursor(10)<cr>a
-
-nnoremap j jzz
-nnoremap k kzz
-nnoremap n nzz
-vnoremap j jzz
-vnoremap k kzz
-vnoremap n nzz
 
 " 增大减小窗口尺寸
 nnoremap <m--> <c-w>-
