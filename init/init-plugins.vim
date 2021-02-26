@@ -222,9 +222,9 @@ if index(g:bundle_group, 'basic') >= 0
     \ 'sty': { 'left': '%'},
     \ 'cls': { 'left': '%'}
     \ }
-  nnoremap <silent><m-/> <cmd>call NERDComment('n', 'Invert')<cr>
-  inoremap <silent><m-/> <cmd>call NERDComment('n', 'Invert')<cr>
-  xnoremap <silent><m-/> <cmd>call NERDComment('x', 'Invert')<cr>
+  nnoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>
+  inoremap <silent><m-/> :call NERDComment('n', 'Invert')<cr>a
+  xnoremap <silent><m-/> :call NERDComment('x', 'Invert')<cr>
 
   " 使用 ALT+E 来选择窗口
   " nmap <m-e> <Plug>(choosewin)
@@ -485,8 +485,8 @@ if index(g:bundle_group, 'coc') >= 0
     let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-pyright', 'coc-jedi', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-sh']
 
     " scroll
-    nnoremap <expr><C-f> coc#float#has_float() ? coc#util#float_scroll(1) : "\<C-f>"
-    nnoremap <expr><C-b> coc#float#has_float() ? coc#util#float_scroll(0) : "\<C-b>"
+    nnoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <expr><C-b> coc#float#has_float() ? coc#float#scroll(0) : "\<C-b>"
 
     " coc-translator
     nnoremap <leader>e :<c-u>CocCommand translator.popup<cr>

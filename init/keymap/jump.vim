@@ -307,7 +307,7 @@ let s:rlpair = s:get_dic(0)
 let s:ldels = s:get_del_list(1)
 let s:rdels = s:get_del_list(0)
 
-inoremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
-inoremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
-noremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
-noremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
+" inoremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
+" inoremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
+" noremap <silent><m-l> <cmd>call <sid>jump(0)<cr>
+" noremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
