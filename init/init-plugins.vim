@@ -1,6 +1,9 @@
 " 取得本文件所在的目录
 let s:plughome = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+" 仓库格式
+let g:plug_url_format = 'https://hub.fastgit.org/%s.git'
+
 " 定义一个命令用来加载插件配置
 command! -nargs=1 LoadPlug exec 'so '.s:plughome.'/plugin-setting/'.'<args>.vim'
 
@@ -454,6 +457,7 @@ endif
 " coc
 if index(g:bundle_group, 'coc') >= 0
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'tjdevries/coc-zsh'
     " if hidden is not set, TextEdit might fail.
     set hidden
 
@@ -967,7 +971,7 @@ if index(g:bundle_group, 'float') >= 0
   nnoremap <silent>- <cmd>Lf .<cr>
   " let g:vlf_file_numbered = 1
   Plug 'ZhiyuanLck/vim-support'
-  Plug 'ZhiyuanLck/vim-session'
+  " Plug 'ZhiyuanLck/vim-session'
   Plug 'skywind3000/vim-cppman'
   let g:cppman_open_mode = "vert botright"
   Plug 'puremourning/vimspector'
