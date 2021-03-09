@@ -24,28 +24,53 @@ endif
 " 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
 "----------------------------------------------------------------------
 if has('nvim') == 0 && has('gui_running') == 0
-  function! s:metacode(key)
-    " 使用alacritty不需要！
-    " exec "set <M-".a:key.">=".a:key
+  function! s:metacode(key, clear)
+    if a:clear
+      exec "set <M-".a:key.">="
+    else
+      exec "set <M-".a:key.">=".a:key
+    endif
     " exec "noremap <M-".a:key."> ".a:key
     " exec "inoremap <M-".a:key."> ".a:key
     " exec "cnoremap <M-".a:key."> ".a:key
     " exec "toremap <M-".a:key."> ".a:key
   endfunc
-  for i in range(10)
-    call s:metacode(nr2char(char2nr('0') + i))
-  endfor
-  for i in range(26)
-    call s:metacode(nr2char(char2nr('a') + i))
-    let t = nr2char(char2nr('A') + i)
-    call s:metacode(t)
-  endfor
-  for c in [',', '.', '/', ';', '{', '}']
-    call s:metacode(c)
-  endfor
-  for c in ['?', ':', '-', '_', '+', '=', "'"]
-    call s:metacode(c)
-  endfor
+
+  function! s:set_meta(clear)
+    for i in range(10)
+      call s:metacode(nr2char(char2nr('0') + i), a:clear)
+    endfor
+    for i in range(26)
+      call s:metacode(nr2char(char2nr('a') + i), a:clear)
+      let t = nr2char(char2nr('A') + i)
+      call s:metacode(t, a:clear)
+    endfor
+    for c in [',', '.', '/', ';', '{', '}']
+      call s:metacode(c, a:clear)
+    endfor
+    for c in ['?', ':', '-', '_', '+', '=', "'"]
+      call s:metacode(c, a:clear)
+    endfor
+  endfunction
+
+  " 初始化
+  call s:set_meta(0)
+
+  function! s:auto_meta(clear)
+    if &bt == 'terminal'
+      if a:clear
+        call s:set_meta(1)
+      else
+        call s:set_meta(0)
+      endif
+    endif
+  endfunction
+
+  augroup TermMeta
+    autocmd!
+    autocmd WinEnter * call <sid>auto_meta(1)
+    autocmd WinLeave * call <sid>auto_meta(0)
+  augroup END
 endif
 
 
