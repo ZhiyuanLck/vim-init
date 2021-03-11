@@ -19,58 +19,18 @@ elseif &ttimeoutlen > 80 || &ttimeoutlen <= 0
 endif
 
 
-"----------------------------------------------------------------------
-" 终端下允许 ALT，详见：http://www.skywind.me/blog/archives/2021
-" 记得设置 ttimeout （见 init-basic.vim） 和 ttimeoutlen （上面）
-"----------------------------------------------------------------------
+" 终端修正ALT
 if has('nvim') == 0 && has('gui_running') == 0
-  function! s:metacode(key, clear)
-    if a:clear
-      exec "set <M-".a:key.">="
-    else
-      exec "set <M-".a:key.">=".a:key
-    endif
-    " exec "noremap <M-".a:key."> ".a:key
-    " exec "inoremap <M-".a:key."> ".a:key
-    " exec "cnoremap <M-".a:key."> ".a:key
-    " exec "toremap <M-".a:key."> ".a:key
-  endfunc
+  let symbols =  map(range(char2nr('0'), char2nr('9')), 'nr2char(v:val)')
+  let symbols += map(range(char2nr('a'), char2nr('z')), 'nr2char(v:val)')
+  let symbols += map(range(char2nr('A'), char2nr('Z')), 'nr2char(v:val)')
+  let symbols += [',', '.', '/', ';', '{', '}']
+  let symbols += ['?', ':', '-', '_', '+', '=', "'"]
 
-  function! s:set_meta(clear)
-    for i in range(10)
-      call s:metacode(nr2char(char2nr('0') + i), a:clear)
-    endfor
-    for i in range(26)
-      call s:metacode(nr2char(char2nr('a') + i), a:clear)
-      let t = nr2char(char2nr('A') + i)
-      call s:metacode(t, a:clear)
-    endfor
-    for c in [',', '.', '/', ';', '{', '}']
-      call s:metacode(c, a:clear)
-    endfor
-    for c in ['?', ':', '-', '_', '+', '=', "'"]
-      call s:metacode(c, a:clear)
-    endfor
-  endfunction
-
-  " 初始化
-  call s:set_meta(0)
-
-  function! s:auto_meta(clear)
-    if &bt == 'terminal'
-      if a:clear
-        call s:set_meta(1)
-      else
-        call s:set_meta(0)
-      endif
-    endif
-  endfunction
-
-  augroup TermMeta
-    autocmd!
-    autocmd WinEnter * call <sid>auto_meta(1)
-    autocmd WinLeave * call <sid>auto_meta(0)
-  augroup END
+  for key in symbols
+    exec "set <m-".key.">=\e".key
+    exec "tnoremap <m-" .. key .. "> <esc>" .. key
+  endfor
 endif
 
 

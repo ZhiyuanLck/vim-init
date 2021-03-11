@@ -62,8 +62,12 @@ call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
 " map <silent>t <Plug>(easymotion-t)
 " map <silent>b <Plug>(easymotion-s)
 Plug 'justinmk/vim-sneak'
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+nnoremap <silent> f :<C-U>call sneak#wrap('',           1, 0, 1, 1)<CR>
+nnoremap <silent> F :<C-U>call sneak#wrap('',           1, 1, 1, 1)<CR>
+xnoremap <silent> f :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 1)<CR>
+xnoremap <silent> F :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 1)<CR>
+onoremap <silent> f :<C-U>call sneak#wrap(v:operator,   1, 0, 1, 1)<CR>
+onoremap <silent> F :<C-U>call sneak#wrap(v:operator,   1, 1, 1, 1)<CR>
 let g:sneak#label = 1
 
 Plug 'haya14busa/incsearch.vim'
