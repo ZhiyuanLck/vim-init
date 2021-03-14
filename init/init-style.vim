@@ -42,10 +42,10 @@ endif
 set laststatus=2
 
 " 总是显示行号
-set number
+set relativenumber
 
 " 行号栏显示标记
-set signcolumn=number
+set signcolumn=yes
 
 " 总是显示标签栏
 set showtabline=2

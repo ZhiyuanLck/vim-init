@@ -44,13 +44,13 @@ inoremap <c-k> <up>
 inoremap <c-l> <right>
 
 " 互换j和gj，居中
-noremap <silent>j  gjzz
-noremap <silent>k  gkzz
-noremap <silent>gj jzz
-noremap <silent>gk kzz
-noremap <silent>n  nzz
-noremap <silent>N  Nzz
-noremap <silent>*  *zz
+noremap <silent>j  gj
+noremap <silent>k  gk
+noremap <silent>gj j
+noremap <silent>gk k
+" noremap <silent>n  nzz
+" noremap <silent>N  Nzz
+" noremap <silent>*  *zz
 noremap <silent><space>hl :set nohlsearch<cr>
 
 " 异步滚动窗口
