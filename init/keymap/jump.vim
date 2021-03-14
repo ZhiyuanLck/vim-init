@@ -316,7 +316,9 @@ let s:rdels = s:get_del_list(0)
 function! AutoCenter()
   let line = line('.')
   if line != get(b:, 'last_line', 0)
+    let saved_pos = getcurpos()
     norm! zz
+    call setpos('.', saved_pos)
     let b:last_line = line
   endif
 endfunction
