@@ -313,7 +313,15 @@ let s:rdels = s:get_del_list(0)
 " noremap <silent><m-h> <cmd>call <sid>jump(1)<cr>
 
 " 自动居中
+function! AutoCenter()
+  let line = line('.')
+  if line != get(b:, 'last_line', 0)
+    norm! zz
+    let b:last_line = line
+  endif
+endfunction
+
 augroup AutoCenter
   autocmd!
-  autocmd CursorMoved,CursorMovedI * norm! zz
+  autocmd CursorMoved,CursorMovedI * call AutoCenter() 
 augroup END
