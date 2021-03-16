@@ -943,6 +943,7 @@ endif
 
 if index(g:bundle_group, 'float') >= 0
   Plug 'ZhiyuanLck/vim-float-terminal'
+  noremap <silent><m-m> <cmd>FtermNew --cwd .<cr>
   let g:fterm_autoquit = 0
   let g:asyncrun_runner = get(g:, 'asyncrun_runner', {})
   let g:asyncrun_runner.fterm = function('fterm#async_runner')

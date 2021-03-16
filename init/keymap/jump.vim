@@ -327,3 +327,49 @@ augroup AutoCenter
   autocmd!
   autocmd CursorMoved,CursorMovedI * call AutoCenter() 
 augroup END
+
+" github 跳转
+function! s:in_parenthese() abort
+  let c = col('.')
+  let line = getline('.')
+  let Get = {idx -> nr2char(strgetchar(line, idx))}
+  let cur_idx = c == 1 ? 0 : strchars(line[0: c - 2])
+  " 左边括号
+  let ret = v:false
+  for i in reverse(range(0, cur_idx))
+    if Get(i) == '('
+      let ret = v:true
+      break
+    endif
+  endfor
+  if !ret
+    return v:false
+  endif
+  " 右边括号
+  let line .= ' '
+  let total = strchars(line)
+  for i in range(cur_idx + 1, total + 1)
+    if Get(i) == ')'
+      let ret = v:true
+      break
+    endif
+  endfor
+  return ret
+endfunction
+
+function! s:jump_md() abort
+  if !s:in_parenthese()
+    return
+  endif
+  norm! "ayi(
+  let root = finddir('.git/..', expand('%:p:h').';')
+  let path = root . '/' . @a
+  if filereadable(path)
+    exec "tabedit " . path
+  endif
+endfunction
+
+augroup JumpGitMd
+  autocmd!
+  autocmd FileType markdown noremap <cr> <cmd>call <sid>jump_md()<cr>
+augroup END
