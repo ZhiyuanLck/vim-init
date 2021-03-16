@@ -22,7 +22,7 @@ if !exists('g:bundle_group')
   let g:bundle_group += ['coc']
   let g:bundle_group += ['leaderf']
   " let g:bundle_group += ['lsp']
-  " let g:bundle_group += ['markdown']
+  let g:bundle_group += ['markdown']
   " let g:bundle_group += ['clap']
   let g:bundle_group += ['edit']
   let g:bundle_group += ['task']
@@ -784,16 +784,18 @@ endif
 " MarkDown插件安装
 "-----------------------------------------------------------------------
 if index(g:bundle_group, 'markdown') >= 0
-  Plug 'godlygeek/tabular', { 'for': 'markdown'}
-  Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
-  Plug 'joker1007/vim-markdown-quote-syntax', { 'for': 'markdown' }
-  Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
+  " sudo npm -g install instant-markdown-d
+  Plug 'instant-markdown/vim-instant-markdown', { 'for': 'markdown' }
+  " Plug 'godlygeek/tabular', { 'for': 'markdown'}
+  " Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
+  " Plug 'joker1007/vim-markdown-quote-syntax', { 'for': 'markdown' }
+  " Plug 'iamcco/markdown-preview.vim', { 'for': 'markdown' }
 
   " 预览快捷键
-  nmap <silent> <F11> <Plug>MarkdownPreview
-  imap <silent> <F11> <Plug>MarkdownPreview
-  nmap <silent> <F12> <Plug>StopMarkdownPreview
-  imap <silent> <F12> <Plug>StopMarkdownPreview
+  " nmap <silent> <F11> <Plug>MarkdownPreview
+  " imap <silent> <F11> <Plug>MarkdownPreview
+  " nmap <silent> <F12> <Plug>StopMarkdownPreview
+  " imap <silent> <F12> <Plug>StopMarkdownPreview
 endif
 
 if index(g:bundle_group, 'edit') >= 0

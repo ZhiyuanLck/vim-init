@@ -362,10 +362,20 @@ function! s:jump_md() abort
     return
   endif
   norm! "ayi(
-  let root = finddir('.git/..', expand('%:p:h').';')
-  let path = root . '/' . @a
+  let root = fnamemodify(finddir('.git/..', expand('%:p:h').';'), ':p')
+  let path = root . @a
   if filereadable(path)
-    exec "tabedit " . path
+    python3 << EOF
+import vim
+path = vim.eval("path")
+for tp, w in ((tp, window) for tp in vim.tabpages for window in tp.windows):
+    if w.buffer.name == path:
+        vim.current.tabpage = tp
+        vim.current.window = w
+        break
+else:
+    vim.command("tabedit %s" % path)
+EOF
   endif
 endfunction
 

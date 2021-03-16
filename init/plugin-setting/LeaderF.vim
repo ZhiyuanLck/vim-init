@@ -4,6 +4,8 @@ Plug 'ZhiyuanLck/LeaderF-ColorPanel'
 " 最大历史文件保存 2048 个
 let g:Lf_MruMaxFiles = 2048
 
+let g:Lf_AutoResize = 1
+
 " ui 定制
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 

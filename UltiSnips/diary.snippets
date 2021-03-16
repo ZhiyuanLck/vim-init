@@ -22,3 +22,12 @@ snippet mis "" iA
 $0
 endsnippet
 
+global !p
+from datetime import date
+def today():
+	return date.today().isoformat()
+endglobal
+
+snippet date "" b
+`!p snip.rv = today()`
+endsnippet
