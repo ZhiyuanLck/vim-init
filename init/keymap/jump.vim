@@ -361,9 +361,16 @@ function! s:jump_md() abort
   if !s:in_parenthese()
     return
   endif
+  let __save = getreg('a')
   norm! "ayi(
-  let root = fnamemodify(finddir('.git/..', expand('%:p:h').';'), ':p')
-  let path = root . @a
+  let name = getreg('a')
+  call setreg('a', __save)
+  if len(name) && strgetchar(name, 0) == '/'
+    let root = fnamemodify(finddir('.git/..', expand('%:p:h').';'), ':p')
+    let path = root . strcharpart(name, 1, strchars(name) - 1)
+  else
+    let path = fnamemodify(bufname('%'), ':p:h') . '/' . name
+  endif
   if filereadable(path)
     python3 << EOF
 import vim
