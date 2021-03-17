@@ -164,7 +164,7 @@ function! CallLeaderF(mode)
   elseif a:mode == 'q'
     exec "LeaderfQuickFix"
   elseif a:mode == 'rg'
-    exec "Leaderf rg -tvim -tpy -ttex -tsh"
+    exec "Leaderf rg -tvim -tpy -ttex -tsh -tc -tcpp -tmarkdown"
   elseif a:mode == 'rtp'
     exec "Leaderf rtp"
   elseif a:mode == 's'
