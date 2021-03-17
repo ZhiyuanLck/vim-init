@@ -371,6 +371,7 @@ function! s:jump_md() abort
   else
     let path = fnamemodify(bufname('%'), ':p:h') . '/' . name
   endif
+  let path = resolve(path)
   if filereadable(path)
     python3 << EOF
 import vim
