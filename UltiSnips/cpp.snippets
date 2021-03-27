@@ -9,13 +9,24 @@ int main() {
 }
 endsnippet
 
+snippet th "bein" b
+#include <iostream>
+#include <thread>$1
+
+using namespace std;
+
+int main() {
+	$2
+}
+endsnippet
+
 snippet fun "function"
 ${1:int} ${2:name}($3) {
     $4
 }
 endsnippet
 
-snippet cl "class" bA
+snippet cl "class" b
 class ${1:Solution} {
     $2
 };

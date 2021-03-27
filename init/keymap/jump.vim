@@ -372,8 +372,8 @@ function! s:jump_md() abort
     let path = fnamemodify(bufname('%'), ':p:h') . '/' . name
   endif
   let path = resolve(path)
-  if filereadable(path)
-    python3 << EOF
+  " if filereadable(path)
+  python3 << EOF
 import vim
 path = vim.eval("path")
 for tp, w in ((tp, window) for tp in vim.tabpages for window in tp.windows):
@@ -384,7 +384,7 @@ for tp, w in ((tp, window) for tp in vim.tabpages for window in tp.windows):
 else:
     vim.command("tabedit %s" % path)
 EOF
-  endif
+  " endif
 endfunction
 
 augroup JumpGitMd

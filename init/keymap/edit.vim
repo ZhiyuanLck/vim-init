@@ -55,7 +55,7 @@ function! s:set_vim_doc() abort
   inoremap <m-;> <esc>:call <sid>align_left_and_right()<cr>
   noremap <m-'> :call append(line('.'), repeat('=', 78))<cr>
   inoremap <m-'> <esc>:call append(line('.'), repeat('=', 78))<cr>
-  set tw=78 scl=no
+  setlocal tw=78 scl=no
 endfunction
 
 augroup VimDocEdit
