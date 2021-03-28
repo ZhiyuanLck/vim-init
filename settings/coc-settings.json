@@ -1,17 +1,6 @@
 {
-  "languageserver": {
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cc", "cpp", "c++", "objc", "objcpp"],
-      "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/", ".root"],
-      "initializationOptions": {
-          "cache": {
-            "directory": "/tmp/ccls"
-          }
-        }
-    }
-  },
   "coc.source.file.enable": true,
+  "clangd.fallbackFlags": ["-std=c++17", "-O2", "-Wall"],
   "python.jediEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.flake8Args": ["--ignore=E121,E123,E126,E226,E24,E704,W503,W504,F403,E501"],

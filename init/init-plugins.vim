@@ -490,7 +490,7 @@ if index(g:bundle_group, 'coc') >= 0
 
     nnoremap <silent><space>ce :CocConfig<cr>
     " auto install extensions
-    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-pyright', 'coc-jedi', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-sh']
+    let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-cmake', 'coc-html', 'coc-solargraph', 'coc-pyright', 'coc-jedi', 'coc-highlight', 'coc-yank', 'coc-vimlsp', 'coc-xml', 'coc-markdownlint', 'coc-vimtex', 'coc-sh', 'coc-clangd']
 
     " scroll
     nnoremap <expr><C-f> coc#float#has_float() ? coc#float#scroll(1) : "\<C-f>"
