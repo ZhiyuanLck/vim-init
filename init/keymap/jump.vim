@@ -154,34 +154,34 @@ endif
 " **********************************************************************
 " 新建标签页窗口打开目录
 " **********************************************************************
-function s:new_edit(mode)
-  if a:mode == 'r'
-    exe "vsp \| normal -"
-  elseif a:mode == 'l'
-    exe "vsp \| normal \<m-H>-"
-  elseif a:mode == 't'
-    exe "sp \| normal -"
-  elseif a:mode == 'b'
-    exe "sp \| normal \<m-J>-"
-  elseif a:mode == 'c'
-    let s:path = fnamemodify(bufname('%'), ':p')
-    tabnew
-    exec 'Clap filer '.s:path
-  elseif a:mode == 'o'
-    exe "tabnew \| LeaderfMru"
-  endif
-endfunc
+" function s:new_edit(mode)
+  " if a:mode == 'r'
+    " exe "vsp \| normal -"
+  " elseif a:mode == 'l'
+    " exe "vsp \| normal \<m-H>-"
+  " elseif a:mode == 't'
+    " exe "sp \| normal -"
+  " elseif a:mode == 'b'
+    " exe "sp \| normal \<m-J>-"
+  " elseif a:mode == 'c'
+    " let s:path = fnamemodify(bufname('%'), ':p')
+    " tabnew
+    " exec 'Clap filer '.s:path
+  " elseif a:mode == 'o'
+    " exe "tabnew \| LeaderfMru"
+  " endif
+" endfunc
 
-noremap <silent> <tab>r :call <SID>new_edit('r')<cr>
-noremap <silent> <tab>l :call <SID>new_edit('l')<cr>
-noremap <silent> <tab>t :call <SID>new_edit('t')<cr>
-noremap <silent> <tab>b :call <SID>new_edit('b')<cr>
-noremap <silent> <tab>c :call <SID>new_edit('c')<cr>
-noremap <silent> <tab>o :call <SID>new_edit('o')<cr>
+" noremap <silent> <tab>r :call <SID>new_edit('r')<cr>
+" noremap <silent> <tab>l :call <SID>new_edit('l')<cr>
+" noremap <silent> <tab>t :call <SID>new_edit('t')<cr>
+" noremap <silent> <tab>b :call <SID>new_edit('b')<cr>
+" noremap <silent> <tab>c :call <SID>new_edit('c')<cr>
+" noremap <silent> <tab>o :call <SID>new_edit('o')<cr>
 
 " tab pre next
-noremap <silent> <tab>n :tabn<cr>
-noremap <silent> <tab>p :tabp<cr>
+noremap <silent> <tab>l :tabn<cr>
+noremap <silent> <tab>h :tabp<cr>
 
 
 " **********************************************************************
