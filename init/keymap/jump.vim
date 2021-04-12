@@ -126,10 +126,10 @@ noremap <m-h> <c-w>h
 noremap <m-l> <c-w>l
 noremap <m-j> <c-w>j
 noremap <m-k> <c-w>k
-inoremap <m-h> <cmd>exec "norm! \<c-w>h"
-inoremap <m-l> <cmd>exec "norm! \<c-w>l"
-inoremap <m-j> <cmd>exec "norm! \<c-w>j"
-inoremap <m-k> <cmd>exec "norm! \<c-w>k"
+inoremap <m-h> <cmd>exec "norm! \<c-w>h"<cr>
+inoremap <m-l> <cmd>exec "norm! \<c-w>l"<cr>
+inoremap <m-j> <cmd>exec "norm! \<c-w>j"<cr>
+inoremap <m-k> <cmd>exec "norm! \<c-w>k"<cr>
 
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
   " vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式

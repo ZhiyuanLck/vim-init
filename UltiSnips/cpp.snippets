@@ -1,6 +1,5 @@
 snippet cxx "bein" bA
-#include <iostream>
-$1
+#include <iostream>$1
 
 using namespace std;
 
@@ -22,24 +21,21 @@ endsnippet
 
 snippet fun "function"
 ${1:int} ${2:name}($3) {
-    $4
+	$4
 }
 endsnippet
 
 snippet cl "class" b
 class ${1:Solution} {
-    $2
+	$2
+public:
 };
 endsnippet
 
 snippet sr "class" b
 struct ${1:Solution} {
-    $2
+	$2
 };
-endsnippet
-
-snippet str "string" b
-#include <string>
 endsnippet
 
 snippet inc "include" b
@@ -63,5 +59,3 @@ ostream& operator<<(ostream &os, const T<H, Args...> &obj) {
     return os;
 }
 endsnippet
-
-
