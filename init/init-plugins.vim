@@ -985,7 +985,7 @@ if index(g:bundle_group, 'float') >= 0
   " let g:vimspector_enable_mappings = 'HUMAN'
   Plug 'ZhiyuanLck/vim-diary'
   Plug 'ojroques/vim-oscyank', { 'branch': 'main' }
-  vnoremap <leader>v :OSCYankReg +<cr>
+  vnoremap <leader>v <cmd>OSCYankReg +<cr>
   autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '+' | OSCYankReg + | endif
 endif
 
