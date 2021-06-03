@@ -64,5 +64,5 @@ augroup VimDocEdit
 augroup END
 
 " 避免缩进消除
-inoremap <esc> <space><bs><esc>
+" inoremap <esc> <space><bs><esc>
 imap <c-v> <esc>pa
