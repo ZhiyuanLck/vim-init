@@ -42,7 +42,7 @@ endif
 set laststatus=2
 
 " 总是显示行号
-set relativenumber
+set number
 
 " 行号栏显示标记
 set signcolumn=yes
