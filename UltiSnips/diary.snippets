@@ -23,11 +23,17 @@ $0
 endsnippet
 
 global !p
-from datetime import date
+from datetime import date, timedelta
 def today():
 	return date.today().isoformat()
+def yesterday():
+	return (date.today() - timedelta(days=1)).isoformat()
 endglobal
 
-snippet date "" b
+snippet to "today" b
 `!p snip.rv = today()`
+endsnippet
+
+snippet yes "yesterday" b
+`!p snip.rv = yesterday()`
 endsnippet
